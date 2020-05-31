@@ -41,6 +41,17 @@ export default class AdminMenu extends Component {
              </Link>
               
             </li>
+
+            <li className="treeview">
+            <Link to="/admin/news">
+                <i className="fa fa-edit" /> <span>Quản lý tin tức</span>
+                <span className="pull-right-container">
+                  <i className="fa fa-angle-left pull-right" />
+                </span>
+             </Link>
+              
+            </li>
+            
             
             {/* <li className="treeview">
               <a href="fake_url">
