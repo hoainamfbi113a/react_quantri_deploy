@@ -1,15 +1,13 @@
 import React,{Component} from 'react';
 import {Link,Redirect}  from 'react-router-dom'
-
+import {Provider} from "react-redux";
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-import AdminHeader from './components/admin/header/AdminHeader';
-import AdminMenu from './components/admin/menu/AdminMenu';
-import AdminFooter from './components/admin/footer/AdminFooter';
-//import AdminContent from './components/admin/content/AdminContent'
-import AdminEditItem from './components/admin/content/adminEdit_Item/AdminEditItem'
 import AdminHome from './components/admin/adminHome/AdminHome'
 import Login from './components/Login'
+import Globading from './components/globaloading/Globading';
 // import Login from './components/Login'
+import configStore from "./store/configstore"
+const store = configStore ();
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route {...rest} render={(props) => (
      localStorage.usertoken
@@ -18,16 +16,21 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
   )} />
 )
 
-export default class componentName extends Component {
+export default class App extends Component {
   render() {
     return (
-      <Router>
-      {/* <RouterURLNode/> */}
-      <Route exact path="/" component={Login} />
-      {/* <Route   path="/admin" component={AdminHome} /> */}
-      <PrivateRoute   path="/admin" component={AdminHome} />
-      {/* <PrivateRoute path='/protected' component={Protected} /> */}
-      </Router>
+      <Provider store={store}>
+      <Globading></Globading>
+                <Router>
+        {/* <RouterURLNode/> */}
+        <Route exact path="/" component={Login} />
+        {/* <Route   path="/admin" component={AdminHome} /> */}
+          <PrivateRoute   path="/admin" component={AdminHome} />
+        {/* <PrivateRoute path='/protected' component={Protected} /> */}
+          </Router>
+     
+ 
+      </Provider>
     )
   }
 }
