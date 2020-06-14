@@ -8,13 +8,14 @@ import 'sweetalert/dist/sweetalert.css';
 import axios from 'axios';
 import ItemNews from '../Items/ItemNews';
 
-class AdminContentNews extends Component {
+export default class AdminContentNews extends Component {
   constructor(props) {
     super(props)
     this.state = {
       showAlert: false,
       news: [],
-      deleteItem: ""
+      deleteItem: "",
+      idAlert:""
     }
   }
   handleShowAlert = (item) => {
@@ -28,11 +29,11 @@ class AdminContentNews extends Component {
     
 
   }
-  handleDeleteItem = () => {
+  handleDeleteItem = async() => {
     let { idAlert, news } = this.state;
-    axios.get('http://localhost:5000/news/delete/'+idAlert)
-    .then(()=>{
-      axios.get('http://localhost:5000/news/list')
+   await axios.get('http://localhost:5000/news/delete/'+idAlert)
+    .then(async()=>{
+     await axios.get('http://localhost:5000/news/list')
       .then(response => {
 
         this.setState({response:response.data});
@@ -130,4 +131,3 @@ class AdminContentNews extends Component {
   }
 }
 
-export default AdminContentNews;
