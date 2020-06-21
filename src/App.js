@@ -20,16 +20,11 @@ export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
-      <Globading></Globading>
-                <Router>
-        {/* <RouterURLNode/> */}
-        <Route exact path="/" component={Login} />
-        {/* <Route   path="/admin" component={AdminHome} /> */}
-          <PrivateRoute   path="/admin" component={AdminHome} />
-        {/* <PrivateRoute path='/protected' component={Protected} /> */}
+      <Globading/>
+          <Router>
+           <Route exact path="/" component={Login} />
+           <PrivateRoute path="/admin" component={AdminHome} />
           </Router>
-     
- 
       </Provider>
     )
   }

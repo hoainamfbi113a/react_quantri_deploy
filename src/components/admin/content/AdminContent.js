@@ -77,7 +77,6 @@ export default class AdminContent extends Component {
         
     }
     renderItem = () =>{
-      
        let {items,idEdit,nameEdit,levelEdit,persons} = this.state; 
         console.log(persons);
         return (
@@ -86,8 +85,6 @@ export default class AdminContent extends Component {
               <Item key={item._id}  item={item} index={index}  handleShowAlert={this.handleShowAlert}  handleEditItem = {this.handleEditItem}/>
             )
           })
-         
-        
         )
     }
     render() {

@@ -6,7 +6,8 @@ export default class ItemNews extends Component {
         return (
                 <tr>
                         <td>{item.title}</td>
-                        <td>{item.images}</td>
+                        {/* <td>{item.images}</td> */}
+                        <td><img src={`http://localhost:5000/${item.images}`} alt="not display"></img></td>
                         <td>{item.contents}</td>
                         <td>{item.timeUpdate}</td>
                         <td>

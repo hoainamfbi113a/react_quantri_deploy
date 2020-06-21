@@ -48,8 +48,9 @@ export default class AdminContentNews extends Component {
     });
   }
   componentDidMount = () => {
-    axios.get('http://localhost:5000/news/list/')
+    axios.get('http://localhost:5000/admin/news/list/')
       .then(response => {
+        console.log(response.data)
         this.setState({ news: response.data })
       })
       .catch(function (error) {
