@@ -1,6 +1,8 @@
 import React,{Component} from 'react';
 import {Link,Redirect}  from 'react-router-dom'
 import {Provider} from "react-redux";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import AdminHome from './components/admin/adminHome/AdminHome'
 import Login from './components/Login'
@@ -21,10 +23,12 @@ export default class App extends Component {
     return (
       <Provider store={store}>
       <Globading/>
-          <Router>
+      <ToastContainer />
+      <Router>
            <Route exact path="/" component={Login} />
            <PrivateRoute path="/admin" component={AdminHome} />
-          </Router>
+      </Router>
+     
       </Provider>
     )
   }

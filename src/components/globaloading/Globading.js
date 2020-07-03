@@ -11,7 +11,7 @@ class Globading extends Component {
         if(showLoading){
             htmlLoading = (
                 <div className="GlobalLoading">
-                     <img src ={imgLoading} alt="img loading" class="icon"></img> 
+                     <img src ={imgLoading} alt="img loading" className="icon"></img> 
                 </div>
             )
         }

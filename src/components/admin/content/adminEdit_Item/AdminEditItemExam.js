@@ -57,7 +57,7 @@ export default class AdminEditItemExam extends Component {
       this.props.history.push('/admin/exam');
   }
     render() {
-      {
+      
         return (
             <div>
              <section className="content">
@@ -148,6 +148,6 @@ export default class AdminEditItemExam extends Component {
             </div>
 
         )
-    }
+    
     }
 }

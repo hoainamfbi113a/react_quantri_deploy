@@ -7,11 +7,12 @@ export default class ItemNews extends Component {
                 <tr>
                         <td>{item.title}</td>
                         {/* <td>{item.images}</td> */}
-                        <td><img src={`http://localhost:5000/${item.images}`} alt="not display"></img></td>
+                        <td><img width="50px" src={`http://localhost:5000/${item.images}`} alt="not display"></img></td>
                         <td>{item.contents}</td>
                         <td>{item.timeUpdate}</td>
                         <td>
-                        <Link to={"/news/edit/"+this.props.item._id} onClick = {()=>this.props.handleEditItem(index,item)}>
+                        {/* <Link to={"/admin/news/edit/"+this.props.item._id}> */}
+                        <Link to={`/admin/news/edit/${item._id}`}>
                         <button type="button" className="btn btn-social-icon btn-bitbucket" >
                         <i className="fa fa-edit" />
                         </button>

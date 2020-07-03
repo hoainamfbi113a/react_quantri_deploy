@@ -3,10 +3,10 @@ import {Link}  from 'react-router-dom'
 import Swal from 'sweetalert-react';
 import 'sweetalert/dist/sweetalert.css';
 import axios from 'axios';
-import Item from '../Items/ItemQuestion';
+import Item from '../Items/ItemLession';
 import { withRouter  } from 'react-router'
 // import Items 
-class AdminContentQuestion extends Component {
+class AdminContentLession extends Component {
     constructor(props){
       super(props)
       this.state = {
@@ -42,28 +42,17 @@ class AdminContentQuestion extends Component {
       });
   }
  
-    componentDidMount(){ 
-       
-            const script = document.createElement("script");
-            script.src='js/content.js'
-            script.async = true;
-            document.body.appendChild(script);
-            // alert(script.textContent)
-            this.countDownTrack = setTimeout(()=>{
-              axios.get('http://localhost:5000/admin/question/list')
+  async componentDidMount(){
+        console.log("xin chao lession")
+     await axios.get('http://localhost:5000/admin/lession/list')
             .then(response => {
-                // console.log(response.data);
                 this.setState({persons: response.data});
             })
             .catch(function (error) {
-                // console.log(error);
             })
-            },200)
-        
     }
     renderItem = () =>{
-      
-       let {items,idEdit,nameEdit,levelEdit,persons} = this.state; 
+       let {persons} = this.state; 
         console.log(persons);
         return (
          persons.map((item,index)=>{
@@ -71,8 +60,6 @@ class AdminContentQuestion extends Component {
               <Item key={item._id}  item={item} index={index}  handleShowAlert={this.handleShowAlert}/>
             )
           })
-         
-        
         )
     }
     render() {
@@ -84,23 +71,16 @@ class AdminContentQuestion extends Component {
             <div className="col-xs-12">
               <div className="box">
                 <div className="box-header">
-                <Link to="question/add"><button type="submit" className="btn btn-primary"><i className="fa fa-fw fa-home" />Thêm câu hỏi</button></Link>
-                </div>
+                <Link to="lession/add"><button type="submit" className="btn btn-primary"><i className="fa fa-fw fa-home" />Thêm bài học</button></Link>
+               </div>
                 {/* /.box-header */}
                 <div className="box-body">
                   <table id="example2" className="table table-bordered table-hover">
                     <thead>
                       <tr>
-                        <th>Loại câu hỏi</th>
-                        <th>Tên câu hỏi</th>
-                        <th>Đáp án A</th>
-                        <th>Đáp án B</th>
-                        <th>Đáp án C</th>
-                        <th>Đáp án D</th>
-                        <th>Đáp án đúng</th>
-                        <th>Sửa</th>
-                        <th>Xóa</th>
-                       
+                        <th>Môn học</th>
+                        <th>Tiêu đề</th>
+                        <th>Ảnh</th> 
                       </tr>
                     </thead>
                     <tbody>
@@ -108,25 +88,15 @@ class AdminContentQuestion extends Component {
                     </tbody>
                     <tfoot>
                       <tr>
-                        <th>Loại câu hỏi</th>
-                        <th>Tên câu hỏi</th>
-                        <th>Đáp án A</th>
-                        <th>Đáp án B</th>
-                        <th>Đáp án C</th>
-                        <th>Đáp án D</th>
-                        <th>Đáp án đúng</th>
-                        <th>Sửa</th>
-                        <th>Xóa</th>
-                       
+                      <th>Môn học</th>
+                      <th>Tiêu đề</th>
+                      <th>Ảnh</th>
                       </tr>
                     </tfoot>
                   </table>
-                </div>
-               
-              </div>
-             
+                </div>      
+              </div>          
             </div>
-           
           </div>
           <Swal
                             show={this.state.showAlert}
@@ -146,4 +116,4 @@ class AdminContentQuestion extends Component {
         )
     }
 }
-export default withRouter(AdminContentQuestion)
+export default withRouter(AdminContentLession)

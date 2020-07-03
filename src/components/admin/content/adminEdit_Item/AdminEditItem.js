@@ -59,8 +59,6 @@ export default class AdminEditItem extends Component {
         <div className="box-header with-border">
           <h3 className="box-title">Edit</h3>
         </div>
-        {/* /.box-header */}
-        {/* form start */}
         <form className="form-horizontal" onSubmit={this.onSubmit}>
           <div className="box-body">
             <div className="form-group">
@@ -82,11 +80,9 @@ export default class AdminEditItem extends Component {
               </div>
             </div>
           </div>
-          {/* /.box-body */}
           <div className="box-footer">
             <button type="submit" className="btn btn-info pull-right">Sign in</button>
           </div>
-          {/* /.box-footer */}
         </form>
       </div>
       </section>

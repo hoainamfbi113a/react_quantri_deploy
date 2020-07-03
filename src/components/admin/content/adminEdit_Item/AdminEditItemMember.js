@@ -18,7 +18,6 @@ export default class AdminEditItem extends Component {
     }
 }
     componentDidMount() {
-      // alert('updatemember')
       axios.get('http://localhost:5000/admin/member/'+this.props.match.params.id)
           .then(response => {
               this.setState({
@@ -57,7 +56,6 @@ export default class AdminEditItem extends Component {
       this.props.history.push('/admin/member');
   }
     render() {
-      {
         return (
             <div>
              <section className="content">
@@ -65,17 +63,11 @@ export default class AdminEditItem extends Component {
         <div className="box-header with-border">
           <h3 className="box-title">Sửa học sinh</h3>
         </div>
-        {/* /.box-header */}
-        {/* form start */}
         <form className="form-horizontal" noValidate onSubmit={this.onSubmit}>
           <div className="box-body">
             <div className="form-group">
               <label style={{textAlign: 'left'}} htmlFor="inputEmail3" className="col-sm-2 control-label">Tên đăng nhập</label>
               <div className="col-sm-10" style={{marginLeft: '-5%'}} >
-              {/* <input  type="text"
-                            className="form-control"
-                            value={this.state.fullname}
-                            onChange={this.onChangeName} /> */}
 
                 <input type="hidden" className="form-control"  placeholder="text" name="_id" value={this.state._id}/>
                 <input type="text" className="form-control"  placeholder="Tên đăng nhập" onChange={this.onChange} name="memberLogin" value={this.state.memberLogin}/>
@@ -141,6 +133,5 @@ export default class AdminEditItem extends Component {
             </div>
 
         )
-    }
     }
 }

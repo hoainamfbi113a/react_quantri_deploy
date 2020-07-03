@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import axios from 'axios';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
@@ -15,9 +14,24 @@ class AdminAddItemNews extends Component {
       selectedFile: '',
       error: {}
     }
+    
     this.onChange = this.onChange.bind(this)
     this.onChangeImg = this.onChange.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
+  }
+  componentDidMount() {
+    const {newsActionsCreators} = this.props;
+    const { setNewEditing } = newsActionsCreators;
+    // console.log(this.props.match.params.id);
+    setNewEditing(this.props.match.params.id);
+    this.setState({
+      _id: this.props.newUpdate._id,
+      title: this.props.newUpdate.title,
+      images: this.props.newUpdate.images,
+      contents: this.props.newUpdate.contents,
+      timeUpdate: this.props.newUpdate.timeUpdate,
+  })
+    
   }
   onChange(e) {
     switch (e.target.name) {
@@ -33,29 +47,14 @@ class AdminAddItemNews extends Component {
     e.preventDefault();
     const { selectedFile, contents, title, timeUpdate } = this.state;
     const formData = new FormData()
+    formData.append('_id', this.props.match.params.id);
     formData.append('selectedFile', selectedFile);
     formData.append('title', title);
     formData.append('contents', contents);
     formData.append('timeUpdate', timeUpdate);
     const {newsActionsCreators} = this.props;
-    const { addNew } = newsActionsCreators;
-    addNew(formData);
-    // console.log(this.state);
-    // axios.post('http://localhost:5000/admin/news', formData
-    // )
-    //   .then(function (response) {
-    //     console.log(response.data + "aaaaa");
-    //     if (response.data === 'User already exists') {
-    //       alert('User already exists')
-    //     }
-    //     else {
-    //       r.props.history.push('/admin/news')
-    //     }
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-
-    //   });
+    const { updateNew } = newsActionsCreators;
+    updateNew(formData);
     r.props.history.push('/admin/news');
   }
   render() {
@@ -64,7 +63,7 @@ class AdminAddItemNews extends Component {
         <section className="content">
           <div className="box box-info">
             <div className="box-header with-border">
-              <h3 className="box-title">Thêm tin tức</h3>
+              <h3 className="box-title">Sửa tin tức</h3>
             </div>
             <form className="form-horizontal" onSubmit={this.onSubmit} >
               <div className="box-body">
@@ -96,12 +95,9 @@ class AdminAddItemNews extends Component {
                     <input type="text" className="form-control" placeholder="TimeUpdate" onChange={this.onChange} name="timeUpdate" value={this.state.timeUpdate} />
                   </div>
                 </div>
-
-
               </div>
               <div className="box-footer" style={{ paddingRight: '69px' }}>
-
-                <button type="submit" className="btn btn-info pull-right">Thêm</button>
+                <button type="submit" className="btn btn-info pull-right">Sua</button>
               </div>
             </form>
           </div>
@@ -111,12 +107,14 @@ class AdminAddItemNews extends Component {
     )
   }
 }
-const mapStateToProps = state =>{
-
+const mapStateToProps = (state, props) =>{
+  // console.log(state.newReducer.listNews.find(item => item._id === props.match.params.id));
+  // console.log(props.match.params.id)
+  return { newUpdate: state.newReducer.listNews.find(item => item._id === props.match.params.id) }
 }
 const mapDispatchToProps = dispatch =>{
   return {
     newsActionsCreators:bindActionCreators(newsAction, dispatch)
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(AdminAddItemNews)
+export default connect(mapStateToProps, mapDispatchToProps)(AdminAddItemNews);

@@ -1,14 +1,14 @@
-// import React, { Component } from 'react';
-// import Swal from 'sweetalert-react';
-// import {Link}  from 'react-router-dom'
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import Swal from 'sweetalert-react';
 import 'sweetalert/dist/sweetalert.css';
 import axios from 'axios';
+import * as newsActions from '../../../../actions/newsAction';
 import ItemNews from '../Items/ItemNews';
 
-export default class AdminContentNews extends Component {
+class AdminContentNews extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -31,34 +31,21 @@ export default class AdminContentNews extends Component {
   }
   handleDeleteItem = async() => {
     let { idAlert, news } = this.state;
-   await axios.get('http://localhost:5000/news/delete/'+idAlert)
-    .then(async()=>{
-     await axios.get('http://localhost:5000/news/list')
-      .then(response => {
-
-        this.setState({response:response.data});
-      })
-      .catch(function(error){
-
-      })
-    })
-    .catch(err => console.log(err))
+    const { newsActionCreators } = this.props;
+    const { deleteNew } = newsActionCreators;
+    deleteNew(idAlert);
     this.setState({
       showAlert:false
     });
   }
   componentDidMount = () => {
-    axios.get('http://localhost:5000/admin/news/list/')
-      .then(response => {
-        console.log(response.data)
-        this.setState({ news: response.data })
-      })
-      .catch(function (error) {
-        console.log(error + "loi kia");
-      })
+    const { newsActionCreators } = this.props;
+    const { fetchListNews } = newsActionCreators;
+    fetchListNews();
   }
   renderItem = () => {
-    let { news } = this.state;
+    // console.log(this.props.news)
+    let { news } = this.props;
     return (
       news.map((item, index) => {
         return (
@@ -68,7 +55,6 @@ export default class AdminContentNews extends Component {
     )
   }
   render() {
-    let { news } = this.state;
     return (
       <div>
         <section className="content">
@@ -131,4 +117,16 @@ export default class AdminContentNews extends Component {
     );
   }
 }
+const mapStateToProps = state => {
+  return {
+    news: state.newReducer.listNews,
+  };
+};
+const mapDispatchToProps = dispatch => {
+  return {
+    newsActionCreators: bindActionCreators(newsActions, dispatch),
+    // modalActionCreators: bindActionCreators( dispatch),
+  };
+};
 
+export default connect(mapStateToProps, mapDispatchToProps)(AdminContentNews);
