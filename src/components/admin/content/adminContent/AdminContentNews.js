@@ -47,6 +47,17 @@ export default class AdminContentNews extends Component {
       showAlert:false
     });
   }
+  handleEditItem = (index,item) => {
+    this.setState({
+        indexEdit: index,
+        idEdit: item._id,
+        titleEdit: item.title,
+        imageEdit: item.image,
+        contentsEdit: item.contents,
+        timeUpdateEdit: item.timeUpdate,
+    });
+}
+
   componentDidMount = () => {
     axios.get('http://localhost:5000/news/list/')
       .then(response => {
@@ -57,11 +68,11 @@ export default class AdminContentNews extends Component {
       })
   }
   renderItem = () => {
-    let { news } = this.state;
+    let {items, idEdit, titleEdit, imageEdit, contentsEdit, timeUpdateEdit,news } = this.state;
     return (
       news.map((item, index) => {
         return (
-          <ItemNews key={item._id} item={item} index={index} handleShowAlert={this.handleShowAlert}></ItemNews>
+          <ItemNews key={item._id} item={item} index={index} handleShowAlert={this.handleShowAlert} handleEditItem={this.handleEditItem}></ItemNews>
         )
       })
     )

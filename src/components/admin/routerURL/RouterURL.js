@@ -12,9 +12,11 @@ import AdminEditItemQuestion from '../content/adminEdit_Item/AdminEditItemQuesti
 import AdminContentExam from '../content/adminContent/AdminContentExam'
 import AdminAddItemExam from '../content/adminAddItem/AdminAddItemExam'
 import AdminEditItemExam from '../content/adminEdit_Item/AdminEditItemExam'
+import AdminEditItemNews from '../content/adminEdit_Item/AdminEditItemNews'
 
 import AdminContentResult from '../content/adminContent/AdminContentResult'
 import AdminContentNews from '../content/adminContent/AdminContentNews'
+import AdminAddItemNews from '../content/adminAddItem/AdminAddItemNews';
 
 export default class RouterURL extends Component {
     
@@ -33,6 +35,10 @@ export default class RouterURL extends Component {
              <Route exact path="/admin/exam/edit/:id" component = {AdminEditItemExam}></Route>
              <Route exact path="/admin/result" component = {AdminContentResult}></Route>
              <Route exact path="/admin/news" component = {AdminContentNews}></Route>
+             {/* <Route exact path="/admin/news/add" component={AdminAddItemNews}></Route> */}
+             <Route exact path="/admin/news/add" component = {AdminAddItemNews}></Route>
+             <Route exact path="/admin/news/edit/:id" component={AdminEditItemNews}></Route>
+            
             </div>
         )
     }

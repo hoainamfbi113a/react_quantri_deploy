@@ -10,7 +10,7 @@ export default class ItemNews extends Component {
                         <td>{item.contents}</td>
                         <td>{item.timeUpdate}</td>
                         <td>
-                        <Link to={"/news/edit/"+this.props.item._id} onClick = {()=>this.props.handleEditItem(index,item)}>
+                        <Link to={"/admin/news/edit/"+this.props.item._id} onClick = {()=>this.props.handleEditItem(index,item)}>
                         <button type="button" className="btn btn-social-icon btn-bitbucket" >
                         <i className="fa fa-edit" />
                         </button>
