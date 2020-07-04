@@ -53,7 +53,7 @@ export default class AdminContentExam extends Component {
     });
 }
     componentDidMount(){
-        axios.get('http://localhost:5000/admin/exam/list')
+      axios.get('http://localhost:5000/admin/exam/list')
             .then(response => {
                 // console.log(response.data);
                 this.setState({persons: response.data});
@@ -61,11 +61,11 @@ export default class AdminContentExam extends Component {
             .catch(function (error) {
                 // console.log(error);
             })
-            const script = document.createElement("script");
-            script.style="text/jsx"
-            script.src='js/content.js';
-            script.async = true;
-            document.body.appendChild(script);
+    }
+    componentDidUpdate(prevProps) {
+      if (this.props.userID !== prevProps.userID) {
+        this.fetchData(this.props.userID);
+      }
     }
     renderItem = () =>{
       

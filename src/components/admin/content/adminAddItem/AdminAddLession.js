@@ -10,7 +10,7 @@ export default class AdminAddItemMember extends Component {
         super(props)
         this.state = {
           _id:'',
-          lessionContentSubjects:"",
+          lessionContentSubjects:"Anh văn 1",
           lessionContentTitle:"",
           lessionContentImg:"",
           lessionContentDetail:"",
@@ -76,16 +76,17 @@ export default class AdminAddItemMember extends Component {
               <div className="col-sm-10" style={{marginLeft: '-5%'}} >
                 <input type="hidden" className="form-control"  placeholder="text" onChange={this.onChange} name="_id" value={this.state._id}/>
                 <select className="form-control"  onChange={this.onChange}  name="lessionContentSubjects" >
-                  <option value="Toán lớp 1">Anh văn lớp 1</option>
-                  <option value="Toán lớp 2">Anh văn lớp 2</option>
-                  <option value="Toán lớp 3">Anh văn lơp 3</option>
-                  <option value="Toán lớp 4">Anh văn lớp 4</option>
-                  <option value="Toán lớp 5">Anh văn lớp 5</option>
-                  <option value="Anh văn 1">Toán lớp 1</option>
-                  <option value="Anh văn 2">Toán lớp 2</option>
-                  <option value="Anh văn 3">Toán lớp 3</option>
-                  <option value="Anh văn 4">Toán lớp 4</option>
-                  <option value="Anh văn 5">Toán lớp 5</option>
+                
+                  <option value="Anh văn 1">Anh văn lớp 1</option>
+                  <option value="Anh văn 2">Anh văn lớp 2</option>
+                  <option value="Anh văn 3">Anh văn lớp 3</option>
+                  <option value="Anh văn 4">Anh văn lớp 4</option>
+                  <option value="Anh văn 5">Anh văn lớp 5</option>
+                  <option value="Toán lớp 1">Toán lớp 1</option>
+                  <option value="Toán lớp 2">Toán lớp 2</option>
+                  <option value="Toán lớp 3">Toán lớp 3</option>
+                  <option value="Toán lớp 4">Toán lớp 4</option>
+                  <option value="Toán lớp 5">Toán lớp 5</option>
                </select>
                {/* <input type="text" className="form-control"  placeholder="Mon hoc" onChange={this.onChange} name="lessionContentSubjects" value={this.state.lessionContentSubjects}/> */}
               </div>
