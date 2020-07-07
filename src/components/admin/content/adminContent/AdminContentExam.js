@@ -54,18 +54,27 @@ export default class AdminContentExam extends Component {
 }
     componentDidMount(){
       axios.get('http://localhost:5000/admin/exam/list')
-            .then(response => {
-                // console.log(response.data);
-                this.setState({persons: response.data});
-            })
-            .catch(function (error) {
-                // console.log(error);
-            })
+        .then(response => {
+            // console.log(response.data);
+            this.setState({persons: response.data});
+        })
+        .catch(function (error) {
+            // console.log(error);
+        })
+      // setTimeout(function(){
+      //   alert("Xin chao")
+
+      // },100)
     }
     componentDidUpdate(prevProps) {
-      if (this.props.userID !== prevProps.userID) {
-        this.fetchData(this.props.userID);
-      }
+      axios.get('http://localhost:5000/admin/exam/list')
+        .then(response => {
+            // console.log(response.data);
+            this.setState({persons: response.data});
+        })
+        .catch(function (error) {
+            // console.log(error);
+        })
     }
     renderItem = () =>{
       

@@ -11,43 +11,47 @@ export default class AdminAddItemMember extends Component {
           memberDate : '',
           memberSex : '',
           memberAddress : '',
-          memberClassId : 'Toán lớp 1',
+          // memberClassId : 'Toán lớp 1',
           errors: {}
         }
         this.onChange = this.onChange.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
       }
-      onChange(e) {
-        this.setState({ [e.target.name]: e.target.value })//cập nhật giá trị input
-        // alert(e.target.value);
+      onChange = (e) => {
+        switch (e.target.name) {
+          case 'avatarContentImg':
+            this.setState({ avatarContentImg: e.target.files[0] });
+            break;
+          default:
+            this.setState({ [e.target.name]: e.target.value });
+        }
       }
       onSubmit(e) {
         var r = this;
         e.preventDefault();
-        axios.post('http://localhost:5000/admin/member', {
-            _id:this.state._id,
-            memberLogin: this.state.memberLogin,
-            memberPass: this.state.memberPass,
-            memberName: this.state.memberName,
-            memberDate: this.state.memberDate,
-            memberSex: this.state.memberSex,
-            memberAddress: this.state.memberAddress,
-            memberClassId: this.state.memberClassId,
-          })
+        const { memberLogin, memberPass, avatarContentImg,memberName,memberDate,memberSex,memberAddress } = this.state;
+        const formData = new FormData()
+        formData.append('avatarContentImg', avatarContentImg);
+        formData.append('memberLogin', memberLogin);
+        formData.append('memberPass', memberPass);
+        formData.append('memberName', memberName);
+        formData.append('memberDate', memberDate);
+        formData.append('memberSex', memberSex);
+        formData.append('memberAddress', memberAddress);
+        axios.post('http://localhost:5000/admin/member', formData)
           .then(function (response) {
-            //  alert(response.data)
-            if(response.data ==='User already exists')
-              // alert('User already exists');
+            alert(response.data+"aaaa")
+            if(response.data === 'User already exists')
               alert(response.data);
             else{
+            alert("vao anh");
             r.props.history.push('/admin/member')
             }
           })
           .catch(function (error) {
             console.log(error);
           });
-         
-      //  r.props.history.push('/admin/member')
+          r.props.history.push('/admin/member');
       }
     render() {
         return (
@@ -108,7 +112,12 @@ export default class AdminAddItemMember extends Component {
             <div className="form-group">
               <label style={{textAlign: 'left'}} htmlFor="inputEmail3" className="col-sm-2 control-label">Lớp</label>
               <div className="col-sm-10" style={{marginLeft: '-5%'}}>
-              <select className="form-control" onChange={this.onChange} name="memberClassId" value={this.state.memberClassId}>
+              <input
+                  type="file"
+                  name="avatarContentImg"
+                  onChange={this.onChange}
+                />
+              {/* <select className="form-control" onChange={this.onChange} name="memberClassId" value={this.state.memberClassId}>
                   <option value="Anh văn 1">Anh văn 1</option>
                   <option value="Anh văn 2">Anh văn 2</option>
                   <option value="Anh văn 3">Anh văn 3</option>
@@ -120,9 +129,8 @@ export default class AdminAddItemMember extends Component {
                   <option value="Toán lớp 4">Toán lớp 4</option>
                   <option value="Toán lớp 5">Toán lớp 5</option>
                   
-              </select>
-                {/* <input type="text" className="form-control"  placeholder="Lớp học" onChange={this.onChange} name="memberClassId" value={this.state.memberClassId}/> */}
-              </div>
+              </select> */}
+               </div>
             </div>
             
           </div>

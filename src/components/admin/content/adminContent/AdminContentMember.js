@@ -91,12 +91,10 @@ export default class AdminContentMember extends Component {
                     <thead>
                       <tr>
                         <th>Tên đăng nhập</th>
-                        <th>Mật khẩu</th>
+                        <th style={{width: '50px'}}>Mật khẩu</th>
                         <th>Họ và tên</th>
-                       
                         <th>Giới tính</th>
-                       
-                        <th>Lớp</th>
+                        <th>Avatar</th>
                         <th>Sửa</th>
                         <th>Xóa</th>
                        
@@ -108,11 +106,11 @@ export default class AdminContentMember extends Component {
                     <tfoot>
                       <tr>
                         <th>Tên đăng nhập</th>
-                        <th>Mật khẩu</th>
+                        <th style={{width: '50px'}}>Mật khẩu</th>
                         <th>Họ và tên</th>
                         <th>Giới tính</th>
                         
-                        <th>Lớp</th>
+                        <th>Avatar</th>
                         <th>Sửa</th>
                         <th>Xóa</th>
                        

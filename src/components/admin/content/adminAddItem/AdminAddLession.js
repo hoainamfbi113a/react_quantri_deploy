@@ -59,7 +59,10 @@ export default class AdminAddItemMember extends Component {
           .catch(function (error) {
             console.log(error);
           });
-       r.props.history.push('/admin/lession')
+          setTimeout(()=>{
+            r.props.history.push('/admin/lession')
+          },400)
+       
       }
     render() {
         return (
@@ -76,7 +79,6 @@ export default class AdminAddItemMember extends Component {
               <div className="col-sm-10" style={{marginLeft: '-5%'}} >
                 <input type="hidden" className="form-control"  placeholder="text" onChange={this.onChange} name="_id" value={this.state._id}/>
                 <select className="form-control"  onChange={this.onChange}  name="lessionContentSubjects" >
-                
                   <option value="Anh văn 1">Anh văn lớp 1</option>
                   <option value="Anh văn 2">Anh văn lớp 2</option>
                   <option value="Anh văn 3">Anh văn lớp 3</option>
@@ -88,8 +90,7 @@ export default class AdminAddItemMember extends Component {
                   <option value="Toán lớp 4">Toán lớp 4</option>
                   <option value="Toán lớp 5">Toán lớp 5</option>
                </select>
-               {/* <input type="text" className="form-control"  placeholder="Mon hoc" onChange={this.onChange} name="lessionContentSubjects" value={this.state.lessionContentSubjects}/> */}
-              </div>
+               </div>
             </div>
             <div className="form-group">
               <label style={{textAlign: 'left'}} htmlFor="inputEmail3" className="col-sm-2 control-label">Tiêu đề</label>
@@ -110,31 +111,9 @@ export default class AdminAddItemMember extends Component {
             <div className="form-group">
               <label style={{textAlign: 'left'}} htmlFor="inputPassword3" className="col-sm-2 control-label">Noi dung bai hoc</label>
               <div className="col-sm-10" style={{marginLeft: '-5%'}}>
-              {/* <QuillEditor
-                placeholder={"Start Posting Something"}
-                onEditorChange={this.onEditorChange}
-                onFilesChange={this.onFilesChange}
-            /> */}
-
-              {/* <CKEditor
-                    editor = {ClassicEditor}
-                    onInit={ editor => {
-                        console.log( 'Editor is ready to use!', editor );
-
-                        // Insert the toolbar before the editable area.
-                        editor.ui.getEditableElement().parentElement.insertBefore(
-                            editor.ui.view.toolbar.element,
-                            editor.ui.getEditableElement()
-                        );
-                    } }
-                    // onChange={ ( event, editor ) => console.log( { event, editor } ) }
-                    onChange={this.handleEditorChange}
-                    data="<p>Hello from CKEditor 5's DecoupledEditor!</p>"
-                   
-                /> */}
+            
               <Editor
               name="lessionContentDetail"
-              //  initialValue="<p>This is the initial content of the editor</p>"
                 init={{
                  height: 500,
                   menubar: false,
