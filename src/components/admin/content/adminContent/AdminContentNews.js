@@ -69,6 +69,8 @@ class AdminContentNews extends Component {
                   <table id="example2" className="table table-bordered table-hover">
                     <thead>
                       <tr>
+
+                        <th>Loại tin tức </th>
                         <th>Tiêu đề tin tức </th>
                         <th>Hình ảnh</th>
                         <th>Nội dung tin tức</th>
@@ -83,6 +85,7 @@ class AdminContentNews extends Component {
                     </tbody>
                     <tfoot>
                       <tr>
+                        <th>Loại tin tức </th>
                         <th>Tiêu đề tin tức </th>
                         <th>Hình ảnh</th>
                         <th>Nội dung tin tức</th>

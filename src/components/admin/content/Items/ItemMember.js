@@ -19,7 +19,7 @@ export default class ItemMember extends Component {
                         </Link>
                         </td>
                         <td style={{width: '40%', overflow: 'scroll'}}>
-                            <button  className="btn btn-social-icon btn-google" onClick = {()=>this.props.handleShowAlert(item)}>
+                            <button className="btn btn-social-icon btn-google" onClick = {()=>this.props.handleShowAlert(item)}>
                             <i className="fa fa-bitbucket" />
                             </button>
                         </td>

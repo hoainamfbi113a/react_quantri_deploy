@@ -7,6 +7,7 @@ class AdminAddItemNews extends Component {
   constructor(prop) {
     super(prop)
     this.state = {
+      categoryNews:'newcategory1',
       title: '',
       images: '',
       contents: '',
@@ -26,6 +27,7 @@ class AdminAddItemNews extends Component {
     setNewEditing(this.props.match.params.id);
     this.setState({
       _id: this.props.newUpdate._id,
+      categoryNews: this.props.newUpdate.categoryNews,
       title: this.props.newUpdate.title,
       images: this.props.newUpdate.images,
       contents: this.props.newUpdate.contents,
@@ -45,10 +47,11 @@ class AdminAddItemNews extends Component {
   onSubmit(e) {
     var r = this;
     e.preventDefault();
-    const { selectedFile, contents, title, timeUpdate } = this.state;
+    const { selectedFile, contents, title, timeUpdate,categoryNews } = this.state;
     const formData = new FormData()
     formData.append('_id', this.props.match.params.id);
     formData.append('selectedFile', selectedFile);
+    formData.append('categoryNews', categoryNews);
     formData.append('title', title);
     formData.append('contents', contents);
     formData.append('timeUpdate', timeUpdate);
@@ -67,6 +70,17 @@ class AdminAddItemNews extends Component {
             </div>
             <form className="form-horizontal" onSubmit={this.onSubmit} >
               <div className="box-body">
+                 <div className="form-group">
+                    <label style={{textAlign: 'left'}} htmlFor="inputPassword3" className="col-sm-2 control-label">Loại tin tức giáo dục </label>
+                    <div className="col-sm-10" style={{marginLeft: '-5%'}}>
+                    <select className="form-control"  onChange={this.onChange}  name="categoryNews" value={this.state.categoryNews}>
+                        <option value="newcategory1">Tin tức giáo dục</option>
+                        <option value="newcategory2">Học sinh tiêu biểu</option>
+            
+                    </select>
+                      {/* <input type="text" className="form-control" id="inputPassword3" placeholder="Lớp làm bài"onChange={this.onChange} name="classId" value={this.state.classId}/> */}
+                    </div>
+                </div>
                 <div className="form-group">
                   <label style={{ textAlign: 'left' }} htmlFor="inputPassword3" className="col-sm-2 control-label">Title</label>
                   <div className="col-sm-10" style={{ marginLeft: '-5%' }}>
