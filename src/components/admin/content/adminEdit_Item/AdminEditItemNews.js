@@ -33,7 +33,6 @@ class AdminAddItemNews extends Component {
       contents: this.props.newUpdate.contents,
       timeUpdate: this.props.newUpdate.timeUpdate,
   })
-    
   }
   onChange(e) {
     switch (e.target.name) {
