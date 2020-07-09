@@ -23,6 +23,7 @@ export default function* videoLearningSaga() {
       const { params } = action.payload;
       yield put(showLoading())
       const resp = yield call(getList,params);
+      console.log(resp.data);
       const {status, data} = resp;
       if (status === 200) {
           yield put(fetchListvideoLearningSuccess(data))
@@ -38,6 +39,9 @@ export default function* videoLearningSaga() {
     yield put(showLoading())
     // alert(console.log("aaa"));
     const resp = yield call(deletevideoLearning, id);
+    console.log(resp);
+    // console.log("delete video");
+
     const {data, status} = resp;
     if(status === 200) {
       yield put(deletevideoLearningSuccess(id));

@@ -30,8 +30,8 @@ class AdminContentvideoLearning extends Component {
   handleDeleteItem = async() => {
     let { idAlert, videoLearning } = this.state;
     const { videoLearningActionCreators } = this.props;
-    const { deleteNew } = videoLearningActionCreators;
-    deleteNew(idAlert);
+    const { deletevideoLearning } = videoLearningActionCreators;
+    deletevideoLearning(idAlert);
     this.setState({
       showAlert:false
     });
@@ -42,9 +42,9 @@ class AdminContentvideoLearning extends Component {
     fetchListvideoLearning();
   }
   renderItem = () => {
-    let { videolearning } = this.props;
+    let { videoLearning } = this.props;
     return (
-      videolearning.map((item, index) => {
+      videoLearning.map((item, index) => {
         return (
           <ItemvideoLearning key={item._id} item={item} index={index} handleShowAlert={this.handleShowAlert}></ItemvideoLearning>
         )
@@ -119,7 +119,7 @@ class AdminContentvideoLearning extends Component {
 }
 const mapStateToProps = state => {
   return {
-    videoLearning: state.newReducer.listvideoLearning,
+    videoLearning: state.videoLearningReducer.listvideoLearning,
   };
 };
 const mapDispatchToProps = dispatch => {

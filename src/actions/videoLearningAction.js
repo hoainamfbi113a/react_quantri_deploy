@@ -73,6 +73,7 @@ export const addvideoLearningFailed = (error) =>{
   }
 }
 export const setvideoLearningEditing = (data) =>{
+  // alert(data);
   return {
     type:videoLearningConstants.SET_VIDEO_LEARNING_EDITING,
     payload: {

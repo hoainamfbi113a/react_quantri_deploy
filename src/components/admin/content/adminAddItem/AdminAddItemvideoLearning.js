@@ -44,7 +44,7 @@ class AdminAddItemvideoLearning extends Component {
     const {videoLearningActionsCreators} = this.props;
     const { addvideoLearning } = videoLearningActionsCreators;
     addvideoLearning(formData);
-    // r.props.history.push('/admin/videolearning');
+    r.props.history.push('/admin/videolearning');
   }
   render() {
     return (

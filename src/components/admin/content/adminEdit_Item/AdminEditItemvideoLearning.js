@@ -2,11 +2,12 @@ import React, { Component } from 'react'
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import * as newsAction  from "../../../../actions/newsAction";
-class AdminAddItemNews extends Component {
+import * as videoLearningAction  from "../../../../actions/videoLearningAction";
+class AdminAddItemvideoLearning extends Component {
   constructor(prop) {
     super(prop)
     this.state = {
+      _id:"",
       videoContentSubjects:'',
       videoContentTitle: '',
       videoContentVideo: '',
@@ -23,11 +24,14 @@ class AdminAddItemNews extends Component {
     const { setvideoLearningEditing } = videoLearningActionsCreators;
     // console.log(this.props.match.params.id);
     setvideoLearningEditing(this.props.match.params.id);
+    // setvideoLearningEditing(12);
     this.setState({
       _id: this.props.videoLearningUpdate._id,
-      videoContentSubjects: this.props.videoLearningUpdate.categoryvideoLearning,
+      videoContentSubjects: this.props.videoLearningUpdate.videoContentSubjects,
       videoContentTitle: this.props.videoLearningUpdate.videoContentTitle,
       videoContentVideo: this.props.videoLearningUpdate.videoContentVideo,
+      videoContentDetail: this.props.videoLearningUpdate.videoContentDetail,
+
       // contents: this.props.videoLearningUpdate.contents,
       // timeUpdate: this.props.videoLearningUpdate.timeUpdate,
   })
@@ -44,14 +48,15 @@ class AdminAddItemNews extends Component {
   onSubmit(e) {
     var r = this;
     e.preventDefault();
-    const { selectedFile, videoContentVideo, videoContentTitle, timeUpdate,videoContentSubjects } = this.state;
+    const { selectedFile, videoContentVideo, videoContentTitle,videoContentSubjects,videoContentDetail } = this.state;
     const formData = new FormData()
     formData.append('_id', this.props.match.params.id);
     formData.append('selectedFile', selectedFile);
     formData.append('videoContentSubjects', videoContentSubjects);
     formData.append('videoContentTitle', videoContentTitle);
     formData.append('videoContentVideo', videoContentVideo);
-    formData.append('timeUpdate', timeUpdate);
+    formData.append('videoContentDetail', videoContentDetail);
+    // formData.append('timeUpdate', timeUpdate);
     const {newsActionsCreators} = this.props;
     const { updateNew } = newsActionsCreators;
     updateNew(formData);
@@ -109,11 +114,11 @@ class AdminAddItemNews extends Component {
 const mapStateToProps = (state, props) =>{
   // console.log(state.newReducer.listNews.find(item => item._id === props.match.params.id));
   // console.log(props.match.params.id)
-  return { newUpdate: state.newReducer.listNews.find(item => item._id === props.match.params.id) }
+  return { videoLearningUpdate: state.videoLearningReducer.listvideoLearning.find(item => item._id === props.match.params.id) }
 }
 const mapDispatchToProps = dispatch =>{
   return {
-    newsActionsCreators:bindActionCreators(newsAction, dispatch)
+    videoLearningActionsCreators:bindActionCreators(videoLearningAction, dispatch)
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(AdminAddItemNews);
+export default connect(mapStateToProps, mapDispatchToProps)(AdminAddItemvideoLearning);
