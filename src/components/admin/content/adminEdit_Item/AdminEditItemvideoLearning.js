@@ -48,18 +48,29 @@ class AdminAddItemvideoLearning extends Component {
   onSubmit(e) {
     var r = this;
     e.preventDefault();
-    const { selectedFile, videoContentVideo, videoContentTitle,videoContentSubjects,videoContentDetail } = this.state;
-    const formData = new FormData()
-    formData.append('_id', this.props.match.params.id);
-    formData.append('selectedFile', selectedFile);
-    formData.append('videoContentSubjects', videoContentSubjects);
-    formData.append('videoContentTitle', videoContentTitle);
-    formData.append('videoContentVideo', videoContentVideo);
-    formData.append('videoContentDetail', videoContentDetail);
+    const {  videoContentVideo, videoContentTitle,videoContentSubjects,videoContentDetail } = this.state;
+    // const formData = new FormData()
+    // formData.append('_id', this.props.match.params.id);
+    // formData.append('selectedFile', selectedFile);
+    // formData.append('videoContentSubjects', videoContentSubjects);
+    // formData.append('videoContentTitle', videoContentTitle);
+    // formData.append('videoContentVideo', videoContentVideo);
+    // formData.append('videoContentDetail', videoContentDetail);
     // formData.append('timeUpdate', timeUpdate);
-    const {newsActionsCreators} = this.props;
-    const { updateNew } = newsActionsCreators;
-    updateNew(formData);
+    let formData={
+      
+    } ;
+    // formData.append('selectedFile', selectedFile);
+    formData._id=this.props.match.params.id;
+    formData.videoContentSubjects=videoContentSubjects;
+    formData.videoContentTitle= videoContentTitle;
+    formData.videoContentVideo= videoContentVideo;
+    formData.videoContentDetail=videoContentDetail;
+    // const {newsActionsCreators} = this.props;
+    // const { updateNew } = newsActionsCreators;
+    const {videoLearningActionsCreators} = this.props;
+    const { updatevideoLearning } = videoLearningActionsCreators;
+    updatevideoLearning(formData);
     r.props.history.push('/admin/news');
   }
   render() {
