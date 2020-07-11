@@ -91,13 +91,14 @@
 import {all} from "redux-saga/effects";
 import newSaga from "./newSaga"
 import videoLearningSaga from "./videoLearningSaga"
+import classSubjectSaga from "./classSubjectSaga"
 
 
 function* rootSaga () {
   yield all([
     // some sagas only receive an action
     newSaga(),
-    videoLearningSaga(),
+    classSubjectSaga(),
   ]);
 }
 export default rootSaga;

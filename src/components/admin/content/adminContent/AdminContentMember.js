@@ -127,7 +127,7 @@ export default class AdminContentMember extends Component {
           <Swal
                             show={this.state.showAlert}
                             title="Delete Item"
-                            text="abc"
+                            // text={this.state.}
                             showCancelButton
                             onOutsideClick={()  => this.setState({ showAlert: false })}
                             onEscapeKey={()     => this.setState({ showAlert: false })}

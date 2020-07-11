@@ -35,8 +35,14 @@ export default class AdminEditItem extends Component {
               console.log(error);
           })
     }
-    onChange(e) {
-      this.setState({ [e.target.name]: e.target.value })//cập nhật giá trị input
+    onChange = (e) => {
+      switch (e.target.name) {
+        case 'avatarContentImg':
+          this.setState({ avatarContentImg: e.target.files[0] });
+          break;
+        default:
+          this.setState({ [e.target.name]: e.target.value });
+      }
     }
     onSubmit(e) {
       e.preventDefault();
@@ -109,9 +115,14 @@ export default class AdminEditItem extends Component {
               </div>
             </div>
             <div className="form-group">
-              <label style={{textAlign: 'left'}} htmlFor="inputEmail3" className="col-sm-2 control-label">Lớp</label>
+              <label style={{textAlign: 'left'}} htmlFor="inputEmail3" className="col-sm-2 control-label">Avatar</label>
               <div className="col-sm-10" style={{marginLeft: '-5%'}}>
-              <select className="form-control"  onChange={this.onChange}  name="memberClassId" value={this.state.memberClassId}>
+              <input
+                  type="file"
+                  name="avatarContentImg"
+                  onChange={this.onChange}
+                />
+              {/* <select className="form-control" onChange={this.onChange} name="memberClassId" value={this.state.memberClassId}>
                   <option value="Anh văn 1">Anh văn 1</option>
                   <option value="Anh văn 2">Anh văn 2</option>
                   <option value="Anh văn 3">Anh văn 3</option>
@@ -122,11 +133,10 @@ export default class AdminEditItem extends Component {
                   <option value="Toán lớp 3">Toán lớp 3</option>
                   <option value="Toán lớp 4">Toán lớp 4</option>
                   <option value="Toán lớp 5">Toán lớp 5</option>
-              </select>
-                {/* <input type="text" className="form-control"  placeholder="Lớp học" onChange={this.onChange} name="memberClassId" value={this.state.memberClassId}/> */}
-              </div>
+                  
+              </select> */}
+               </div>
             </div>
-            
           </div>
           {/* /.box-body */}
           <div className="box-footer" style={{paddingRight: '69px'}}>

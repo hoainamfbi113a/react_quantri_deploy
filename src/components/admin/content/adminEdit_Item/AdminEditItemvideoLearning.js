@@ -71,7 +71,10 @@ class AdminAddItemvideoLearning extends Component {
     const {videoLearningActionsCreators} = this.props;
     const { updatevideoLearning } = videoLearningActionsCreators;
     updatevideoLearning(formData);
-    r.props.history.push('/admin/news');
+    setTimeout(()=>{
+      r.props.history.push('/admin/videolearning');
+    },100)
+    
   }
   render() {
     return (
@@ -107,8 +110,6 @@ class AdminAddItemvideoLearning extends Component {
                   <input type="text" className="form-control" placeholder="videoContentDetail" onChange={this.onChange} name="videoContentDetail" value={this.state.videoContentDetail} />
                 </div>
               </div>
-
-
             </div>
             <div className="box-footer" style={{ paddingRight: '69px' }}>
 

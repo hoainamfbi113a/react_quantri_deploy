@@ -110,7 +110,7 @@ export default class AdminAddItemMember extends Component {
               </div>
             </div>
             <div className="form-group">
-              <label style={{textAlign: 'left'}} htmlFor="inputEmail3" className="col-sm-2 control-label">Lớp</label>
+              <label style={{textAlign: 'left'}} htmlFor="inputEmail3" className="col-sm-2 control-label">Avatar</label>
               <div className="col-sm-10" style={{marginLeft: '-5%'}}>
               <input
                   type="file"
