@@ -46,19 +46,30 @@ export default class AdminEditItem extends Component {
     }
     onSubmit(e) {
       e.preventDefault();
-      const obj = {
-            _id:this.state._id,
-            memberLogin: this.state.memberLogin,
-            memberPass: this.state.memberPass,
-            memberName: this.state.memberName,
-            memberDate: this.state.memberDate,
-            memberSex: this.state.memberSex,
-            memberAddress: this.state.memberAddress,
-            memberClassId: this.state.memberClassId,
-      };
-      axios.post('http://localhost:5000/admin/member', obj)
-          .then(res => console.log(res.data));
-
+      // const obj = {
+      //       _id:this.state._id,
+      //       memberLogin: this.state.memberLogin,
+      //       memberPass: this.state.memberPass,
+      //       memberName: this.state.memberName,
+      //       memberDate: this.state.memberDate,
+      //       memberSex: this.state.memberSex,
+      //       memberAddress: this.state.memberAddress,
+      //       memberClassId: this.state.memberClassId,
+      // };
+      // axios.post('http://localhost:5000/admin/member', obj)
+      //     .then(res => console.log(res.data));
+      const {_id, memberLogin, memberPass, avatarContentImg,memberName,memberDate,memberSex,memberAddress } = this.state;
+        const formData = new FormData()
+        formData.append('_id', _id);
+        formData.append('avatarContentImg', avatarContentImg);
+        formData.append('memberLogin', memberLogin);
+        formData.append('memberPass', memberPass);
+        formData.append('memberName', memberName);
+        formData.append('memberDate', memberDate);
+        formData.append('memberSex', memberSex);
+        formData.append('memberAddress', memberAddress);
+        axios.post('http://localhost:5000/admin/member', formData)
+        .then(res => console.log(res.data));
       this.props.history.push('/admin/member');
   }
     render() {
@@ -103,7 +114,7 @@ export default class AdminEditItem extends Component {
               <div className="col-sm-10" style={{marginLeft: '-5%'}}>
               <select className="form-control"  onChange={this.onChange} name="memberSex" value={this.state.memberSex}>
                   <option value="NAM">NAM</option>
-                  <option value="Nữ">Nữ</option>
+                  <option value="Nữ">NỮ</option>
               </select>
                 {/* <input type="text" className="form-control"  placeholder="Giới tính" onChange={this.onChange} name="memberSex" value={this.state.memberSex}/> */}
               </div>
@@ -122,7 +133,8 @@ export default class AdminEditItem extends Component {
                   name="avatarContentImg"
                   onChange={this.onChange}
                 />
-              {/* <select className="form-control" onChange={this.onChange} name="memberClassId" value={this.state.memberClassId}>
+              {/*
+               <select className="form-control" onChange={this.onChange} name="memberClassId" value={this.state.memberClassId}>
                   <option value="Anh văn 1">Anh văn 1</option>
                   <option value="Anh văn 2">Anh văn 2</option>
                   <option value="Anh văn 3">Anh văn 3</option>
@@ -148,7 +160,6 @@ export default class AdminEditItem extends Component {
       </div>
       </section>
             </div>
-
         )
     }
 }

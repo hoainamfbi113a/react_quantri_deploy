@@ -12,7 +12,7 @@ export default class ItemMember extends Component {
                         <td style={{width: '10%', overflow: 'scroll'}}>{item.memberSex}</td>
                         <td style={{width: '10%', overflow: 'scroll'}}><img width="50px" src={`http://localhost:5000/${item.avatarContentImg}`} alt="not display"></img></td>
                         <td style={{width: '10%', overflow: 'scroll'}}>
-                        <Link to={"/admin/member/edit/"+this.props.item._id} onClick = {()=>this.props.handleEditItem(index,item)}>
+                        <Link to={"/admin/member/edit/"+this.props.item._id}>
                         <button type="button" className="btn btn-social-icon btn-bitbucket" >
                         <i className="fa fa-edit" />
                         </button>

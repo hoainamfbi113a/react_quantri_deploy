@@ -26,8 +26,6 @@ class AdminContentNews extends Component {
       deleteItem: item.title
 
     })
-    
-
   }
   handleDeleteItem = async() => {
     let { idAlert, news } = this.state;
@@ -120,6 +118,7 @@ class AdminContentNews extends Component {
     );
   }
 }
+
 const mapStateToProps = state => {
   return {
     news: state.newReducer.listNews,

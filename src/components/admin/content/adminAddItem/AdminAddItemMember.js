@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import axios from 'axios';
-export default class AdminAddItemMember extends Component {
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as memberAction  from "../../../../actions/memberAction";
+class AdminAddItemMember extends Component {
     constructor(props) {//khởi tạo giá trị
         super(props)
         this.state = {
@@ -38,19 +41,22 @@ export default class AdminAddItemMember extends Component {
         formData.append('memberDate', memberDate);
         formData.append('memberSex', memberSex);
         formData.append('memberAddress', memberAddress);
-        axios.post('http://localhost:5000/admin/member', formData)
-          .then(function (response) {
-            alert(response.data+"aaaa")
-            if(response.data === 'User already exists')
-              alert(response.data);
-            else{
-            alert("vao anh");
-            r.props.history.push('/admin/member')
-            }
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
+        const {memberActionsCreators} = this.props;
+        const { addMember } = memberActionsCreators;
+        addMember(formData);
+        // axios.post('http://localhost:5000/admin/member', formData)
+        //   .then(function (response) {
+        //     alert(response.data+"aaaa")
+        //     if(response.data === 'User already exists')
+        //       alert(response.data);
+        //     else{
+        //     alert("vao anh");
+        //     r.props.history.push('/admin/member')
+        //     }
+        //   })
+        //   .catch(function (error) {
+        //     console.log(error);
+        //   });
           r.props.history.push('/admin/member');
       }
     render() {
@@ -99,7 +105,7 @@ export default class AdminAddItemMember extends Component {
               <div className="col-sm-10" style={{marginLeft: '-5%'}}>
               <select className="form-control"  onChange={this.onChange} name="memberSex">
                   <option value="NAM">NAM</option>
-                  <option value="Nữ">Nữ</option>
+                  <option value="Nữ">NỮ</option>
               </select>
                 </div>
             </div>
@@ -117,7 +123,8 @@ export default class AdminAddItemMember extends Component {
                   name="avatarContentImg"
                   onChange={this.onChange}
                 />
-              {/* <select className="form-control" onChange={this.onChange} name="memberClassId" value={this.state.memberClassId}>
+              {/* 
+              <select className="form-control" onChange={this.onChange} name="memberClassId" value={this.state.memberClassId}>
                   <option value="Anh văn 1">Anh văn 1</option>
                   <option value="Anh văn 2">Anh văn 2</option>
                   <option value="Anh văn 3">Anh văn 3</option>
@@ -149,3 +156,13 @@ export default class AdminAddItemMember extends Component {
         )
     }
 }
+
+const mapStateToProps = state =>{
+
+}
+const mapDispatchToProps = dispatch =>{
+  return {
+    memberActionsCreators:bindActionCreators(memberAction, dispatch)
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(AdminAddItemMember)

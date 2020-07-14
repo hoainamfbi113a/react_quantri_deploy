@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import axios from 'axios';
-export default class AdminAddItemQuestion extends Component {
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as questionAction  from "../../../../actions/questionAction";
+class AdminAddItemQuestion extends Component {
     constructor(props) {//khởi tạo giá trị
         super(props)
         this.state = {
@@ -23,28 +26,26 @@ export default class AdminAddItemQuestion extends Component {
       onSubmit(e) {
         var r = this;
         e.preventDefault();
-        axios.post('http://localhost:5000/admin/question', {
-            _id:this.state._id,
-            questionCategoryId: this.state.questionCategoryId,
-            questionName: this.state.questionName,
-            questionResultA: this.state.questionResultA,
-            questionResultB: this.state.questionResultB,
-            questionResultC: this.state.questionResultC,
-            questionResultD: this.state.questionResultD,
-            questionResultRight: this.state.questionResultRight,
-           
-          })
-          .then(function (response) {
-            if(response.data ==='User already exists')
-              alert('User already exists');
-            else{
-            r.props.history.push('/admin/question')
-            }
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-       r.props.history.push('/admin/question')
+        const {_id, questionCategoryId, questionName, questionResultA,questionResultB,questionResultC,questionResultD,questionResultRight } = this.state;
+        let formData={
+          
+        } ;
+        // formData.append('selectedFile', selectedFile);
+        formData._id = _id ;
+        formData.questionCategoryId = questionCategoryId ;
+        formData.questionName = questionName ;
+        formData.questionResultA= questionResultA;
+        formData.questionResultB= questionResultB;
+        formData.questionResultC= questionResultC;
+        formData.questionResultD= questionResultD;
+        formData.questionResultRight= questionResultRight;
+        // formData.append('timeUpdate', timeUpdate);
+        const {questionActionsCreators} = this.props;
+        const { addquestion } = questionActionsCreators;
+        addquestion(formData);
+        setTimeout(()=>{
+          r.props.history.push('/admin/question');
+    },100)
       }
     render() {
         return (
@@ -138,3 +139,12 @@ export default class AdminAddItemQuestion extends Component {
         )
     }
 }
+const mapStateToProps = state =>{
+
+}
+const mapDispatchToProps = dispatch =>{
+  return {
+    questionActionsCreators:bindActionCreators(questionAction, dispatch)
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(AdminAddItemQuestion)
