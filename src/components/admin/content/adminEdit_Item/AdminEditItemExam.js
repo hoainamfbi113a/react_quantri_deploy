@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 import axios from 'axios';
-export default class AdminEditItemExam extends Component {
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+
+import * as examAction  from "../../../../actions/examAction";
+class AdminEditItemExam extends Component {
   constructor(props) {
     super(props);
     
@@ -17,43 +21,42 @@ export default class AdminEditItemExam extends Component {
     }
 }
     componentDidMount() {
-      // alert('updatemember')
-      axios.get('http://localhost:5000/admin/exam/'+this.props.match.params.id)
-          .then(response => {
+      const {examActionsCreators} = this.props;
+      const { setexamEditing } = examActionsCreators;
+    // console.log(this.props.match.params.id);
+      setexamEditing(this.props.match.params.id);
               this.setState({
-                  _id:this.props.match.params.id,
-                  examName: response.data.examName,
-                  examEasyNumber:response.data.examEasyNumber,
-                  examMediumNumber : response.data.examMediumNumber,
-                  examDifficultNumber : response.data.examDifficultNumber,
-                  examTimeMake : response.data.examTimeMake,
-                  classId : response.data.classId,
+                  _id:this.props.examUpdate._id,
+                  examName: this.props.examUpdate.examName,
+                  examEasyNumber:this.props.examUpdate.examEasyNumber,
+                  examMediumNumber : this.props.examUpdate.examMediumNumber,
+                  examDifficultNumber : this.props.examUpdate.examDifficultNumber,
+                  examTimeMake : this.props.examUpdate.examTimeMake,
+                  classId : this.props.examUpdate.classId,
                  
                    });
-          })
-          .catch(function (error) {
-              console.log(error);
-          })
     }
     onChange(e) {
       this.setState({ [e.target.name]: e.target.value })//cập nhật giá trị input
     }
     onSubmit(e) {
+      var r = this;
       e.preventDefault();
-      const obj = {
-            _id:this.state._id,
-            examName: this.state.examName,
-            examEasyNumber: this.state.examEasyNumber,
-            examMediumNumber: this.state.examMediumNumber,
-            examDifficultNumber: this.state.examDifficultNumber,
-            examTimeMake: this.state.examTimeMake,
-            classId: this.state.classId,
-          
-      };
-      axios.post('http://localhost:5000/admin/exam', obj)
-          .then(res => console.log(res.data));
-
-      this.props.history.push('/admin/exam');
+      const {  examMediumNumber, examEasyNumber,examName,examDifficultNumber } = this.state;
+      let formData={
+      } ;
+      // formData.append('selectedFile', selectedFile);
+      formData._id=this.props.match.params.id;
+      formData.examName=examName;
+      formData.examEasyNumber= examEasyNumber;
+      formData.examMediumNumber= examMediumNumber;
+      formData.examDifficultNumber=examDifficultNumber;
+      const {examActionsCreators} = this.props;
+      const { updateexam } = examActionsCreators;
+      updateexam(formData);
+      setTimeout(()=>{
+        r.props.history.push('/admin/exam');
+      },100)
   }
     render() {
       
@@ -162,3 +165,14 @@ export default class AdminEditItemExam extends Component {
     
     }
 }
+const mapStateToProps = (state, props) =>{
+  // console.log(state.newReducer.listNews.find(item => item._id === props.match.params.id));
+  // console.log(props.match.params.id)
+  return { examUpdate: state.examReducer.listexam.find(item => item._id === props.match.params.id) }
+}
+const mapDispatchToProps = dispatch =>{
+  return {
+    examActionsCreators:bindActionCreators(examAction, dispatch)
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(AdminEditItemExam);

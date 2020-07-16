@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import axios from 'axios';
-export default class AdminAddItemMember extends Component {
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as examAction  from "../../../../actions/examAction";
+class AdminAddItemExam extends Component {
     constructor(props) {//khởi tạo giá trị
         super(props)
         this.state = {
@@ -21,29 +24,48 @@ export default class AdminAddItemMember extends Component {
         this.setState({ [e.target.name]: e.target.value })//cập nhật giá trị input
       }
       onSubmit(e) {
+      //   var r = this;
+      //   e.preventDefault();
+      //   axios.post('http://localhost:5000/admin/exam', {
+      //       _id:this.state._id,
+      //       examName: this.state.examName,
+      //       // examEasyNumber: this.state.examEasyNumber,
+      //       // examMediumNumber: this.state.examMediumNumber,
+      //       // examDifficultNumber: this.state.examDifficultNumber,
+      //       examCategoryNumber: this.state.examCategoryNumber,
+      //       examTimeMake: this.state.examTimeMake,
+      //       classId: this.state.classId,
+      //     })
+      //     .then(function (response) {
+      //       if(response.data ==='User already exists')
+      //         alert('User already exists');
+      //       else{
+      //       r.props.history.push('/admin/exam')
+      //       }
+      //     })
+      //     .catch(function (error) {
+      //       console.log(error);
+      //     });
+      //  r.props.history.push('/admin/exam')
         var r = this;
         e.preventDefault();
-        axios.post('http://localhost:5000/admin/exam', {
-            _id:this.state._id,
-            examName: this.state.examName,
-            // examEasyNumber: this.state.examEasyNumber,
-            // examMediumNumber: this.state.examMediumNumber,
-            // examDifficultNumber: this.state.examDifficultNumber,
-            examCategoryNumber: this.state.examCategoryNumber,
-            examTimeMake: this.state.examTimeMake,
-            classId: this.state.classId,
-          })
-          .then(function (response) {
-            if(response.data ==='User already exists')
-              alert('User already exists');
-            else{
-            r.props.history.push('/admin/exam')
-            }
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-       r.props.history.push('/admin/exam')
+        const { examName, examEasyNumber, examMediumNumber,examDifficultNumber,examCategoryNumber,examTimeMake,classId } = this.state;
+        let formData={
+          
+        } ;
+        formData.examDifficultNumber=examDifficultNumber;
+        formData.examMediumNumber= examMediumNumber;
+        formData.examName= examName;
+        formData.examEasyNumber=examEasyNumber;
+        formData.examCategoryNumber=examCategoryNumber;
+        formData.examTimeMake=examTimeMake;
+        formData.classId=classId;
+        const {examActionsCreators} = this.props;
+        const { addexam } = examActionsCreators;
+        addexam(formData);
+        setTimeout(()=>{
+          r.props.history.push('/admin/exam');
+        },500)
       }
     render() {
         return (
@@ -152,3 +174,12 @@ export default class AdminAddItemMember extends Component {
         )
     }
 }
+const mapStateToProps = state =>{
+
+}
+const mapDispatchToProps = dispatch =>{
+  return {
+    examActionsCreators:bindActionCreators(examAction, dispatch)
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(AdminAddItemExam)

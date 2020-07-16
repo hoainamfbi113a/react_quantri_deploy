@@ -5,6 +5,7 @@ import videoLearningReducer from "./videoLearningReducer";
 import classSubjectReducer from "./classSubjectReducer";
 import memberReducer from "./memberReducer";
 import questionReducer from "./questionReducer";
+import examReducer from "./examReducer";
 const rootReducer = combineReducers({
     ui:uiReducer,
     newReducer:newReducer,
@@ -12,5 +13,6 @@ const rootReducer = combineReducers({
     classSubjectReducer:classSubjectReducer,
     memberReducer:memberReducer,
     questionReducer:questionReducer,
+    examReducer:examReducer,
 })
 export default rootReducer;

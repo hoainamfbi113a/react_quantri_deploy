@@ -10,7 +10,7 @@ export default class ItemExam extends Component {
                         <td>{item.examTimeMake}</td>
                         <td>{item.classId}</td>
                         <td>
-                        <Link to={"/admin/exam/edit/"+this.props.item._id} onClick = {()=>this.props.handleEditItem(index,item)}>
+                        <Link to={"/admin/exam/edit/"+this.props.item._id}>
                         <button type="button" className="btn btn-social-icon btn-bitbucket" >
                         <i className="fa fa-edit" />
                         </button>
