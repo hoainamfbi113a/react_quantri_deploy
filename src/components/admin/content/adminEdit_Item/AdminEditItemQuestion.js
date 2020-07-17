@@ -56,7 +56,7 @@ export default class AdminEditItem extends Component {
       this.props.history.push('/admin/question');
   }
     render() {
-      {
+      
         return (
             <div>
              <section className="content">
@@ -143,6 +143,6 @@ export default class AdminEditItem extends Component {
             </div>
 
         )
-    }
+    
     }
 }

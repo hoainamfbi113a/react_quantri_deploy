@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './style.css'
-// import imgLoading from "../../assets/imgloading.gif";
 import imgLoading from "../../assets/imgloading.gif";
 import * as uiAction from "../../actions/ui"
 import {bindActionCreators} from 'redux';
@@ -12,11 +11,10 @@ class Globading extends Component {
         if(showLoading){
             htmlLoading = (
                 <div className="GlobalLoading">
-                     <img src ={imgLoading} alt="img loading" class="icon"></img> 
+                     <img src ={imgLoading} alt="img loading" className="icon"></img> 
                 </div>
             )
         }
-        
         return htmlLoading;
     }
 }
@@ -31,5 +29,4 @@ const mapDispathToProps = (dispath) =>{
     }
 }
 export default connect(mapStateToProps, mapDispathToProps)(Globading)
-// const withConnect = connect(mapStateToProps,mapDispathToProps);
 

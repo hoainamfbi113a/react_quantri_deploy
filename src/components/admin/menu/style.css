@@ -1,0 +1,6 @@
+.treeview:hover{
+    background: linear-gradient(to right, #16a085, #02a795, #00aea4, #00b5b4, #00bbc3, #00bbc3, #00bbc3, #00bbc3, #00b5b4, #00aea4, #02a795, #16a085);
+}
+.skin-blue .sidebar-menu>li:hover>a, .skin-blue .sidebar-menu>li.active>a :hover{
+    background: linear-gradient(to right, #16a085, #02a795, #00aea4, #00b5b4, #00bbc3, #00bbc3, #00bbc3, #00bbc3, #00b5b4, #00aea4, #02a795, #16a085);
+}

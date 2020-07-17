@@ -98,9 +98,16 @@ export default class AdminAddItemMember extends Component {
               <label style={{textAlign: 'left'}} htmlFor="inputEmail3" className="col-sm-2 control-label">Loại câu hỏi</label>
               <div className="col-sm-10" style={{marginLeft: '-5%'}}>
               <select className="form-control"  onChange={this.onChange}  name="examCategoryNumber">
+              <option value="Anh văn 1">Anh văn 1</option>
+                  <option value="Anh văn 2">Anh văn 2</option>
+                  <option value="Anh văn 3">Anh văn 3</option>
+                  <option value="Anh văn 4">Anh văn 4</option>
+                  <option value="Anh văn 5">Anh văn 5</option>
                   <option value="Toán lớp 1">Toán lớp 1</option>
                   <option value="Toán lớp 2">Toán lớp 2</option>
-                  <option value="Anh văn 1">Anh văn 1</option>
+                  <option value="Toán lớp 3">Toán lớp 3</option>
+                  <option value="Toán lớp 4">Toán lớp 4</option>
+                  <option value="Toán lớp 5">Toán lớp 5</option>
               </select>
                 {/* <input type="text" className="form-control"  placeholder="Số câu trung bình" onChange={this.onChange} name="examMediumNumber" value={this.state.examMediumNumber}/> */}
               </div>
@@ -115,14 +122,20 @@ export default class AdminAddItemMember extends Component {
               <label style={{textAlign: 'left'}} htmlFor="inputPassword3" className="col-sm-2 control-label">Lớp làm bài</label>
               <div className="col-sm-10" style={{marginLeft: '-5%'}}>
               <select className="form-control"  onChange={this.onChange}  name="classId" >
+              <option value="Anh văn 1">Anh văn 1</option>
+                  <option value="Anh văn 2">Anh văn 2</option>
+                  <option value="Anh văn 3">Anh văn 3</option>
+                  <option value="Anh văn 4">Anh văn 4</option>
+                  <option value="Anh văn 5">Anh văn 5</option>
                   <option value="Toán lớp 1">Toán lớp 1</option>
                   <option value="Toán lớp 2">Toán lớp 2</option>
-                  <option value="Anh văn 1">Anh văn 1</option>
+                  <option value="Toán lớp 3">Toán lớp 3</option>
+                  <option value="Toán lớp 4">Toán lớp 4</option>
+                  <option value="Toán lớp 5">Toán lớp 5</option>
               </select>
                 {/* <input type="text" className="form-control" id="inputPassword3" placeholder="Lớp làm bài"onChange={this.onChange} name="classId" value={this.state.classId}/> */}
               </div>
             </div>
-            
           </div>
           {/* /.box-body */}
           <div className="box-footer" style={{paddingRight: '69px'}}>

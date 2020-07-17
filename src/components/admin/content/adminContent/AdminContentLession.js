@@ -3,17 +3,16 @@ import {Link}  from 'react-router-dom'
 import Swal from 'sweetalert-react';
 import 'sweetalert/dist/sweetalert.css';
 import axios from 'axios';
-import Item from '../Items/ItemExam';
-
+import Item from '../Items/ItemLession';
+import { withRouter  } from 'react-router'
 // import Items 
-export default class AdminContentExam extends Component {
+class AdminContentLession extends Component {
     constructor(props){
       super(props)
       this.state = {
         showAlert:false,
         idAlert:"",
-        persons:[],
-        refresh:true
+        persons:[]
       }
     }
     handleShowAlert = (item) =>{
@@ -25,9 +24,9 @@ export default class AdminContentExam extends Component {
     }
     handleDeleteItem = () => {
       let {idAlert, persons} = this.state;
-      axios.get('http://localhost:5000/admin/exam/delete/'+idAlert)
+      axios.get('http://localhost:5000/admin/question/delete/'+idAlert)
       .then(()=>{
-        axios.get('http://localhost:5000/admin/exam/list')
+        axios.get('http://localhost:5000/admin/question/list')
         .then(response => {
             // console.log(response.data);
             this.setState({persons: response.data});
@@ -42,68 +41,46 @@ export default class AdminContentExam extends Component {
           showAlert: false
       });
   }
-  handleEditItem = (index,item) => {
-
-    this.setState({
-        indexEdit: index,
-        idEdit: item._id,
-        nameEdit: item.fullname,
-        emailEdit: item.email,
-       
-    });
-}
-    componentDidMount(){
-      axios.get('http://localhost:5000/admin/exam/list')
+ 
+  async componentDidMount(){
+        console.log("xin chao lession")
+     await axios.get('http://localhost:5000/admin/lession/list')
             .then(response => {
-                // console.log(response.data);
                 this.setState({persons: response.data});
             })
             .catch(function (error) {
-                // console.log(error);
             })
     }
-    componentDidUpdate(prevProps) {
-      if (this.props.userID !== prevProps.userID) {
-        this.fetchData(this.props.userID);
-      }
-    }
     renderItem = () =>{
-      
-       let {items,idEdit,nameEdit,levelEdit,persons} = this.state; 
+       let {persons} = this.state; 
         console.log(persons);
         return (
          persons.map((item,index)=>{
             return(
-              <Item key={item._id}  item={item} index={index}  handleShowAlert={this.handleShowAlert}  handleEditItem = {this.handleEditItem}/>
+              <Item key={item._id}  item={item} index={index}  handleShowAlert={this.handleShowAlert}/>
             )
           })
-         
-        
         )
     }
     render() {
     
         return (     
-       <div>
+       
           <section className="content">
           <div className="row">
             <div className="col-xs-12">
               <div className="box">
                 <div className="box-header">
-                <Link to="exam/add"><button type="submit" className="btn btn-primary"><i className="fa fa-fw fa-home" />Thêm đề thi</button></Link>
-                </div>
+                <Link to="lession/add"><button type="submit" className="btn btn-primary"><i className="fa fa-fw fa-home" />Thêm bài học</button></Link>
+               </div>
                 {/* /.box-header */}
                 <div className="box-body">
                   <table id="example2" className="table table-bordered table-hover">
                     <thead>
                       <tr>
-                        <th>Tên đề thi </th>
-                        <th>Loại câu hỏi</th>
-                        <th>Thời gian làm bài</th>
-                        <th>Lớp làm bài</th>
-                        <th>Sửa đề thi</th>
-                        <th>Xóa đề thi</th>
-                       
+                        <th>Môn học</th>
+                        <th>Tiêu đề</th>
+                        <th>Ảnh</th> 
                       </tr>
                     </thead>
                     <tbody>
@@ -111,21 +88,15 @@ export default class AdminContentExam extends Component {
                     </tbody>
                     <tfoot>
                       <tr>
-                        <th>Tên đề thi </th>
-                        <th>Loại câu hỏi</th>
-                        <th>Thời gian làm bài</th>
-                        <th>Lớp làm bài</th>
-                        <th>Sửa đề thi</th>
-                        <th>Xóa đề thi</th> 
+                      <th>Môn học</th>
+                      <th>Tiêu đề</th>
+                      <th>Ảnh</th>
                       </tr>
                     </tfoot>
                   </table>
-                </div>
-               
-              </div>
-             
+                </div>      
+              </div>          
             </div>
-           
           </div>
           <Swal
                             show={this.state.showAlert}
@@ -139,9 +110,10 @@ export default class AdminContentExam extends Component {
            />
         </section>
        
-        </div>    
+                  
           
 
         )
     }
 }
+export default withRouter(AdminContentLession)

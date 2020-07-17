@@ -4,8 +4,9 @@ import Swal from 'sweetalert-react';
 import 'sweetalert/dist/sweetalert.css';
 import axios from 'axios';
 import Item from '../Items/ItemQuestion';
+import { withRouter  } from 'react-router'
 // import Items 
-export default class AdminContentQuestion extends Component {
+class AdminContentQuestion extends Component {
     constructor(props){
       super(props)
       this.state = {
@@ -145,3 +146,4 @@ export default class AdminContentQuestion extends Component {
         )
     }
 }
+export default withRouter(AdminContentQuestion)

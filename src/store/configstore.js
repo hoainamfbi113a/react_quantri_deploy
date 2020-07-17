@@ -20,6 +20,5 @@ const configStore = () =>{
     const store = createStore(rootReducer,composeEnhancers(...enhaners));
     sagaMiddleware.run(rootSaga);
     return store;
-
 }
-export default configStore
+export default configStore;
