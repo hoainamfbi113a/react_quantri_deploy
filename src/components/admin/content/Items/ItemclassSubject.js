@@ -1,16 +1,14 @@
 import React, { Component } from 'react'
 import {Link}  from 'react-router-dom'
-export default class ItemExam extends Component {
+export default class ItemNews extends Component {
     render() {
         let {item,index} = this.props;
         return (
                 <tr>
-                        <td>{item.examName}</td>
-                        <td>{item.examCategoryNumber}</td>
-                        <td>{item.examTimeMake}</td>
-                        <td>{item.classId}</td>
+                        <td>{item.classSubjectName}</td>
                         <td>
-                        <Link to={"/admin/exam/edit/"+this.props.item._id}>
+                        {/* <Link to={"/admin/news/edit/"+this.props.item._id}> */}
+                        <Link to={`/admin/classsubject/edit/${item._id}`}>
                         <button type="button" className="btn btn-social-icon btn-bitbucket" >
                         <i className="fa fa-edit" />
                         </button>

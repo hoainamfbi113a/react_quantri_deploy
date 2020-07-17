@@ -5,15 +5,15 @@ import { Link } from 'react-router-dom'
 import Swal from 'sweetalert-react';
 import 'sweetalert/dist/sweetalert.css';
 import axios from 'axios';
-import * as newsActions from '../../../../actions/newsAction';
-import ItemNews from '../Items/ItemNews';
+import * as videoLearningActions from '../../../../actions/videoLearningAction';
+import ItemvideoLearning from '../Items/ItemvideoLearning';
 
-class AdminContentNews extends Component {
+class AdminContentvideoLearning extends Component {
   constructor(props) {
     super(props)
     this.state = {
       showAlert: false,
-      news: [],
+      videoLearning: [],
       deleteItem: "",
       idAlert:""
     }
@@ -28,37 +28,25 @@ class AdminContentNews extends Component {
     })
   }
   handleDeleteItem = async() => {
-    let { idAlert, news } = this.state;
-    const { newsActionCreators } = this.props;
-    const { deleteNew } = newsActionCreators;
-    deleteNew(idAlert);
+    let { idAlert, videoLearning } = this.state;
+    const { videoLearningActionCreators } = this.props;
+    const { deletevideoLearning } = videoLearningActionCreators;
+    deletevideoLearning(idAlert);
     this.setState({
       showAlert:false
     });
   }
-  handleEditItem = (index,item) => {
-    this.setState({
-        indexEdit: index,
-        idEdit: item._id,
-        titleEdit: item.title,
-        imageEdit: item.image,
-        contentsEdit: item.contents,
-        timeUpdateEdit: item.timeUpdate,
-    });
-}
-
   componentDidMount = () => {
-    const { newsActionCreators } = this.props;
-    const { fetchListNews } = newsActionCreators;
-    fetchListNews();
+    const { videoLearningActionCreators } = this.props;
+    const { fetchListvideoLearning } = videoLearningActionCreators;
+    fetchListvideoLearning();
   }
   renderItem = () => {
-    // console.log(this.props.news)
-    let { news } = this.props;
+    let { videoLearning } = this.props;
     return (
-      news.map((item, index) => {
+      videoLearning.map((item, index) => {
         return (
-          <ItemNews key={item._id} item={item} index={index} handleShowAlert={this.handleShowAlert} handleEditItem={this.handleEditItem}></ItemNews>
+          <ItemvideoLearning key={item._id} item={item} index={index} handleShowAlert={this.handleShowAlert}></ItemvideoLearning>
         )
       })
     )
@@ -71,7 +59,7 @@ class AdminContentNews extends Component {
             <div className="col-xs-12">
               <div className="box">
                 <div className="box-header">
-                  <Link to="news/add"><button type="submit" className="btn btn-primary"><i className="fa fa-fw fa-home" />Thêm tin tức</button></Link>
+                  <Link to="videolearning/add"><button type="submit" className="btn btn-primary"><i className="fa fa-fw fa-home" />Thêm video bài học</button></Link>
                 </div>
                 {/* /.box-header */}
                 <div className="box-body">
@@ -79,13 +67,13 @@ class AdminContentNews extends Component {
                     <thead>
                       <tr>
 
-                        <th>Loại tin tức </th>
-                        <th>Tiêu đề tin tức </th>
-                        <th>Hình ảnh</th>
-                        <th>Nội dung tin tức</th>
-                        <th>Thời gian update</th>
-                        <th>Sửa tin tức</th>
-                        <th>Xóa tin tức</th>
+                        <th>Video của lớp học </th>
+                        <th>Tiêu đề của bài học video </th>
+                        <th>Video</th>
+                        <th>Nội dung video</th>
+                        {/* <th>Thời gian update</th> */}
+                        <th>Sửa video</th>
+                        <th>Xóa video</th>
 
                       </tr>
                     </thead>
@@ -94,13 +82,13 @@ class AdminContentNews extends Component {
                     </tbody>
                     <tfoot>
                       <tr>
-                        <th>Loại tin tức </th>
-                        <th>Tiêu đề tin tức </th>
-                        <th>Hình ảnh</th>
-                        <th>Nội dung tin tức</th>
-                        <th>Thời gian update</th>
-                        <th>Sửa tin tức</th>
-                        <th>Xóa tin tức</th>
+                        <th>Video của lớp học </th>
+                        <th>Tiêu đề của bài học video </th>
+                        <th>video</th>
+                        <th>Nội dung video</th>
+                        {/* <th>Thời gian update</th> */}
+                        <th>Sửa video</th>
+                        <th>Xóa video</th>
                       </tr>
                     </tfoot>
                   </table>
@@ -129,17 +117,16 @@ class AdminContentNews extends Component {
     );
   }
 }
-
 const mapStateToProps = state => {
   return {
-    news: state.newReducer.listNews,
+    videoLearning: state.videoLearningReducer.listvideoLearning,
   };
 };
 const mapDispatchToProps = dispatch => {
   return {
-    newsActionCreators: bindActionCreators(newsActions, dispatch),
+    videoLearningActionCreators: bindActionCreators(videoLearningActions, dispatch),
     // modalActionCreators: bindActionCreators( dispatch),
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AdminContentNews);
+export default connect(mapStateToProps, mapDispatchToProps)(AdminContentvideoLearning);

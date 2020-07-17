@@ -1,12 +1,15 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import {Link}  from 'react-router-dom'
 import Swal from 'sweetalert-react';
 import 'sweetalert/dist/sweetalert.css';
 import axios from 'axios';
 import Item from '../Items/ItemExam';
+import * as examActions from '../../../../actions/examAction';
 
 // import Items 
-export default class AdminContentExam extends Component {
+class AdminContentExam extends Component {
     constructor(props){
       super(props)
       this.state = {
@@ -24,22 +27,12 @@ export default class AdminContentExam extends Component {
       })
     }
     handleDeleteItem = () => {
-      let {idAlert, persons} = this.state;
-      axios.get('http://localhost:5000/admin/exam/delete/'+idAlert)
-      .then(()=>{
-        axios.get('http://localhost:5000/admin/exam/list')
-        .then(response => {
-            // console.log(response.data);
-            this.setState({persons: response.data});
-        })
-        .catch(function (error) {
-            // console.log(error);
-        })
-      }
-      )
-      .catch(err => console.log(err))
+      let { idAlert, exam } = this.state;
+      const { examActionCreators } = this.props;
+      const { deleteexam } = examActionCreators;
+      deleteexam(idAlert);
       this.setState({
-          showAlert: false
+        showAlert:false
       });
   }
   handleEditItem = (index,item) => {
@@ -53,33 +46,20 @@ export default class AdminContentExam extends Component {
     });
 }
     componentDidMount(){
-      axios.get('http://localhost:5000/admin/exam/list')
-            .then(response => {
-                // console.log(response.data);
-                this.setState({persons: response.data});
-            })
-            .catch(function (error) {
-                // console.log(error);
-            })
-    }
-    componentDidUpdate(prevProps) {
-      if (this.props.userID !== prevProps.userID) {
-        this.fetchData(this.props.userID);
-      }
+      const { examActionCreators } = this.props;
+      const { fetchListexam } = examActionCreators;
+      fetchListexam();
     }
     renderItem = () =>{
       
-       let {items,idEdit,nameEdit,levelEdit,persons} = this.state; 
-        console.log(persons);
+      let { exam } = this.props;
+    return (
+      exam.map((item, index) => {
         return (
-         persons.map((item,index)=>{
-            return(
-              <Item key={item._id}  item={item} index={index}  handleShowAlert={this.handleShowAlert}  handleEditItem = {this.handleEditItem}/>
-            )
-          })
-         
-        
+          <Item key={item._id} item={item} index={index} handleShowAlert={this.handleShowAlert}></Item>
         )
+      })
+    )
     }
     render() {
     
@@ -145,3 +125,16 @@ export default class AdminContentExam extends Component {
         )
     }
 }
+const mapStateToProps = state => {
+  return {
+    exam: state.examReducer.listexam,
+  };
+};
+const mapDispatchToProps = dispatch => {
+  return {
+    examActionCreators: bindActionCreators(examActions, dispatch),
+    // modalActionCreators: bindActionCreators( dispatch),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AdminContentExam);

@@ -1,9 +1,12 @@
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import React, { Component } from 'react'
 import {Link}  from 'react-router-dom'
 import Swal from 'sweetalert-react';
 import 'sweetalert/dist/sweetalert.css';
 import axios from 'axios';
 import Item from '../Items/ItemQuestion';
+import * as questionActions from '../../../../actions/questionAction';
 import { withRouter  } from 'react-router'
 // import Items 
 class AdminContentQuestion extends Component {
@@ -24,55 +27,63 @@ class AdminContentQuestion extends Component {
     }
     handleDeleteItem = () => {
       let {idAlert, persons} = this.state;
-      axios.get('http://localhost:5000/admin/question/delete/'+idAlert)
-      .then(()=>{
-        axios.get('http://localhost:5000/admin/question/list')
-        .then(response => {
-            // console.log(response.data);
-            this.setState({persons: response.data});
-        })
-        .catch(function (error) {
-            // console.log(error);
-        })
-      }
-      )
-      .catch(err => console.log(err))
+      // axios.get('http://localhost:5000/admin/question/delete/'+idAlert)
+      // .then(()=>{
+      //   axios.get('http://localhost:5000/admin/question/list')
+      //   .then(response => {
+      //       // console.log(response.data);
+      //       this.setState({persons: response.data});
+      //   })
+      //   .catch(function (error) {
+      //       // console.log(error);
+      //   })
+      // }
+      // )
+      // .catch(err => console.log(err))
+      // this.setState({
+      //     showAlert: false
+      // });
+      const { questionActionCreators } = this.props;
+      const { deletequestion } = questionActionCreators;
+      deletequestion(idAlert);
       this.setState({
-          showAlert: false
+        showAlert:false
       });
   }
  
     componentDidMount(){ 
        
-            const script = document.createElement("script");
-            script.src='js/content.js'
-            script.async = true;
-            document.body.appendChild(script);
-            // alert(script.textContent)
-            this.countDownTrack = setTimeout(()=>{
-              axios.get('http://localhost:5000/admin/question/list')
-            .then(response => {
-                // console.log(response.data);
-                this.setState({persons: response.data});
-            })
-            .catch(function (error) {
-                // console.log(error);
-            })
-            },200)
+            // const script = document.createElement("script");
+            // script.src='js/content.js'
+            // script.async = true;
+            // document.body.appendChild(script);
+            // // alert(script.textContent)
+            // this.countDownTrack = setTimeout(()=>{
+            //   axios.get('http://localhost:5000/admin/question/list')
+            // .then(response => {
+            //     // console.log(response.data);
+            //     this.setState({persons: response.data});
+            // })
+            // .catch(function (error) {
+            //     // console.log(error);
+            // })
+            // },200)
+            const { questionActionCreators } = this.props;
+            const { fetchListquestion } = questionActionCreators;
+            fetchListquestion();
         
     }
     renderItem = () =>{
-      
-       let {items,idEdit,nameEdit,levelEdit,persons} = this.state; 
-        console.log(persons);
+       let { question } = this.props;
+      //  console.log(question);
+      //  let {items,idEdit,nameEdit,levelEdit,persons} = this.state; 
+        // console.log(persons);
         return (
-         persons.map((item,index)=>{
+          question.map((item,index)=>{
             return(
-              <Item key={item._id}  item={item} index={index}  handleShowAlert={this.handleShowAlert}/>
+              <Item key={item._id} item={item} index={index} handleShowAlert={this.handleShowAlert}/>
             )
           })
-         
-        
         )
     }
     render() {
@@ -146,4 +157,16 @@ class AdminContentQuestion extends Component {
         )
     }
 }
-export default withRouter(AdminContentQuestion)
+const mapStateToProps = state => {
+  return {
+    question: state.questionReducer.listquestion,
+  };
+};
+const mapDispatchToProps = dispatch => {
+  return {
+    questionActionCreators: bindActionCreators(questionActions, dispatch),
+    // modalActionCreators: bindActionCreators( dispatch),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AdminContentQuestion);

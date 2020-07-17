@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import axios from 'axios';
-export default class AdminEditItem extends Component {
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as questionAction  from "../../../../actions/questionAction";
+class AdminEditItemQuestion extends Component {
   constructor(props) {
     super(props);
     
@@ -18,42 +21,46 @@ export default class AdminEditItem extends Component {
     }
 }
     componentDidMount() {
-      axios.get('http://localhost:5000/admin/question/'+this.props.match.params.id)
-          .then(response => {
+      const {questionActionsCreators} = this.props;
+      const { setquestionEditing } = questionActionsCreators;
+      // console.log(this.props.match.params.id);
+      setquestionEditing(this.props.match.params.id);
               this.setState({
-                  _id:this.props.match.params.id,
-                  questionCategoryId: response.data.questionCategoryId,
-                  questionName:response.data.questionName,
-                  questionResultA : response.data.questionResultA,
-                  questionResultB : response.data.questionResultB,
-                  questionResultC : response.data.questionResultC,
-                  questionResultD : response.data.questionResultD,
-                  questionResultRight : response.data.questionResultRight,
-                   });
-          })
-          .catch(function (error) {
-              console.log(error);
-          })
+                  _id:this.props.questionUpdate._id,
+                  questionCategoryId: this.props.questionUpdate.questionCategoryId,
+                  questionName: this.props.questionUpdate.questionName,
+                  questionResultA : this.props.questionUpdate.questionResultA,
+                  questionResultB : this.props.questionUpdate.questionResultB,
+                  questionResultC : this.props.questionUpdate.questionResultC,
+                  questionResultD : this.props.questionUpdate.questionResultD,
+                  questionResultRight : this.props.questionUpdate.questionResultRight,
+              })
     }
     onChange(e) {
       this.setState({ [e.target.name]: e.target.value })//cập nhật giá trị input
     }
     onSubmit(e) {
+      var r = this;
       e.preventDefault();
-      const obj = {
-            _id:this.state._id,
-            questionCategoryId: this.state.questionCategoryId,
-            questionName: this.state.questionName,
-            questionResultA: this.state.questionResultA,
-            questionResultB: this.state.questionResultB,
-            questionResultC: this.state.questionResultC,
-            questionResultD: this.state.questionResultD,
-            questionResultRight: this.state.questionResultRight,
-      };
-      axios.post('http://localhost:5000/admin/question', obj)
-          .then(res => console.log(res.data));
-
-      this.props.history.push('/admin/question');
+      const {  questionResultA, questionName,questionCategoryId,questionResultB,questionResultC,questionResultD,questionResultRight } = this.state;
+      let formData={
+      
+      } ;
+      // formData.append('selectedFile', selectedFile);
+      formData._id=this.props.match.params.id;
+      formData.questionCategoryId=questionCategoryId;
+      formData.questionName= questionName;
+      formData.questionResultA= questionResultA;
+      formData.questionResultB=questionResultB;
+      formData.questionResultC=questionResultC;
+      formData.questionResultD=questionResultD;
+      formData.questionResultRight=questionResultRight;
+      const {questionActionsCreators} = this.props;
+      const { updatequestion } = questionActionsCreators;
+      updatequestion(formData);
+      setTimeout(()=>{
+        r.props.history.push('/admin/question');
+      },100)
   }
     render() {
       
@@ -78,9 +85,16 @@ export default class AdminEditItem extends Component {
 
                 <input type="hidden" className="form-control"  placeholder="text" name="_id" value={this.state._id}/>
                 <select className="form-control"  onChange={this.onChange}  name="questionCategoryId" value={this.state.questionCategoryId} >
+                <option value="Anh văn 1">Anh văn 1</option>
+                  <option value="Anh văn 2">Anh văn 2</option>
+                  <option value="Anh văn 3">Anh văn 3</option>
+                  <option value="Anh văn 4">Anh văn 4</option>
+                  <option value="Anh văn 5">Anh văn 5</option>
                   <option value="Toán lớp 1">Toán lớp 1</option>
                   <option value="Toán lớp 2">Toán lớp 2</option>
-                  <option value="Anh văn 1">Anh văn 1</option>
+                  <option value="Toán lớp 3">Toán lớp 3</option>
+                  <option value="Toán lớp 4">Toán lớp 4</option>
+                  <option value="Toán lớp 5">Toán lớp 5</option>
                  
               </select>
                 {/* <input type="text" className="form-control"  placeholder="Loại câu hỏi" onChange={this.onChange} name="questionCategoryId" value={this.state.questionCategoryId}/> */}
@@ -146,3 +160,14 @@ export default class AdminEditItem extends Component {
     
     }
 }
+const mapStateToProps = (state, props) =>{
+  // console.log(state.newReducer.listNews.find(item => item._id === props.match.params.id));
+  // console.log(props.match.params.id)
+  return { questionUpdate: state.questionReducer.listquestion.find(item => item._id === props.match.params.id) }
+}
+const mapDispatchToProps = dispatch =>{
+  return {
+    questionActionsCreators:bindActionCreators(questionAction, dispatch)
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(AdminEditItemQuestion);

@@ -5,6 +5,7 @@ export default class ItemNews extends Component {
         let {item,index} = this.props;
         return (
                 <tr>
+                        <td>{item.categoryNews==="newcategory1"? "Tin tức giáo dục": "Tin tức học sinh tiêu biểu"}</td>
                         <td>{item.title}</td>
                         {/* <td>{item.images}</td> */}
                         <td><img width="50px" src={`http://localhost:5000/${item.images}`} alt="not display"></img></td>

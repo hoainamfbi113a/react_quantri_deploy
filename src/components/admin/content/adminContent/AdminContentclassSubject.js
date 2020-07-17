@@ -5,15 +5,15 @@ import { Link } from 'react-router-dom'
 import Swal from 'sweetalert-react';
 import 'sweetalert/dist/sweetalert.css';
 import axios from 'axios';
-import * as newsActions from '../../../../actions/newsAction';
-import ItemNews from '../Items/ItemNews';
+import * as classSubjectActions from '../../../../actions/classSubjectAction';
+import ItemclassSubject from '../Items/ItemclassSubject';
 
-class AdminContentNews extends Component {
+class AdminContentclassSubject extends Component {
   constructor(props) {
     super(props)
     this.state = {
       showAlert: false,
-      news: [],
+      classSubject: [],
       deleteItem: "",
       idAlert:""
     }
@@ -28,37 +28,25 @@ class AdminContentNews extends Component {
     })
   }
   handleDeleteItem = async() => {
-    let { idAlert, news } = this.state;
-    const { newsActionCreators } = this.props;
-    const { deleteNew } = newsActionCreators;
-    deleteNew(idAlert);
+    let { idAlert, classSubject } = this.state;
+    const { classSubjectActionCreators } = this.props;
+    const { deleteclassSubject } = classSubjectActionCreators;
+    deleteclassSubject(idAlert);
     this.setState({
       showAlert:false
     });
   }
-  handleEditItem = (index,item) => {
-    this.setState({
-        indexEdit: index,
-        idEdit: item._id,
-        titleEdit: item.title,
-        imageEdit: item.image,
-        contentsEdit: item.contents,
-        timeUpdateEdit: item.timeUpdate,
-    });
-}
-
   componentDidMount = () => {
-    const { newsActionCreators } = this.props;
-    const { fetchListNews } = newsActionCreators;
-    fetchListNews();
+    const { classSubjectActionCreators } = this.props;
+    const { fetchListclassSubject } = classSubjectActionCreators;
+    fetchListclassSubject();
   }
   renderItem = () => {
-    // console.log(this.props.news)
-    let { news } = this.props;
+    let { classSubject } = this.props;
     return (
-      news.map((item, index) => {
+      classSubject.map((item, index) => {
         return (
-          <ItemNews key={item._id} item={item} index={index} handleShowAlert={this.handleShowAlert} handleEditItem={this.handleEditItem}></ItemNews>
+          <ItemclassSubject key={item._id} item={item} index={index} handleShowAlert={this.handleShowAlert}></ItemclassSubject>
         )
       })
     )
@@ -71,7 +59,7 @@ class AdminContentNews extends Component {
             <div className="col-xs-12">
               <div className="box">
                 <div className="box-header">
-                  <Link to="news/add"><button type="submit" className="btn btn-primary"><i className="fa fa-fw fa-home" />Thêm tin tức</button></Link>
+                  <Link to="classSubject/add"><button type="submit" className="btn btn-primary"><i className="fa fa-fw fa-home" />Thêm lớp môn học</button></Link>
                 </div>
                 {/* /.box-header */}
                 <div className="box-body">
@@ -79,13 +67,10 @@ class AdminContentNews extends Component {
                     <thead>
                       <tr>
 
-                        <th>Loại tin tức </th>
-                        <th>Tiêu đề tin tức </th>
-                        <th>Hình ảnh</th>
-                        <th>Nội dung tin tức</th>
-                        <th>Thời gian update</th>
-                        <th>Sửa tin tức</th>
-                        <th>Xóa tin tức</th>
+                        <th>Tên lớp học </th>
+                        
+                        <th>Sửa lớp</th>
+                        <th>Xóa lớp</th>
 
                       </tr>
                     </thead>
@@ -94,13 +79,9 @@ class AdminContentNews extends Component {
                     </tbody>
                     <tfoot>
                       <tr>
-                        <th>Loại tin tức </th>
-                        <th>Tiêu đề tin tức </th>
-                        <th>Hình ảnh</th>
-                        <th>Nội dung tin tức</th>
-                        <th>Thời gian update</th>
-                        <th>Sửa tin tức</th>
-                        <th>Xóa tin tức</th>
+                        <th>Tên lớp học </th>
+                        <th>Sửa lớp</th>
+                        <th>Xóa lớp</th>
                       </tr>
                     </tfoot>
                   </table>
@@ -129,17 +110,16 @@ class AdminContentNews extends Component {
     );
   }
 }
-
 const mapStateToProps = state => {
   return {
-    news: state.newReducer.listNews,
+    classSubject: state.classSubjectReducer.listclassSubject,
   };
 };
 const mapDispatchToProps = dispatch => {
   return {
-    newsActionCreators: bindActionCreators(newsActions, dispatch),
+    classSubjectActionCreators: bindActionCreators(classSubjectActions, dispatch),
     // modalActionCreators: bindActionCreators( dispatch),
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AdminContentNews);
+export default connect(mapStateToProps, mapDispatchToProps)(AdminContentclassSubject);

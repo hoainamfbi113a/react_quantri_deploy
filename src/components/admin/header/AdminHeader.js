@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { withRouter  } from 'react-router'
+import {Link}  from 'react-router-dom'
  class AdminHeader extends Component {
   logOut(e) {
     e.preventDefault()
@@ -13,12 +14,14 @@ import { withRouter  } from 'react-router'
             
                  <header className="main-header">
         {/* Logo */}
-        <a href="../../index2.html" className="logo">
+        {/* <a href="../../index2.html" className="logo"> */}
+        <Link to="/admin" className="logo">
           {/* mini logo for sidebar mini 50x50 pixels */}
-          <span className="logo-mini"><b>A</b>LT</span>
+          <span className="logo-mini"><b>NL</b>KIDS</span>
           {/* logo for regular state and mobile devices */}
-          <span className="logo-lg"><b>Admin</b>LTE</span>
-        </a>
+          <span className="logo-lg"><b>NL</b>KIDS</span>
+        {/* </a> */}
+        </Link>
         {/* Header Navbar: style can be found in header.less */}
        
         <nav className="navbar navbar-static-top">
