@@ -76,6 +76,15 @@ export default class AdminMenu extends Component {
                   <i className="fa fa-angle-left pull-right" />
                 </span>
              </Link>
+             
+              </li>
+             <li>
+             <Link to="/admin/game">
+                <i className="fa fa-edit" /> <span>Quản lý câu hỏi trò chơi</span>
+                <span className="pull-right-container">
+                  <i className="fa fa-angle-left pull-right" />
+                </span>
+              </Link>
               </li>
     
             

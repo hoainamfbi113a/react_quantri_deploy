@@ -35,16 +35,6 @@ class AdminContentExam extends Component {
         showAlert:false
       });
   }
-  handleEditItem = (index,item) => {
-
-    this.setState({
-        indexEdit: index,
-        idEdit: item._id,
-        nameEdit: item.fullname,
-        emailEdit: item.email,
-       
-    });
-}
     componentDidMount(){
       const { examActionCreators } = this.props;
       const { fetchListexam } = examActionCreators;

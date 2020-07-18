@@ -28,6 +28,9 @@ import AdminAddItemclassSubject from '../content/adminAddItem/AdminAddItemclassS
 import AdminEditItemclassSubject from '../content/adminEdit_Item/AdminEditItemclassSubject';
 import AdminContentclassSubject from '../content/adminContent/AdminContentclassSubject'
 
+import AdminContentgame from '../content/adminContent/AdminContentgame'
+import AdminAddItemgame from '../content/adminAddItem/AdminAddItemgame'
+
 export default class RouterURL extends Component {
     
     render() {
@@ -55,8 +58,12 @@ export default class RouterURL extends Component {
              <Route exact path="/admin/videoLearning/edit/:id" component = {AdminEditItemvideoLearning}></Route>
 
              <Route exact path="/admin/classSubject" component = {AdminContentclassSubject}></Route>
+            
              <Route exact path="/admin/classSubject/add" component = {AdminAddItemclassSubject}></Route>
              <Route exact path="/admin/classSubject/edit/:id" component = {AdminEditItemclassSubject}></Route>
+
+             <Route exact path="/admin/game" component = {AdminContentgame}></Route>
+             <Route exact path="/admin/game/add" component = {AdminAddItemgame}></Route>
             </div>
         )
     }
