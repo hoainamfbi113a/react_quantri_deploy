@@ -12,6 +12,7 @@ import AdminEditItemQuestion from '../content/adminEdit_Item/AdminEditItemQuesti
 import AdminContentExam from '../content/adminContent/AdminContentExam'
 import AdminAddItemExam from '../content/adminAddItem/AdminAddItemExam'
 import AdminEditItemExam from '../content/adminEdit_Item/AdminEditItemExam'
+import AdminEditItemNews from '../content/adminEdit_Item/AdminEditItemNews'
 
 import AdminContentResult from '../content/adminContent/AdminContentResult'
 

@@ -36,6 +36,17 @@ class AdminContentNews extends Component {
       showAlert:false
     });
   }
+  handleEditItem = (index,item) => {
+    this.setState({
+        indexEdit: index,
+        idEdit: item._id,
+        titleEdit: item.title,
+        imageEdit: item.image,
+        contentsEdit: item.contents,
+        timeUpdateEdit: item.timeUpdate,
+    });
+}
+
   componentDidMount = () => {
     const { newsActionCreators } = this.props;
     const { fetchListNews } = newsActionCreators;
@@ -47,7 +58,7 @@ class AdminContentNews extends Component {
     return (
       news.map((item, index) => {
         return (
-          <ItemNews key={item._id} item={item} index={index} handleShowAlert={this.handleShowAlert}></ItemNews>
+          <ItemNews key={item._id} item={item} index={index} handleShowAlert={this.handleShowAlert} handleEditItem={this.handleEditItem}></ItemNews>
         )
       })
     )
