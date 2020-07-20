@@ -20,7 +20,7 @@ import AdminAddItemLession from '../content/adminAddItem/AdminAddLession'
 import AdminContentLession from '../content/adminContent/AdminContentLession'
 
 import AdminAddItemNews from '../content/adminAddItem/AdminAddItemNews';
-import AdminEditItemNews from '../content/adminEdit_Item/AdminEditItemNews';
+// import AdminEditItemNews from '../content/adminEdit_Item/AdminEditItemNews';
 import AdminContentNews from '../content/adminContent/AdminContentNews'
 import AdminAddItemvideoLearning from '../content/adminAddItem/AdminAddItemvideoLearning';
 import AdminEditItemvideoLearning from '../content/adminEdit_Item/AdminEditItemvideoLearning';
@@ -53,16 +53,12 @@ export default class RouterURL extends Component {
              <Route exact path="/admin/news/edit/:id" component = {AdminEditItemNews}></Route>
              <Route exact path="/admin/lession" component = {AdminContentLession}></Route>
              <Route exact path="/admin/lession/add" component = {AdminAddItemLession}></Route>
-
              <Route exact path="/admin/videoLearning" component = {AdminContentvideoLearning}></Route>
              <Route exact path="/admin/videoLearning/add" component = {AdminAddItemvideoLearning}></Route>
              <Route exact path="/admin/videoLearning/edit/:id" component = {AdminEditItemvideoLearning}></Route>
-
              <Route exact path="/admin/classSubject" component = {AdminContentclassSubject}></Route>
-            
              <Route exact path="/admin/classSubject/add" component = {AdminAddItemclassSubject}></Route>
              <Route exact path="/admin/classSubject/edit/:id" component = {AdminEditItemclassSubject}></Route>
-
              <Route exact path="/admin/game" component = {AdminContentgame}></Route>
              <Route exact path="/admin/game/add" component = {AdminAddItemgame}></Route>
             </div>
