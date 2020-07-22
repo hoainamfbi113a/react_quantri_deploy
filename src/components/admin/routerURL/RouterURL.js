@@ -20,7 +20,7 @@ import AdminAddItemLession from '../content/adminAddItem/AdminAddLession'
 import AdminContentLession from '../content/adminContent/AdminContentLession'
 
 import AdminAddItemNews from '../content/adminAddItem/AdminAddItemNews';
-import AdminEditItemNews from '../content/adminEdit_Item/AdminEditItemNews';
+//import AdminEditItemNews from '../content/adminEdit_Item/AdminEditItemNews';
 import AdminContentNews from '../content/adminContent/AdminContentNews'
 import AdminAddItemvideoLearning from '../content/adminAddItem/AdminAddItemvideoLearning';
 import AdminEditItemvideoLearning from '../content/adminEdit_Item/AdminEditItemvideoLearning';
