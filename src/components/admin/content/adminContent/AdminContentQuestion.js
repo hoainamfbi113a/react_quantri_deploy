@@ -7,6 +7,7 @@ import 'sweetalert/dist/sweetalert.css';
 import axios from 'axios';
 import Item from '../Items/ItemQuestion';
 import * as questionActions from '../../../../actions/questionAction';
+import './style.css';
 import { withRouter  } from 'react-router'
 // import Items 
 class AdminContentQuestion extends Component {
@@ -15,7 +16,9 @@ class AdminContentQuestion extends Component {
       this.state = {
         showAlert:false,
         idAlert:"",
-        persons:[]
+        persons:[],
+        currentPage: 1,
+        newsPerPage: 7
       }
     }
     handleShowAlert = (item) =>{
@@ -52,43 +55,36 @@ class AdminContentQuestion extends Component {
   }
  
     componentDidMount(){ 
-       
-            // const script = document.createElement("script");
-            // script.src='js/content.js'
-            // script.async = true;
-            // document.body.appendChild(script);
-            // // alert(script.textContent)
-            // this.countDownTrack = setTimeout(()=>{
-            //   axios.get('http://localhost:5000/admin/question/list')
-            // .then(response => {
-            //     // console.log(response.data);
-            //     this.setState({persons: response.data});
-            // })
-            // .catch(function (error) {
-            //     // console.log(error);
-            // })
-            // },200)
             const { questionActionCreators } = this.props;
             const { fetchListquestion } = questionActionCreators;
             fetchListquestion();
         
     }
-    renderItem = () =>{
-       let { question } = this.props;
-      //  console.log(question);
-      //  let {items,idEdit,nameEdit,levelEdit,persons} = this.state; 
-        // console.log(persons);
-        return (
-          question.map((item,index)=>{
-            return(
-              <Item key={item._id} item={item} index={index} handleShowAlert={this.handleShowAlert}/>
-            )
-          })
-        )
+    chosePage = (event) => {
+      this.setState({
+        currentPage: Number(event.target.id)
+      });
+    }
+    select = (event) => {
+      this.setState({
+        newsPerPage: event.target.value
+      })
     }
     render() {
-    
-        return (     
+      let { question } = this.props;
+      const currentPage = this.state.currentPage;
+      const newsPerPage = this.state.newsPerPage;
+      const indexOfLastNews = currentPage * newsPerPage;
+      const indexOfFirstNews = indexOfLastNews - newsPerPage;
+      const currentTodos = question.slice(indexOfFirstNews, indexOfLastNews);
+      const renderTodos = currentTodos.map((todo, index) => {
+        return <Item stt={index + 1 + (currentPage - 1)*newsPerPage} key={index} item={todo} />;
+      });
+      const pageNumbers = [];
+      for (let i = 1; i <= Math.ceil(question.length / newsPerPage); i++) {
+        pageNumbers.push(i);
+      }
+      return (     
        
           <section className="content">
           <div className="row">
@@ -96,6 +92,14 @@ class AdminContentQuestion extends Component {
               <div className="box">
                 <div className="box-header">
                 <Link to="question/add"><button type="submit" className="btn btn-primary"><i className="fa fa-fw fa-home" />Thêm câu hỏi</button></Link>
+                <div className="news-per-page" style={{marginTop: '10px'}}>
+                    <select defaultValue="0" onChange={this.select} >
+                      <option value="0" disabled>Get by</option>
+                      <option value="3">5</option>
+                      <option value="5">10</option>
+                      <option value="7">20</option>
+                    </select>
+                  </div>
                 </div>
                 {/* /.box-header */}
                 <div className="box-body">
@@ -115,7 +119,7 @@ class AdminContentQuestion extends Component {
                       </tr>
                     </thead>
                     <tbody>
-                     {this.renderItem()}
+                     {renderTodos}
                     </tbody>
                     <tfoot>
                       <tr>
@@ -133,7 +137,28 @@ class AdminContentQuestion extends Component {
                     </tfoot>
                   </table>
                 </div>
-               
+                <div className="pagination-custom">
+                  <ul id="page-numbers">
+                    {
+                      pageNumbers.map(number => {
+                        if (this.state.currentPage === number) {
+                          return (
+                            <li key={number} id={number} className="active">
+                              {number}
+                            </li>
+                          )
+                        }
+                        else {
+                          return (
+                            <li key={number} id={number} onClick={this.chosePage} >
+                              {number}
+                            </li>
+                          )
+                        }
+                      })
+                    }
+                  </ul>
+                </div>
               </div>
              
             </div>

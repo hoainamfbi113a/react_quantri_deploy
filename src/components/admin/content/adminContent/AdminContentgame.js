@@ -15,7 +15,9 @@ class AdminContentgame extends Component {
       showAlert: false,
       game: [],
       deleteItem: "",
-      idAlert:""
+      idAlert:"",
+      currentPage: 1,
+      newsPerPage: 7
     }
   }
   handleShowAlert = (item) => {
@@ -44,23 +46,37 @@ class AdminContentgame extends Component {
   handleGenerate = ()=>{
     axios.get('http://localhost:5000/admin/game/generate/')
     .then(response => {
-        this.setState({listquestionGame: response.data});
+        // this.setState({listquestionGame: response.data});
+        console.log(response.data);
     })
     .catch(function (error) {
       
     })
   }
-  renderItem = () => {
-    let { game } = this.props;
-    return (
-      game.map((item, index) => {
-        return (
-          <Itemgame key={item._id} item={item} index={index} handleShowAlert={this.handleShowAlert}></Itemgame>
-        )
-      })
-    )
+  chosePage = (event) => {
+    this.setState({
+      currentPage: Number(event.target.id)
+    });
+  }
+  select = (event) => {
+    this.setState({
+      newsPerPage: event.target.value
+    })
   }
   render() {
+    let { game } = this.props;
+    const currentPage = this.state.currentPage;
+    const newsPerPage = this.state.newsPerPage;
+    const indexOfLastNews = currentPage * newsPerPage;
+    const indexOfFirstNews = indexOfLastNews - newsPerPage;
+    const currentTodos = game.slice(indexOfFirstNews, indexOfLastNews);
+    const renderTodos = currentTodos.map((todo, index) => {
+      return <Itemgame stt={index + 1 + (currentPage - 1)*newsPerPage} key={index} item={todo} />;
+    });
+    const pageNumbers = [];
+    for (let i = 1; i <= Math.ceil(game.length / newsPerPage); i++) {
+      pageNumbers.push(i);
+    }
     return (
       <div>
         <section className="content">
@@ -74,6 +90,14 @@ class AdminContentgame extends Component {
                       this.handleGenerate()
                     }} className="btn btn-primary"><i className="fa fa-fw fa-home" />Generate câu hỏi trò chơi</button>
                     {/* </Link> */}
+                    <div className="news-per-page" style={{marginTop: '10px'}}>
+                    <select defaultValue="0" onChange={this.select} >
+                      <option value="0" disabled>Get by</option>
+                      <option value="3">5</option>
+                      <option value="5">10</option>
+                      <option value="7">20</option>
+                    </select>
+                  </div>
                 </div>
                 {/* /.box-header */}
                 <div className="box-body">
@@ -92,7 +116,7 @@ class AdminContentgame extends Component {
                       </tr>
                     </thead>
                     <tbody>
-                      {this.renderItem()}
+                      {renderTodos}
                     </tbody>
                     <tfoot>
                     <tr>
@@ -106,7 +130,28 @@ class AdminContentgame extends Component {
                     </tfoot>
                   </table>
                 </div>
-
+                <div className="pagination-custom">
+                  <ul id="page-numbers">
+                    {
+                      pageNumbers.map(number => {
+                        if (this.state.currentPage === number) {
+                          return (
+                            <li key={number} id={number} className="active">
+                              {number}
+                            </li>
+                          )
+                        }
+                        else {
+                          return (
+                            <li key={number} id={number} onClick={this.chosePage} >
+                              {number}
+                            </li>
+                          )
+                        }
+                      })
+                    }
+                  </ul>
+                </div>
               </div>
 
             </div>

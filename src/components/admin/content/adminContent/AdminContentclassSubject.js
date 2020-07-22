@@ -15,7 +15,10 @@ class AdminContentclassSubject extends Component {
       showAlert: false,
       classSubject: [],
       deleteItem: "",
-      idAlert:""
+      idAlert:"",
+      currentPage: 1,
+      newsPerPage: 7,
+      
     }
   }
   handleShowAlert = (item) => {
@@ -41,17 +44,40 @@ class AdminContentclassSubject extends Component {
     const { fetchListclassSubject } = classSubjectActionCreators;
     fetchListclassSubject();
   }
-  renderItem = () => {
-    let { classSubject } = this.props;
-    return (
-      classSubject.map((item, index) => {
-        return (
-          <ItemclassSubject key={item._id} item={item} index={index} handleShowAlert={this.handleShowAlert}></ItemclassSubject>
-        )
-      })
-    )
+  // renderItem = () => {
+  //   let { classSubject } = this.props;
+  //   return (
+  //     classSubject.map((item, index) => {
+  //       return (
+  //         <ItemclassSubject key={item._id} item={item} index={index} handleShowAlert={this.handleShowAlert}></ItemclassSubject>
+  //       )
+  //     })
+  //   )
+  // }
+  chosePage = (event) => {
+    this.setState({
+      currentPage: Number(event.target.id)
+    });
+  }
+  select = (event) => {
+    this.setState({
+      newsPerPage: event.target.value
+    })
   }
   render() {
+    let { classSubject } = this.props;
+    const currentPage = this.state.currentPage;
+    const newsPerPage = this.state.newsPerPage;
+    const indexOfLastNews = currentPage * newsPerPage;
+    const indexOfFirstNews = indexOfLastNews - newsPerPage;
+    const currentTodos = classSubject.slice(indexOfFirstNews, indexOfLastNews);
+    const renderTodos = currentTodos.map((todo, index) => {
+      return <ItemclassSubject stt={index + 1 + (currentPage - 1)*newsPerPage} key={index} item={todo} />;
+    });
+    const pageNumbers = [];
+    for (let i = 1; i <= Math.ceil(classSubject.length / newsPerPage); i++) {
+      pageNumbers.push(i);
+    }
     return (
       <div>
         <section className="content">
@@ -60,6 +86,14 @@ class AdminContentclassSubject extends Component {
               <div className="box">
                 <div className="box-header">
                   <Link to="classSubject/add"><button type="submit" className="btn btn-primary"><i className="fa fa-fw fa-home" />Thêm lớp môn học</button></Link>
+                  <div className="news-per-page" style={{marginTop: '10px'}}>
+                    <select defaultValue="0" onChange={this.select} >
+                      <option value="0" disabled>Get by</option>
+                      <option value="3">5</option>
+                      <option value="5">10</option>
+                      <option value="7">20</option>
+                    </select>
+                  </div>
                 </div>
                 {/* /.box-header */}
                 <div className="box-body">
@@ -75,7 +109,7 @@ class AdminContentclassSubject extends Component {
                       </tr>
                     </thead>
                     <tbody>
-                      {this.renderItem()}
+                    {renderTodos}
                     </tbody>
                     <tfoot>
                       <tr>
@@ -86,7 +120,28 @@ class AdminContentclassSubject extends Component {
                     </tfoot>
                   </table>
                 </div>
-
+                <div className="pagination-custom">
+                  <ul id="page-numbers">
+                    {
+                      pageNumbers.map(number => {
+                        if (this.state.currentPage === number) {
+                          return (
+                            <li key={number} id={number} className="active">
+                              {number}
+                            </li>
+                          )
+                        }
+                        else {
+                          return (
+                            <li key={number} id={number} onClick={this.chosePage} >
+                              {number}
+                            </li>
+                          )
+                        }
+                      })
+                    }
+                  </ul>
+                </div>
               </div>
 
             </div>

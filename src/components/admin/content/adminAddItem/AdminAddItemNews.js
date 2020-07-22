@@ -42,22 +42,6 @@ class AdminAddItemNews extends Component {
     const {newsActionsCreators} = this.props;
     const { addNew } = newsActionsCreators;
     addNew(formData);
-    // console.log(this.state);
-    // axios.post('http://localhost:5000/admin/news', formData
-    // )
-    //   .then(function (response) {
-    //     console.log(response.data + "aaaaa");
-    //     if (response.data === 'User already exists') {
-    //       alert('User already exists')
-    //     }
-    //     else {
-    //       r.props.history.push('/admin/news')
-    //     }
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-
-    //   });
     r.props.history.push('/admin/news');
   }
   render() {

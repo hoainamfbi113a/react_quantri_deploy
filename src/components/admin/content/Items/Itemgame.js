@@ -5,14 +5,18 @@ export default class ItemNews extends Component {
         let {item,index} = this.props;
         return (
                 <tr>
-                        <td>{item._id}</td>
+                        <td>{item.categoryvocabulary}</td>
+                        <td>{item.vocabularygame}</td>
+                        <td>{item.spellingvocabulary}</td>
+                        <td>{item.questionResultA.ImgQuestionA}</td>
+                        <td>{item.questionResultB.ImgQuestionB}</td>
+                        <td>{item.questionResultC.ImgQuestionC}</td>
                         <td>
-                        {/* <Link to={"/admin/news/edit/"+this.props.item._id}> */}
-                        <Link to={`/admin/classsubject/edit/${item._id}`}>
-                        <button type="button" className="btn btn-social-icon btn-bitbucket" >
-                        <i className="fa fa-edit" />
-                        </button>
-                        </Link>
+                            <Link to={`/admin/classsubject/edit/${item._id}`}>
+                                <button type="button" className="btn btn-social-icon btn-bitbucket" >
+                                    <i className="fa fa-edit" />
+                                </button>
+                            </Link>
                         </td>
                         <td>
                             <button  className="btn btn-social-icon btn-google" onClick = {()=>this.props.handleShowAlert(item)}>

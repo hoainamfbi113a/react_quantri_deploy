@@ -11,7 +11,9 @@ export default class AdminContentQuestion extends Component {
       this.state = {
         showAlert:false,
         idAlert:"",
-        persons:[]
+        persons:[],
+        currentPage: 1,
+        newsPerPage: 7
       }
     }
     handleShowAlert = (item) =>{
@@ -51,29 +53,44 @@ export default class AdminContentQuestion extends Component {
                 // console.log(error);
             })
     }
-    renderItem = () =>{
-      
-       let {items,idEdit,nameEdit,levelEdit,persons} = this.state; 
-        console.log(persons);
-        return (
-         persons.map((item,index)=>{
-            return(
-              <Item key={item._id}  item={item} index={index}  handleShowAlert={this.handleShowAlert}/>
-            )
-          })
-         
-        
-        )
+    chosePage = (event) => {
+      this.setState({
+        currentPage: Number(event.target.id)
+      });
+    }
+    select = (event) => {
+      this.setState({
+        newsPerPage: event.target.value
+      })
     }
     render() {
-    
+      let { persons } = this.state;
+      const currentPage = this.state.currentPage;
+      const newsPerPage = this.state.newsPerPage;
+      const indexOfLastNews = currentPage * newsPerPage;
+      const indexOfFirstNews = indexOfLastNews - newsPerPage;
+      const currentTodos = persons.slice(indexOfFirstNews, indexOfLastNews);
+      const renderTodos = currentTodos.map((todo, index) => {
+        return <Item stt={index + 1 + (currentPage - 1)*newsPerPage} key={index} item={todo} />;
+      });
+      const pageNumbers = [];
+      for (let i = 1; i <= Math.ceil(persons.length / newsPerPage); i++) {
+        pageNumbers.push(i);
+      }
         return (     
-       
           <section className="content">
           <div className="row">
             <div className="col-xs-12">
               <div className="box">
                 <div className="box-header">
+                <div className="news-per-page" style={{marginTop: '10px'}}>
+                    <select defaultValue="0" onChange={this.select} >
+                      <option value="0" disabled>Get by</option>
+                      <option value="3">5</option>
+                      <option value="5">10</option>
+                      <option value="7">20</option>
+                    </select>
+                  </div>
                </div>
                 {/* /.box-header */}
                 <div className="box-body">
@@ -88,7 +105,7 @@ export default class AdminContentQuestion extends Component {
                       </tr>
                     </thead>
                     <tbody>
-                     {this.renderItem()}
+                     {renderTodos}
                     </tbody>
                     <tfoot>
                       <tr>
@@ -99,7 +116,29 @@ export default class AdminContentQuestion extends Component {
                       </tr>
                     </tfoot>
                   </table>
-                </div>      
+                </div> 
+                <div className="pagination-custom">
+                  <ul id="page-numbers">
+                    {
+                      pageNumbers.map(number => {
+                        if (this.state.currentPage === number) {
+                          return (
+                            <li key={number} id={number} className="active">
+                              {number}
+                            </li>
+                          )
+                        }
+                        else {
+                          return (
+                            <li key={number} id={number} onClick={this.chosePage} >
+                              {number}
+                            </li>
+                          )
+                        }
+                      })
+                    }
+                  </ul>
+                </div>   
               </div>          
             </div>
           </div>

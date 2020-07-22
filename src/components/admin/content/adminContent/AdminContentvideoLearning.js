@@ -15,7 +15,9 @@ class AdminContentvideoLearning extends Component {
       showAlert: false,
       videoLearning: [],
       deleteItem: "",
-      idAlert:""
+      idAlert:"",
+      currentPage: 1,
+      newsPerPage: 7
     }
   }
   handleShowAlert = (item) => {
@@ -41,17 +43,30 @@ class AdminContentvideoLearning extends Component {
     const { fetchListvideoLearning } = videoLearningActionCreators;
     fetchListvideoLearning();
   }
-  renderItem = () => {
-    let { videoLearning } = this.props;
-    return (
-      videoLearning.map((item, index) => {
-        return (
-          <ItemvideoLearning key={item._id} item={item} index={index} handleShowAlert={this.handleShowAlert}></ItemvideoLearning>
-        )
-      })
-    )
+  chosePage = (event) => {
+    this.setState({
+      currentPage: Number(event.target.id)
+    });
+  }
+  select = (event) => {
+    this.setState({
+      newsPerPage: event.target.value
+    })
   }
   render() {
+    let { videoLearning } = this.props;
+    const currentPage = this.state.currentPage;
+    const newsPerPage = this.state.newsPerPage;
+    const indexOfLastNews = currentPage * newsPerPage;
+    const indexOfFirstNews = indexOfLastNews - newsPerPage;
+    const currentTodos = videoLearning.slice(indexOfFirstNews, indexOfLastNews);
+    const renderTodos = currentTodos.map((todo, index) => {
+      return <ItemvideoLearning stt={index + 1 + (currentPage - 1)*newsPerPage} key={index} item={todo} />;
+    });
+    const pageNumbers = [];
+    for (let i = 1; i <= Math.ceil(videoLearning.length / newsPerPage); i++) {
+      pageNumbers.push(i);
+    }
     return (
       <div>
         <section className="content">
@@ -78,7 +93,7 @@ class AdminContentvideoLearning extends Component {
                       </tr>
                     </thead>
                     <tbody>
-                      {this.renderItem()}
+                      {renderTodos}
                     </tbody>
                     <tfoot>
                       <tr>
@@ -93,7 +108,28 @@ class AdminContentvideoLearning extends Component {
                     </tfoot>
                   </table>
                 </div>
-
+                <div className="pagination-custom">
+                  <ul id="page-numbers">
+                    {
+                      pageNumbers.map(number => {
+                        if (this.state.currentPage === number) {
+                          return (
+                            <li key={number} id={number} className="active">
+                              {number}
+                            </li>
+                          )
+                        }
+                        else {
+                          return (
+                            <li key={number} id={number} onClick={this.chosePage} >
+                              {number}
+                            </li>
+                          )
+                        }
+                      })
+                    }
+                  </ul>
+                </div>
               </div>
 
             </div>
