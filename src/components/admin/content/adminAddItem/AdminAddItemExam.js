@@ -87,35 +87,6 @@ class AdminAddItemExam extends Component {
                 <input type="text" className="form-control"  placeholder="Tên đề thi" onChange={this.onChange} name="examName" value={this.state.examName}/>
               </div>
             </div>
-            {/* <div className="form-group">
-              <label style={{textAlign: 'left'}} htmlFor="inputPassword3" className="col-sm-2 control-label">Số câu dễ</label>
-              <div className="col-sm-10" style={{marginLeft: '-5%'}}>
-              <select className="form-control"  onChange={this.onChange}  name="examEasyNumber" >
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-              </select>
-                <input type="text" className="form-control" id="inputPassword3" placeholder="Số câu dễ"onChange={this.onChange} name="examEasyNumber" value={this.state.examEasyNumber}/>
-              </div>
-            </div> */}
-            {/* <div className="form-group">
-              <label style={{textAlign: 'left'}} htmlFor="inputEmail3" className="col-sm-2 control-label">Số câu trung bình</label>
-              <div className="col-sm-10" style={{marginLeft: '-5%'}}>
-              <select className="form-control"  onChange={this.onChange}  name="examMediumNumber">
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-              </select>
-                <input type="text" className="form-control"  placeholder="Số câu trung bình" onChange={this.onChange} name="examMediumNumber" value={this.state.examMediumNumber}/>
-              </div>
-            </div> */}
-            {/* <div className="form-group">
-              <label style={{textAlign: 'left'}} htmlFor="inputPassword3" className="col-sm-2 control-label">Số câu khó</label>
-              <div className="col-sm-10" style={{marginLeft: '-5%'}}>
-                <input readOnly type="text" className="form-control" id="inputPassword3" placeholder="Số câu khó = 10 - số câu dễ - số câu trung bình" onChange={this.onChange} name="examDifficultNumber" value={this.state.examDifficultNumber}/>
-              </div>
-            </div> */}
-
             <div className="form-group">
               <label style={{textAlign: 'left'}} htmlFor="inputEmail3" className="col-sm-2 control-label">Loại câu hỏi</label>
               <div className="col-sm-10" style={{marginLeft: '-5%'}}>
