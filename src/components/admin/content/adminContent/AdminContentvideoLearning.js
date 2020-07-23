@@ -61,7 +61,7 @@ class AdminContentvideoLearning extends Component {
     const indexOfFirstNews = indexOfLastNews - newsPerPage;
     const currentTodos = videoLearning.slice(indexOfFirstNews, indexOfLastNews);
     const renderTodos = currentTodos.map((todo, index) => {
-      return <ItemvideoLearning stt={index + 1 + (currentPage - 1)*newsPerPage} key={index} item={todo} />;
+      return <ItemvideoLearning stt={index + 1 + (currentPage - 1)*newsPerPage} key={index} item={todo} handleShowAlert={this.handleShowAlert} />;
     });
     const pageNumbers = [];
     for (let i = 1; i <= Math.ceil(videoLearning.length / newsPerPage); i++) {
@@ -75,13 +75,20 @@ class AdminContentvideoLearning extends Component {
               <div className="box">
                 <div className="box-header">
                   <Link to="videolearning/add"><button type="submit" className="btn btn-primary"><i className="fa fa-fw fa-home" />Thêm video bài học</button></Link>
+                  <div className="news-per-page" style={{marginTop: '10px'}}>
+                    <select defaultValue="0" onChange={this.select} >
+                      <option value="0" disabled>Get by</option>
+                      <option value="5">5</option>
+                      <option value="10">10</option>
+                      <option value="20">20</option>
+                    </select>
+                  </div>
                 </div>
                 {/* /.box-header */}
                 <div className="box-body">
                   <table id="example2" className="table table-bordered table-hover">
                     <thead>
                       <tr>
-
                         <th>Video của lớp học </th>
                         <th>Tiêu đề của bài học video </th>
                         <th>Video</th>
@@ -89,7 +96,6 @@ class AdminContentvideoLearning extends Component {
                         {/* <th>Thời gian update</th> */}
                         <th>Sửa video</th>
                         <th>Xóa video</th>
-
                       </tr>
                     </thead>
                     <tbody>
@@ -131,9 +137,7 @@ class AdminContentvideoLearning extends Component {
                   </ul>
                 </div>
               </div>
-
             </div>
-
           </div>
            <Swal
                                  show={this.state.showAlert}
@@ -146,10 +150,7 @@ class AdminContentvideoLearning extends Component {
                                  onConfirm={() => this.handleDeleteItem()}
                 /> 
         </section>
-
       </div>
-
-
     );
   }
 }

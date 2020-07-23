@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import {Link}  from 'react-router-dom'
+import {Link}  from 'react-router-dom';
+import parse from 'html-react-parser';
 export default class ItemNews extends Component {
     render() {
         let {item,index} = this.props;
@@ -9,8 +10,9 @@ export default class ItemNews extends Component {
                         <td>{item.title}</td>
                         {/* <td>{item.images}</td> */}
                         <td><img width="50px" src={`http://localhost:5000/${item.images}`} alt="not display"></img></td>
-                        <td>{item.contents}</td>
-                        <td>{item.timeUpdate}</td>
+                        {/* <td>{item.contents}</td> */}
+                        <td>{parse(`${item.contents}`)}</td>
+                        {/* <td>{item.timeUpdate}</td> */}
                         <td>
                         {/* <Link to={"/admin/news/edit/"+this.props.item._id}> */}
                         <Link to={`/admin/news/edit/${item._id}`}>

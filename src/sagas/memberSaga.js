@@ -81,15 +81,10 @@ export default function* memberSaga() {
       yield put(hideLoading())
   }
   function* updatememberSaga({ payload }) {
-    // const { title, description, status } = payload;
-    // const memberEditing = yield select(state => state.task.taskEditing);
     yield put(showLoading());
-    // console.log(payload.data);
     const resp = yield call(
       updatemember,payload.data
     );
-    // console.log("aaaa");
-    // console.log(resp);
     const { data, status: statusCode } = resp;
     if (statusCode === 200) {
       yield put(updateMemberSuccess(data));

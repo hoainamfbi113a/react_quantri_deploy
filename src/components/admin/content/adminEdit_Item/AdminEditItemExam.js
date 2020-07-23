@@ -126,7 +126,12 @@ class AdminEditItemExam extends Component {
             <div className="form-group">
               <label style={{textAlign: 'left'}} htmlFor="inputEmail3" className="col-sm-2 control-label">Thời gian làm bài</label>
               <div className="col-sm-10" style={{marginLeft: '-5%'}}>
-                <input type="text" className="form-control"  placeholder="Thời gian làm bài" onChange={this.onChange} name="examTimeMake" value={this.state.examTimeMake}/>
+              <select className="form-control"  onChange={this.onChange}  name="examTimeMake" value={this.state.examTimeMake}>
+                  <option value="5 phút">5 phút</option>
+                  <option value="10 phút">10 phút</option>
+                  <option value="15 phút">15 phút</option>
+              </select>
+                {/* <input type="text" className="form-control"  placeholder="Thời gian làm bài" onChange={this.onChange} name="examTimeMake" value={this.state.examTimeMake}/> */}
               </div>
             </div>
             <div className="form-group">

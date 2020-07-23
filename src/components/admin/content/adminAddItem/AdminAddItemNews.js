@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-
+import { Editor } from '@tinymce/tinymce-react';
 import * as newsAction  from "../../../../actions/newsAction";
 class AdminAddItemNews extends Component {
   constructor(prop) {
@@ -28,6 +28,12 @@ class AdminAddItemNews extends Component {
       default:
         this.setState({ [e.target.name]: e.target.value });
     }
+  }
+  handleEditorChange = (content, editor) => {
+    console.log('Content was updated:', content);
+    this.setState({
+      contents:content
+    })
   }
   onSubmit(e) {
     var r = this;
@@ -71,30 +77,40 @@ class AdminAddItemNews extends Component {
                     <input type="text" className="form-control" id="inputPassword3" placeholder="Title" onChange={this.onChange} name="title" value={this.state.title} />
                   </div>
                 </div>
-                <input
+                
+                <div className="form-group">
+                  <label style={{ textAlign: 'left' }} htmlFor="inputEmail3" className="col-sm-2 control-label">images</label>
+                  <div className="col-sm-10" style={{ marginLeft: '-5%' }}>
+                  <input
                   type="file"
                   name="selectedFile"
                   onChange={this.onChange}
                 />
-                <div className="form-group">
-                  <label style={{ textAlign: 'left' }} htmlFor="inputEmail3" className="col-sm-2 control-label">images</label>
-                  <div className="col-sm-10" style={{ marginLeft: '-5%' }}>
                   </div>
                 </div>
                 <div className="form-group">
                   <label style={{ textAlign: 'left' }} htmlFor="inputPassword3" className="col-sm-2 control-label">Contents</label>
                   <div className="col-sm-10" style={{ marginLeft: '-5%' }}>
-                    <input type="text" className="form-control" id="inputPassword3" placeholder="Contents" onChange={this.onChange} name="contents" value={this.state.contents} />
+                  <Editor
+                    name="lessionContentDetail"
+                      init={{
+                      height: 500,
+                        menubar: false,
+                        plugins: [
+                        'advlist autolink lists link image charmap print preview anchor',
+                        'searchreplace visualblocks code fullscreen',
+                        'insertdatetime media table paste code help wordcount'
+                          ],
+                        toolbar:
+                        'undo redo | formatselect | bold italic backcolor | \
+                          alignleft aligncenter alignright alignjustify | \
+                            bullist numlist outdent indent | removeformat | help'
+              }}
+                            onEditorChange={this.handleEditorChange}
+             />
+                    {/* <input type="text" className="form-control" id="inputPassword3" placeholder="Contents" onChange={this.onChange} name="contents" value={this.state.contents} /> */}
                   </div>
                 </div>
-                <div className="form-group">
-                  <label style={{ textAlign: 'left' }} htmlFor="inputEmail3" className="col-sm-2 control-label">TimeUpdate</label>
-                  <div className="col-sm-10" style={{ marginLeft: '-5%' }}>
-                    <input type="text" className="form-control" placeholder="TimeUpdate" onChange={this.onChange} name="timeUpdate" value={this.state.timeUpdate} />
-                  </div>
-                </div>
-
-
               </div>
               <div className="box-footer" style={{ paddingRight: '69px' }}>
 
@@ -103,7 +119,6 @@ class AdminAddItemNews extends Component {
             </form>
           </div>
         </section>
-
       </div>
     )
   }

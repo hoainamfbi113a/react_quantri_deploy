@@ -6,6 +6,7 @@ import Swal from 'sweetalert-react';
 import 'sweetalert/dist/sweetalert.css';
 import axios from 'axios';
 import * as newsActions from '../../../../actions/newsAction';
+
 import ItemNews from '../Items/ItemNews';
 
 class AdminContentNews extends Component {
@@ -49,9 +50,12 @@ class AdminContentNews extends Component {
 }
 
   componentDidMount = () => {
-    const { newsActionCreators } = this.props;
-    const { fetchListNews } = newsActionCreators;
-    fetchListNews();
+   
+    this.timeout = setTimeout(() => {
+      const { newsActionCreators } = this.props;
+      const { fetchListNews } = newsActionCreators;
+      fetchListNews();
+      }, 200);
   }
   // renderItem = () => {
   //   // console.log(this.props.news)
@@ -82,7 +86,7 @@ class AdminContentNews extends Component {
     const indexOfFirstNews = indexOfLastNews - newsPerPage;
     const currentTodos = news.slice(indexOfFirstNews, indexOfLastNews);
     const renderTodos = currentTodos.map((todo, index) => {
-      return <ItemNews stt={index + 1 + (currentPage - 1)*newsPerPage} key={index} item={todo} />;
+      return <ItemNews stt={index + 1 + (currentPage - 1)*newsPerPage} key={index} item={todo} handleShowAlert={this.handleShowAlert} />;
     });
     const pageNumbers = [];
     for (let i = 1; i <= Math.ceil(news.length / newsPerPage); i++) {
@@ -99,9 +103,9 @@ class AdminContentNews extends Component {
                   <div className="news-per-page" style={{marginTop: '10px'}}>
                     <select defaultValue="0" onChange={this.select} >
                       <option value="0" disabled>Get by</option>
-                      <option value="3">5</option>
-                      <option value="5">10</option>
-                      <option value="7">20</option>
+                      <option value="5">5</option>
+                      <option value="10">10</option>
+                      <option value="20">20</option>
                     </select>
                   </div>
                 </div>
@@ -114,7 +118,7 @@ class AdminContentNews extends Component {
                         <th>Tiêu đề tin tức </th>
                         <th>Hình ảnh</th>
                         <th>Nội dung tin tức</th>
-                        <th>Thời gian update</th>
+                        {/* <th>Thời gian update</th> */}
                         <th>Sửa tin tức</th>
                         <th>Xóa tin tức</th>
                       </tr>
@@ -129,7 +133,7 @@ class AdminContentNews extends Component {
                         <th>Tiêu đề tin tức </th>
                         <th>Hình ảnh</th>
                         <th>Nội dung tin tức</th>
-                        <th>Thời gian update</th>
+                        {/* <th>Thời gian update</th> */}
                         <th>Sửa tin tức</th>
                         <th>Xóa tin tức</th>
                       </tr>

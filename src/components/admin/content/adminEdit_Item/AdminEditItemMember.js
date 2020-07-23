@@ -46,18 +46,6 @@ export default class AdminEditItem extends Component {
     }
     onSubmit(e) {
       e.preventDefault();
-      // const obj = {
-      //       _id:this.state._id,
-      //       memberLogin: this.state.memberLogin,
-      //       memberPass: this.state.memberPass,
-      //       memberName: this.state.memberName,
-      //       memberDate: this.state.memberDate,
-      //       memberSex: this.state.memberSex,
-      //       memberAddress: this.state.memberAddress,
-      //       memberClassId: this.state.memberClassId,
-      // };
-      // axios.post('http://localhost:5000/admin/member', obj)
-      //     .then(res => console.log(res.data));
       const {_id, memberLogin, memberPass, avatarContentImg,memberName,memberDate,memberSex,memberAddress } = this.state;
         const formData = new FormData()
         formData.append('_id', _id);
@@ -106,7 +94,7 @@ export default class AdminEditItem extends Component {
             <div className="form-group">
               <label style={{textAlign: 'left'}} htmlFor="inputPassword3" className="col-sm-2 control-label">Ngày sinh</label>
               <div className="col-sm-10" style={{marginLeft: '-5%'}}>
-                <input readOnly type="text" className="form-control" id="inputPassword3" placeholder="Ngày sinh"onChange={this.onChange} name="memberDate" value={this.state.memberDate}/>
+                <input type="date" className="form-control" id="inputPassword3" placeholder="Ngày sinh"onChange={this.onChange} name="memberDate" value={this.state.memberDate}/>
               </div>
             </div>
             <div className="form-group">

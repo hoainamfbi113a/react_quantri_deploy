@@ -71,7 +71,7 @@ class AdminContentExam extends Component {
       const indexOfFirstNews = indexOfLastNews - newsPerPage;
       const currentTodos = exam.slice(indexOfFirstNews, indexOfLastNews);
       const renderTodos = currentTodos.map((todo, index) => {
-        return <Item stt={index + 1 + (currentPage - 1)*newsPerPage} key={index} item={todo} />;
+        return <Item stt={index + 1 + (currentPage - 1)*newsPerPage} key={index} item={todo} handleShowAlert={this.handleShowAlert} />;
       });
       const pageNumbers = [];
       for (let i = 1; i <= Math.ceil(exam.length / newsPerPage); i++) {
@@ -88,9 +88,9 @@ class AdminContentExam extends Component {
                 <div className="news-per-page" style={{marginTop: '10px'}}>
                     <select defaultValue="0" onChange={this.select} >
                       <option value="0" disabled>Get by</option>
-                      <option value="3">5</option>
-                      <option value="5">10</option>
-                      <option value="7">20</option>
+                      <option value="5">5</option>
+                      <option value="10">10</option>
+                      <option value="20">20</option>
                     </select>
                   </div>
                 </div>
@@ -103,9 +103,8 @@ class AdminContentExam extends Component {
                         <th>Loại câu hỏi</th>
                         <th>Thời gian làm bài</th>
                         <th>Lớp làm bài</th>
-                        <th>Sửa đề thi</th>
+                        {/* <th>Sửa đề thi</th> */}
                         <th>Xóa đề thi</th>
-                       
                       </tr>
                     </thead>
                     <tbody>
@@ -117,7 +116,7 @@ class AdminContentExam extends Component {
                         <th>Loại câu hỏi</th>
                         <th>Thời gian làm bài</th>
                         <th>Lớp làm bài</th>
-                        <th>Sửa đề thi</th>
+                        {/* <th>Sửa đề thi</th> */}
                         <th>Xóa đề thi</th> 
                       </tr>
                     </tfoot>

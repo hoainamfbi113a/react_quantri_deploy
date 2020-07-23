@@ -3,6 +3,7 @@ import axios from 'axios';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as memberAction  from "../../../../actions/memberAction";
+import './style.css'
 class AdminAddItemMember extends Component {
     constructor(props) {//khởi tạo giá trị
         super(props)
@@ -129,17 +130,6 @@ class AdminAddItemMember extends Component {
                 />
                </div>
             </div>
-            <div className="form-group">
-              <label style={{textAlign: 'left'}} htmlFor="inputEmail3" className="col-sm-2 control-label">Avatar</label>
-              <div className="col-sm-10" style={{marginLeft: '-5%'}}>
-              <input
-                  type="file"
-                  name="avatarContentImg2"
-                  onChange={this.onChange}
-                />
-               </div>
-            </div>
-            
           </div>
           {/* /.box-body */}
           <div className="box-footer" style={{paddingRight: '69px'}}>

@@ -38,9 +38,12 @@ class AdminContentMember extends Component {
   }
 
     componentDidMount(){ 
-      const { memberActionCreators } = this.props;
-      const { fetchListMember } = memberActionCreators;
-      fetchListMember();
+      this.timeout = setTimeout(() => {
+        const { memberActionCreators } = this.props;
+        const { fetchListMember } = memberActionCreators;
+        fetchListMember();
+       }, 500);
+      
      
     }
     chosePage = (event) => {
@@ -61,7 +64,7 @@ class AdminContentMember extends Component {
       const indexOfFirstNews = indexOfLastNews - newsPerPage;
       const currentTodos = member.slice(indexOfFirstNews, indexOfLastNews);
       const renderTodos = currentTodos.map((todo, index) => {
-        return <Item stt={index + 1 + (currentPage - 1)*newsPerPage} key={index} item={todo} />;
+        return <Item stt={index + 1 + (currentPage - 1)*newsPerPage} key={index} item={todo} handleShowAlert={this.handleShowAlert} />;
       });
       const pageNumbers = [];
       for (let i = 1; i <= Math.ceil(member.length / newsPerPage); i++) {
@@ -78,9 +81,9 @@ class AdminContentMember extends Component {
                 <div className="news-per-page" style={{marginTop: '10px'}}>
                     <select defaultValue="0" onChange={this.select} >
                       <option value="0" disabled>Get by</option>
-                      <option value="3">5</option>
-                      <option value="5">10</option>
-                      <option value="7">20</option>
+                      <option value="5">5</option>
+                      <option value="10">10</option>
+                      <option value="20">20</option>
                     </select>
                   </div>
                 </div>
