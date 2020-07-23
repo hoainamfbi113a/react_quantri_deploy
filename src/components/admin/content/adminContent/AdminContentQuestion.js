@@ -18,7 +18,8 @@ class AdminContentQuestion extends Component {
         idAlert:"",
         persons:[],
         currentPage: 1,
-        newsPerPage: 7
+        newsPerPage: 7,
+        filterlist:"",
       }
     }
     handleShowAlert = (item) =>{
@@ -30,22 +31,6 @@ class AdminContentQuestion extends Component {
     }
     handleDeleteItem = () => {
       let {idAlert, persons} = this.state;
-      // axios.get('http://localhost:5000/admin/question/delete/'+idAlert)
-      // .then(()=>{
-      //   axios.get('http://localhost:5000/admin/question/list')
-      //   .then(response => {
-      //       // console.log(response.data);
-      //       this.setState({persons: response.data});
-      //   })
-      //   .catch(function (error) {
-      //       // console.log(error);
-      //   })
-      // }
-      // )
-      // .catch(err => console.log(err))
-      // this.setState({
-      //     showAlert: false
-      // });
       const { questionActionCreators } = this.props;
       const { deletequestion } = questionActionCreators;
       deletequestion(idAlert);
@@ -70,8 +55,17 @@ class AdminContentQuestion extends Component {
         newsPerPage: event.target.value
       })
     }
+    filterList = (event) => {
+      this.setState({
+        filterlist: event.target.value
+      })
+    }
     render() {
       let { question } = this.props;
+      let filterList = this.state.filterlist;
+      question = question.filter(function(item) {
+          return item.questionName.toLowerCase().search(filterList.toLowerCase()) !== -1;
+        });
       const currentPage = this.state.currentPage;
       const newsPerPage = this.state.newsPerPage;
       const indexOfLastNews = currentPage * newsPerPage;
@@ -91,15 +85,18 @@ class AdminContentQuestion extends Component {
             <div className="col-xs-12">
               <div className="box">
                 <div className="box-header">
-                <Link to="question/add"><button type="submit" className="btn btn-primary"><i className="fa fa-fw fa-home" />Thêm câu hỏi</button></Link>
-                <div className="news-per-page" style={{marginTop: '10px'}}>
-                    <select defaultValue="0" onChange={this.select} >
-                      <option value="0" disabled>Get by</option>
-                      <option value="5">5</option>
-                      <option value="10">10</option>
-                      <option value="202">20</option>
-                    </select>
-                  </div>
+                  <div >
+                      <Link to="question/add"><button type="submit" className="btn btn-primary"><i className="fa fa-fw fa-home" />Thêm câu hỏi</button></Link>
+                      <div className="news-per-page" style={{marginTop: '10px'}}>
+                          <select defaultValue="0" onChange={this.select} >
+                            <option value="0" disabled>Get by</option>
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="202">20</option>
+                          </select>
+                        </div>
+                      </div>
+                  <input style={{height: '36px'}} type="text" placeholder="Search" onChange={this.filterList}/>
                 </div>
                 {/* /.box-header */}
                 <div className="box-body">

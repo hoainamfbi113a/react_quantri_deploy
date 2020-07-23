@@ -18,6 +18,7 @@ class AdminContentMember extends Component {
         persons:[],
         currentPage: 1,
         newsPerPage: 7,
+        filterlist:"",
       }
     }
     handleShowAlert = (item) =>{
@@ -56,8 +57,18 @@ class AdminContentMember extends Component {
         newsPerPage: event.target.value
       })
     }
+    filterList = (event) => {
+      this.setState({
+        filterlist: event.target.value
+      })
+    }
     render() {
       let { member } = this.props;
+      let filterList = this.state.filterlist;
+      member = member.filter(function(item) {
+          return item.memberLogin.toLowerCase().search(filterList.toLowerCase()) !== -1;
+        });
+      
       const currentPage = this.state.currentPage;
       const newsPerPage = this.state.newsPerPage;
       const indexOfLastNews = currentPage * newsPerPage;
@@ -76,7 +87,7 @@ class AdminContentMember extends Component {
           <div className="row">
             <div className="col-xs-12">
               <div className="box">
-                <div className="box-header">
+                {/* <div className="box-header">
                 <Link to="member/add"><button type="submit" className="btn btn-primary"><i className="fa fa-fw fa-home" />Thêm học sinh</button></Link>
                 <div className="news-per-page" style={{marginTop: '10px'}}>
                     <select defaultValue="0" onChange={this.select} >
@@ -86,6 +97,20 @@ class AdminContentMember extends Component {
                       <option value="20">20</option>
                     </select>
                   </div>
+                </div> */}
+                 <div className="box-header">
+                  <div >
+                  <Link to="member/add"><button type="submit" className="btn btn-primary"><i className="fa fa-fw fa-home" />Thêm học sinh</button></Link>
+                      <div className="news-per-page" style={{marginTop: '10px'}}>
+                          <select defaultValue="0" onChange={this.select} >
+                            <option value="0" disabled>Get by</option>
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="202">20</option>
+                          </select>
+                        </div>
+                      </div>
+                  <input style={{height: '36px'}} type="text" placeholder="Search" onChange={this.filterList}/>
                 </div>
                 {/* /.box-header */}
                 <div className="box-body">

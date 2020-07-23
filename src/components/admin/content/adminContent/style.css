@@ -43,3 +43,12 @@
     margin-bottom: 20px;
     width: 100%;
   }
+  .box-header{
+    display: flex;
+    /* justify-content: space-between; */ 
+  }
+  .box-header *{
+    /* padding-right: 100px; */
+    margin-right: 10px;
+    /* justify-content:space-between; */
+  }

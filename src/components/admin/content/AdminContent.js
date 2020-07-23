@@ -90,12 +90,12 @@ export default class AdminContent extends Component {
     render() {
     
         return (
-                    <section className="content">
+         <section className="content-background">
           <div className="row">
             <div className="col-xs-12">
               <div className="box">
                 <div className="box-header">
-              <h1>Chào mừng bạn đến với trang quản lý</h1>
+              <h1>Chào mừng bạn đến với trang quản ly</h1>
                 </div>
                
                
