@@ -8,7 +8,7 @@ class AdminAddItemgame extends Component {
         super(props)
         this.state = {
           _id:'',
-          categoryvocabulary:'',
+          categoryvocabulary:'con người',
           vocabularygame: '',
           spellingvocabulary:'',
           meaningA : '',
@@ -70,11 +70,9 @@ class AdminAddItemgame extends Component {
               <label style={{textAlign: 'left'}} htmlFor="inputEmail3" className="col-sm-2 control-label">Loại câu hỏi cua game</label>
               <div className="col-sm-10" style={{marginLeft: '-5%'}}>
               <select className="form-control"  onChange={this.onChange}  name="categoryvocabulary">
-                  <option value="Anh văn 1">Anh văn 1</option>
-                  <option value="Anh văn 2">Anh văn 2</option>
-                  <option value="Anh văn 3">Anh văn 3</option>
-                  <option value="Anh văn 4">Anh văn 4</option>
-                  <option value="Anh văn 5">Anh văn 5</option>
+                  <option value="con người">con người</option>
+                  <option value="thiên nhiên">thiên nhiên</option>
+                  <option value="hoa quả">hoa quả</option>
               </select>
                 {/* <input type="text" className="form-control"  placeholder="Số câu trung bình" onChange={this.onChange} name="examMediumNumber" value={this.state.examMediumNumber}/> */}
               </div>

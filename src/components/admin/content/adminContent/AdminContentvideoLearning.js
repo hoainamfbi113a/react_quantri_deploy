@@ -61,10 +61,10 @@ class AdminContentvideoLearning extends Component {
   }
   render() {
     let { videoLearning } = this.props;
-    let filterList = this.state.filterlist;
-    videoLearning = videoLearning.filter(function(item) {
-        return item.videoContentTitle.toLowerCase().search(filterList.toLowerCase()) !== -1;
-      });
+    // let filterList = this.state.filterlist;
+    // videoLearning = videoLearning.filter(function(item) {
+    //     return item.videoContentTitle.toLowerCase().search(filterList.toLowerCase()) !== -1;
+    //   });
     
     const currentPage = this.state.currentPage;
     const newsPerPage = this.state.newsPerPage;
