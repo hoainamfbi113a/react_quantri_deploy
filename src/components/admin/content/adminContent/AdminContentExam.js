@@ -73,7 +73,7 @@ class AdminContentExam extends Component {
       let { exam } = this.props;
       let filterList = this.state.filterlist;
       exam = exam.filter(function(item) {
-          return item.examName.toLowerCase().search(filterList.toLowerCase()) !== -1;
+          return item.examName && item.examName.toLowerCase().search(filterList.toLowerCase()) !== -1;
         });
       const currentPage = this.state.currentPage;
       const newsPerPage = this.state.newsPerPage;

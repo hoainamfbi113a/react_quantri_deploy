@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { withRouter  } from 'react-router'
 import {Link}  from 'react-router-dom'
+import jwt_decode from 'jwt-decode'
  class AdminHeader extends Component {
   logOut(e) {
     e.preventDefault()
@@ -9,7 +10,11 @@ import {Link}  from 'react-router-dom'
     // hashHistory.push('/')
   }
     render() {
-      // var this = this;
+      let decoded =""
+      if(localStorage.usertoken){
+      const token = localStorage.usertoken
+      decoded = jwt_decode(token)//giai ma token
+      }
         return (
             
                  <header className="main-header">
@@ -32,7 +37,8 @@ import {Link}  from 'react-router-dom'
             <span className="icon-bar" />
             <span className="icon-bar" />
           </a>
-          <a style={{position: 'absolute', marginLeft: '86%', paddingTop: '14px',color:'#fff'}} href="" onClick={this.logOut.bind(this)} className="nav-link"><i className="fa fa-fw fa-home" />
+          <span style={{position: 'absolute', marginLeft: '66%', paddingTop: '14px',color:'#fff'}}>Admin: {decoded.memberLogin}</span>
+          <a style={{position: 'absolute', marginLeft: '80%', paddingTop: '14px',color:'#fff'}} href="" onClick={this.logOut.bind(this)} className="nav-link"><i className="fa fa-fw fa-home" />
             ĐĂNG XUẤT
           </a>
         </nav>

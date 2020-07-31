@@ -36,7 +36,7 @@ const classSubjectReducer = (state = initialState, action) => {
     }
     case classSubjectConstants.ADD_CLASS_SUBJECT_SUCCESS:{
       const {data} = action.payload;
-      toastSuccess('Thêm mới tin tức thành công');
+      toastSuccess('Thêm mới lớp học thành công');
       setTimeout(()=>{
 
       },100)
@@ -58,7 +58,7 @@ const classSubjectReducer = (state = initialState, action) => {
     }
     case classSubjectConstants.DELETE_CLASS_SUBJECT_SUCCESS: {
       const { data: id } = action.payload; // task id
-      toastSuccess('Xóa tin tuc thành công');
+      toastSuccess('Xóa lớp học thành công');
       console.log(state.listclassSubject.filter(item => item._id !== id))
       return {
         ...state,
@@ -98,7 +98,7 @@ const classSubjectReducer = (state = initialState, action) => {
           data,
           ...listclassSubject.slice(index + 1),
         ];
-        toastSuccess('Cập nhật công việc thành công');
+        toastSuccess('Cập nhật lớp học thành công');
         return {
           ...state,
           listclassSubject: newList,

@@ -36,7 +36,7 @@ const gameReducer = (state = initialState, action) => {
     }
     case gameConstants.ADD_GAME_SUCCESS:{
       const {data} = action.payload;
-      toastSuccess('Thêm mới tin tức thành công');
+      toastSuccess('Thêm mới item game thành công');
       setTimeout(()=>{
 
       },100)
@@ -58,7 +58,7 @@ const gameReducer = (state = initialState, action) => {
     }
     case gameConstants.DELETE_GAME_SUCCESS: {
       const { data: id } = action.payload; // task id
-      toastSuccess('Xóa tin tuc thành công');
+      toastSuccess('Xóa item game thành công');
       console.log(state.listgame.filter(item => item._id !== id))
       return {
         ...state,
@@ -98,7 +98,7 @@ const gameReducer = (state = initialState, action) => {
           data,
           ...listgame.slice(index + 1),
         ];
-        toastSuccess('Cập nhật công việc thành công');
+        toastSuccess('Cập nhật item game thành công');
         return {
           ...state,
           listgame: newList,

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-
+import { toastError, toastSuccess } from '../../../../helpers/toastHelper';
 import * as classSubjectAction  from "../../../../actions/classSubjectAction";
 class AdminAddItemclassSubject extends Component {
   constructor(prop) {
@@ -53,6 +53,7 @@ class AdminAddItemclassSubject extends Component {
     const {classSubjectActionsCreators} = this.props;
     const { updateclassSubject } = classSubjectActionsCreators;
     updateclassSubject(formData);
+    toastSuccess('Cập nhật lớp học thành công');
     setTimeout(()=>{
       r.props.history.push('/admin/classsubject');
     },100)

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-
+import { toastSuccess } from '../../../../helpers/toastHelper';
 import * as examAction  from "../../../../actions/examAction";
 class AdminEditItemExam extends Component {
   constructor(props) {
@@ -18,6 +18,7 @@ class AdminEditItemExam extends Component {
       examDifficultNumber : '',
       examTimeMake : '',
       classId : '',
+      classObject: [],
     }
 }
     componentDidMount() {
@@ -35,6 +36,26 @@ class AdminEditItemExam extends Component {
                   classId : this.props.examUpdate.classId,
                  
                    });
+                   axios.get('http://localhost:5000/admin/classsubject/list/')
+                   .then(response => {
+                    this.setState({classObject:response.data})
+                     })
+                      .catch(function (error){
+                         console.log(error +"loi ne");
+                     })
+    }
+    renderClass = () =>{
+      let{classObject}=this.state;
+      console.log(classObject);
+      return ( <select className="form-control"  onChange={this.onChange} name="examCategoryNumber" value={this.state.classId}>
+                { classObject.map((item,index)=>{
+                  return (
+                    <option value={item.classSubjectName}>{item.classSubjectName}</option>
+                  )
+                    })
+                  }
+        </select>
+      )
     }
     onChange(e) {
       this.setState({ [e.target.name]: e.target.value })//cập nhật giá trị input
@@ -54,12 +75,12 @@ class AdminEditItemExam extends Component {
       const {examActionsCreators} = this.props;
       const { updateexam } = examActionsCreators;
       updateexam(formData);
+      toastSuccess('Cập nhật bài kiểm tra thành công');
       setTimeout(()=>{
         r.props.history.push('/admin/exam');
       },100)
-  }
+    }
     render() {
-      
         return (
             <div>
              <section className="content">
@@ -79,50 +100,11 @@ class AdminEditItemExam extends Component {
             <div className="form-group">
               <label style={{textAlign: 'left'}} htmlFor="inputEmail3" className="col-sm-2 control-label">Loại câu hỏi</label>
               <div className="col-sm-10" style={{marginLeft: '-5%'}}>
-              <select className="form-control"  onChange={this.onChange}  name="examCategoryNumber" value={this.state.classId}>
-                  <option value="Anh văn 1">Anh văn 1</option>
-                  <option value="Anh văn 2">Anh văn 2</option>
-                  <option value="Anh văn 3">Anh văn 3</option>
-                  <option value="Anh văn 4">Anh văn 4</option>
-                  <option value="Anh văn 5">Anh văn 5</option>
-                  <option value="Toán lớp 1">Toán lớp 1</option>
-                  <option value="Toán lớp 2">Toán lớp 2</option>
-                  <option value="Toán lớp 3">Toán lớp 3</option>
-                  <option value="Toán lớp 4">Toán lớp 4</option>
-                  <option value="Toán lớp 5">Toán lớp 5</option>
-                  {/* <option value="Anh văn 2">Anh văn 2</option> */}
-              </select>
+              {this.renderClass()}
                 {/* <input type="text" className="form-control"  placeholder="Số câu trung bình" onChange={this.onChange} name="examMediumNumber" value={this.state.examMediumNumber}/> */}
               </div>
             </div>
-            {/* <div className="form-group">
-              <label style={{textAlign: 'left'}} htmlFor="inputPassword3" className="col-sm-2 control-label">Số câu dễ</label>
-              <div className="col-sm-10" style={{marginLeft: '-5%'}}>
-              <select className="form-control"  onChange={this.onChange}  name="examEasyNumber" value={this.state.examEasyNumber} >
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-              </select>
-                <input type="text" className="form-control" id="inputPassword3" placeholder="Số câu dễ"onChange={this.onChange} name="examEasyNumber" value={this.state.examEasyNumber}/>
-              </div>
-            </div> */}
-            {/* <div className="form-group">
-              <label style={{textAlign: 'left'}} htmlFor="inputEmail3" className="col-sm-2 control-label">Số câu trung bình</label>
-              <div className="col-sm-10" style={{marginLeft: '-5%'}}>
-              <select className="form-control"  onChange={this.onChange}  name="examMediumNumber" value={this.state.examMediumNumber} >
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-              </select>
-                <input type="text" className="form-control"  placeholder="Số câu trung bình" onChange={this.onChange} name="examMediumNumber" value={this.state.examMediumNumber}/>
-              </div>
-            </div> */}
-            {/* <div className="form-group">
-              <label style={{textAlign: 'left'}} htmlFor="inputPassword3" className="col-sm-2 control-label">Số câu khó</label>
-              <div className="col-sm-10" style={{marginLeft: '-5%'}}>
-                <input readOnly type="text" className="form-control" id="inputPassword3" placeholder="Số câu khó = 10 - số câu dễ - số câu trung bình" onChange={this.onChange} name="examDifficultNumber" />
-              </div>
-            </div> */}
+            
             <div className="form-group">
               <label style={{textAlign: 'left'}} htmlFor="inputEmail3" className="col-sm-2 control-label">Thời gian làm bài</label>
               <div className="col-sm-10" style={{marginLeft: '-5%'}}>
@@ -137,18 +119,7 @@ class AdminEditItemExam extends Component {
             <div className="form-group">
               <label style={{textAlign: 'left'}} htmlFor="inputPassword3" className="col-sm-2 control-label">Lớp làm bài</label>
               <div className="col-sm-10" style={{marginLeft: '-5%'}}>
-              <select className="form-control"  onChange={this.onChange}  name="classId" value={this.state.classId} >
-                  <option value="Anh văn 1">Anh văn 1</option>
-                  <option value="Anh văn 2">Anh văn 2</option>
-                  <option value="Anh văn 3">Anh văn 3</option>
-                  <option value="Anh văn 4">Anh văn 4</option>
-                  <option value="Anh văn 5">Anh văn 5</option>
-                  <option value="Toán lớp 1">Toán lớp 1</option>
-                  <option value="Toán lớp 2">Toán lớp 2</option>
-                  <option value="Toán lớp 3">Toán lớp 3</option>
-                  <option value="Toán lớp 4">Toán lớp 4</option>
-                  <option value="Toán lớp 5">Toán lớp 5</option>
-              </select>
+              {this.renderClass()}
                 {/* <input type="text" className="form-control" id="inputPassword3" placeholder="Lớp làm bài"onChange={this.onChange} name="classId" value={this.state.classId}/> */}
               </div>
             </div>

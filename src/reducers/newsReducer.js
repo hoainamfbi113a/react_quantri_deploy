@@ -58,7 +58,7 @@ const newsReducer = (state = initialState, action) => {
     }
     case newsConstants.DELETE_NEW_SUCCESS: {
       const { data: id } = action.payload; // task id
-      toastSuccess('Xóa tin tuc thành công');
+      toastSuccess('Xóa tin tức thành công');
       console.log(state.listNews.filter(item => item._id !== id))
       return {
         ...state,
@@ -98,7 +98,7 @@ const newsReducer = (state = initialState, action) => {
           data,
           ...listNews.slice(index + 1),
         ];
-        toastSuccess('Cập nhật công việc thành công');
+        toastSuccess('Cập nhật tin tức thành công');
         return {
           ...state,
           listNews: newList,

@@ -3,12 +3,14 @@ import axios from 'axios';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as questionAction  from "../../../../actions/questionAction";
+import { toastError, toastSuccess } from '../../../../helpers/toastHelper';
 class AdminAddItemQuestion extends Component {
     constructor(props) {//khởi tạo giá trị
         super(props)
         this.state = {
           _id:'',
           questionCategoryId: 'Toán lớp 1',
+          classObject: [],
           questionName:'',
           questionResultA : '',
           questionResultB : '',
@@ -23,6 +25,30 @@ class AdminAddItemQuestion extends Component {
       onChange(e) {
         this.setState({ [e.target.name]: e.target.value })//cập nhật giá trị input
       }
+      componentDidMount =() =>
+      {
+        axios.get('http://localhost:5000/admin/classsubject/list/')
+          .then(response => {
+            this.setState({classObject:response.data})
+          })
+          .catch(function (error){
+            console.log(error +"loi ne");
+          })
+      }
+      renderClass = () =>{
+        let{classObject}=this.state;
+        console.log(classObject);
+    // console.log(questionForum)
+        return ( <select className="form-control"  onChange={this.onChange}  name="questionCategoryId" >
+                  { classObject.map((item,index)=>{
+                    return (
+                      <option value={item.classSubjectName}>{item.classSubjectName}</option>
+                    )
+                      })
+                    }
+          </select>
+        )
+      }
       onSubmit(e) {
         var r = this;
         e.preventDefault();
@@ -30,7 +56,6 @@ class AdminAddItemQuestion extends Component {
         let formData={
           
         } ;
-        // formData.append('selectedFile', selectedFile);
         formData._id = _id ;
         formData.questionCategoryId = questionCategoryId ;
         formData.questionName = questionName ;
@@ -39,10 +64,10 @@ class AdminAddItemQuestion extends Component {
         formData.questionResultC= questionResultC;
         formData.questionResultD= questionResultD;
         formData.questionResultRight= questionResultRight;
-        // formData.append('timeUpdate', timeUpdate);
         const {questionActionsCreators} = this.props;
         const { addquestion } = questionActionsCreators;
         addquestion(formData);
+        toastSuccess('Thêm câu hỏi thành công');
         setTimeout(()=>{
           r.props.history.push('/admin/question');
     },100)
@@ -63,19 +88,7 @@ class AdminAddItemQuestion extends Component {
               <label style={{textAlign: 'left'}} htmlFor="inputEmail3" className="col-sm-2 control-label">Loại câu hỏi</label>
               <div className="col-sm-10" style={{marginLeft: '-5%'}} >
                 <input type="hidden" className="form-control"  placeholder="text" onChange={this.onChange} name="_id" value={this.state._id}/>
-                <select className="form-control"  onChange={this.onChange}  name="questionCategoryId" >
-                  <option value="Anh văn 1">Anh văn 1</option>
-                  <option value="Anh văn 2">Anh văn 2</option>
-                  <option value="Anh văn 3">Anh văn 3</option>
-                  <option value="Anh văn 4">Anh văn 4</option>
-                  <option value="Anh văn 5">Anh văn 5</option>
-                  <option value="Toán lớp 1">Toán lớp 1</option>
-                  <option value="Toán lớp 2">Toán lớp 2</option>
-                  <option value="Toán lớp 3">Toán lớp 3</option>
-                  <option value="Toán lớp 4">Toán lớp 4</option>
-                  <option value="Toán lớp 5">Toán lớp 5</option>
-                 
-               </select>
+                {this.renderClass(this.state.classObject)}
                 {/* <input type="text" className="form-control"  placeholder="Loại câu hỏi" onChange={this.onChange} name="questionCategoryId" value={this.state.questionCategoryId}/> */}
               </div>
             </div>

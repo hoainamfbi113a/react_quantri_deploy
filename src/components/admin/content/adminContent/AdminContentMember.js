@@ -66,7 +66,7 @@ class AdminContentMember extends Component {
       let { member } = this.props;
       let filterList = this.state.filterlist;
       member = member.filter(function(item) {
-          return item.memberLogin.toLowerCase().search(filterList.toLowerCase()) !== -1;
+          return item.memberLogin && item.memberLogin.toLowerCase().search(filterList.toLowerCase()) !== -1;
         });
       
       const currentPage = this.state.currentPage;
@@ -118,13 +118,12 @@ class AdminContentMember extends Component {
                     <thead>
                       <tr>
                         <th>Tên đăng nhập</th>
-                        <th style={{width: '50px'}}>Mật khẩu</th>
                         <th>Họ và tên</th>
                         <th>Giới tính</th>
+                        <th>Ngày sinh</th>
                         <th>Avatar</th>
                         <th>Sửa</th>
                         <th>Xóa</th>
-                       
                       </tr>
                     </thead>
                     <tbody>
@@ -134,14 +133,12 @@ class AdminContentMember extends Component {
                     <tfoot>
                       <tr>
                         <th>Tên đăng nhập</th>
-                        <th style={{width: '50px'}}>Mật khẩu</th>
                         <th>Họ và tên</th>
                         <th>Giới tính</th>
-                        
+                        <th>Ngày sinh</th>
                         <th>Avatar</th>
                         <th>Sửa</th>
                         <th>Xóa</th>
-                       
                       </tr>
                     </tfoot>
                   </table>
@@ -199,7 +196,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     memberActionCreators: bindActionCreators(memberActions, dispatch),
-    // modalActionCreators: bindActionCreators( dispatch),
   };
 };
 

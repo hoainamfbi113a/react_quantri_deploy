@@ -52,7 +52,7 @@ export default function* newSaga() {
     console.log(data);
     const resp = yield call(addNew,data);
     const { dataresp , status} = resp;
-    if(status === 201) {
+    if(status === 200) {
       yield put(addNewSuccess(data));
     } else {
       yield put(addNewFailed(data));

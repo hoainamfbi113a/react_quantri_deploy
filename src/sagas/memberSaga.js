@@ -8,6 +8,7 @@ import { fetchListMemberFailed, fetchListMemberSuccess, deleteMemberSuccess,
    updateMemberFailed
   } from "../actions/memberAction";
 import { showLoading, hideLoading } from "../actions/ui";
+import { toastError, toastSuccess } from '../helpers/toastHelper';
 export default function* memberSaga() {
     yield all([
         yield fork(watchFetchListmemberAction),
@@ -52,14 +53,15 @@ export default function* memberSaga() {
   }
   function * addmemberSaga ({payload}){
     const {data} = payload;
+    
     yield put(showLoading());
     console.log("add member")
     console.log(data);
     const resp = yield call(addmember,data);
-    console.log("add member")
     console.log(data);
     const { dataresp , status} = resp;
-    if(status === 201) {
+    console.log(status);
+    if(status === 200) {
       yield put(addMemberSuccess(data));
     } else {
       yield put(addMemberFailed(data));

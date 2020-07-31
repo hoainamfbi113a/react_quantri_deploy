@@ -64,7 +64,7 @@ class AdminContentQuestion extends Component {
       let { question } = this.props;
       let filterList = this.state.filterlist;
       question = question.filter(function(item) {
-          return item.questionName.toLowerCase().search(filterList.toLowerCase()) !== -1;
+          return item.questionName && item.questionName.toLowerCase().search(filterList.toLowerCase()) !== -1;
         });
       const currentPage = this.state.currentPage;
       const newsPerPage = this.state.newsPerPage;

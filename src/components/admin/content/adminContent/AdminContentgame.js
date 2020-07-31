@@ -104,14 +104,13 @@ class AdminContentgame extends Component {
                   <table id="example2" className="table table-bordered table-hover">
                     <thead>
                       <tr>
-
                         <th>categoryvocabulary </th>
-                        
                         <th>vocabularygame</th>
                         <th>spellingvocabulary</th>
                         <th>questionResultA</th>
                         <th>questionResultB</th>
                         <th>questionResultC</th>
+                        <th>Xoá</th>
 
                       </tr>
                     </thead>
@@ -126,6 +125,7 @@ class AdminContentgame extends Component {
                       <th>questionResultA</th>
                       <th>questionResultB</th>
                       <th>questionResultC</th>
+                      <th>Xoá</th>
                     </tr>
                     </tfoot>
                   </table>

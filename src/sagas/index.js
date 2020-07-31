@@ -6,6 +6,7 @@ import memberSaga from "./memberSaga"
 import questionSaga from "./questionSaga"
 import examSaga from "./examSaga"
 import gameSaga from "./gameSaga"
+import lessionSaga from "./lessionSaga"
 
 
 function* rootSaga () {
@@ -18,6 +19,7 @@ function* rootSaga () {
     gameSaga(),
     examSaga(),
     videoLearningSaga(),
+    lessionSaga(),
   ]);
 }
 export default rootSaga;

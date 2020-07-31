@@ -73,7 +73,7 @@ export default class AdminContentQuestion extends Component {
       let { persons } = this.state;
       let filterList = this.state.filterlist;
       persons = persons.filter(function(item) {
-          return item.memberid.toLowerCase().search(filterList.toLowerCase()) !== -1;
+          return item.memberid && item.memberid.toLowerCase().search(filterList.toLowerCase()) !== -1;
         });
       
       const currentPage = this.state.currentPage;

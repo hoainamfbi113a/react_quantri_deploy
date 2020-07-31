@@ -1,42 +1,42 @@
-import * as memberConstants from "../constants/memberConstant";
+import * as lessionConstants from "../constants/lessionConstant";
 import { toastError, toastSuccess } from '../helpers/toastHelper';
 
 const initialState = {
-  listmember: [],
+  listlession: [],
   taskEditing: null,
 };
 
-const memberReducer = (state = initialState, action) => {
+const lessionReducer = (state = initialState, action) => {
   switch (action.type) {
-    case memberConstants.FETCH_MEMBER: {
+    case lessionConstants.FETCH_LESSION: {
       return {
         ...state,
-        listmember: [],
+        listlession: [],
       };
     }
-    case memberConstants.FETCH_MEMBER_SUCCESS: {
+    case lessionConstants.FETCH_LESSION_SUCCESS: {
       const { data } = action.payload;
       return {
         ...state,
-        listmember: data,
+        listlession: data,
       };
     }
-    case memberConstants.FETCH_MEMBER_FAILED: {
+    case lessionConstants.FETCH_LESSION_FAILED: {
       const { error } = action.payload;
       // toastError(error);
       return {
         ...state,
-        listmember: [],
+        listlession: [],
       };
     }
-    case memberConstants.ADD_MEMBER: {
+    case lessionConstants.ADD_LESSION: {
       return {
         ...state,
       }
     }
-    case memberConstants.ADD_MEMBER_SUCCESS:{
+    case lessionConstants.ADD_LESSION_SUCCESS:{
       const {data} = action.payload;
-      toastSuccess('Thêm mới MEMBER thành công');
+      toastSuccess('Thêm mới bài học thành công');
       setTimeout(()=>{
 
       },100)
@@ -44,71 +44,71 @@ const memberReducer = (state = initialState, action) => {
         ...state,data
       }
     }
-    case memberConstants.ADD_MEMBER_FAILED:{
+    case lessionConstants.ADD_LESSION_FAILED:{
       const {error} = action.payload;
       toastError(error)
       return {
         ...state
       }
     }
-    case memberConstants.DELETE_MEMBER: {
+    case lessionConstants.DELETE_LESSION: {
       return {
         ...state,
       };
     }
-    case memberConstants.DELETE_MEMBER_SUCCESS: {
+    case lessionConstants.DELETE_LESSION_SUCCESS: {
       const { data: id } = action.payload; // task id
-      toastSuccess('Xóa MEMBER thành công');
-      console.log(state.listmember.filter(item => item._id !== id))
+      toastSuccess('Xóa bài học thành công');
+      console.log(state.listlession.filter(item => item._id !== id))
       return {
         ...state,
-        listmember: state.listmember.filter(item => item._id !== id),
+        listlession: state.listlession.filter(item => item._id !== id),
       };
     }
-    case memberConstants.DELETE_MEMBER_FAILED: {
+    case lessionConstants.DELETE_LESSION_FAILED: {
       const { error } = action.payload;
       toastError(error);
       return {
         ...state,
       };
     }
-    case memberConstants.SET_MEMBER_EDITING: {
+    case lessionConstants.SET_LESSION_EDITING: {
       return {
         ...state,
       };
     }
-    case memberConstants.SET_MEMBER_EDITING_SUCCESS: {
+    case lessionConstants.SET_LESSION_EDITING_SUCCESS: {
       return {
         ...state,
       };
     }
-    case memberConstants.UPDATE_MEMBER: {
+    case lessionConstants.UPDATE_LESSION: {
       return {
         ...state,
       };
     }
-    case memberConstants.UPDATE_MEMBER_SUCCESS: {
+    case lessionConstants.UPDATE_LESSION_SUCCESS: {
       const { data } = action.payload;
-      const { listmember } = state;
+      const { listlession } = state;
       console.log(data._id+"1"+ data.id);
-      const index = listmember.findIndex(item => item.id === data.id);
+      const index = listlession.findIndex(item => item.id === data.id);
       if (index !== -1) {
         const newList = [
-          ...listmember.slice(0, index),
+          ...listlession.slice(0, index),
           data,
-          ...listmember.slice(index + 1),
+          ...listlession.slice(index + 1),
         ];
-        toastSuccess('Cập nhật MEMBER thành công');
+        toastSuccess('Cập nhật bài học thành công');
         return {
           ...state,
-          listmember: newList,
+          listlession: newList,
         };
       }
       return {
         ...state,
       };
     }
-    case memberConstants.UPDATE_MEMBER_FAILED: {
+    case lessionConstants.UPDATE_LESSION_FAILED: {
       const { error } = action.payload;
       toastError(error);
       return {
@@ -120,4 +120,4 @@ const memberReducer = (state = initialState, action) => {
   }
 };
 
-export default memberReducer;
+export default lessionReducer;

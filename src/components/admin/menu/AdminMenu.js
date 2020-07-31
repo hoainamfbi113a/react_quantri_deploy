@@ -10,7 +10,15 @@ export default class AdminMenu extends Component {
         <section className="sidebar">
         
           <ul className="sidebar-menu">
-           
+            <li className="treeview" >
+              <Link to="/admin/classsubject">
+                  <i className="fa fa-dashboard" /> <span>Quản lý lớp học</span>
+                  <span className="pull-right-container">
+                    <i className="fa fa-angle-left pull-right" />
+                  </span>
+                  </Link>
+              
+              </li>
             <li className="treeview" >
             <Link to="/admin/member">
                 <i className="fa fa-dashboard" /> <span>Quản lý học sinh</span>
@@ -20,15 +28,7 @@ export default class AdminMenu extends Component {
                 </Link>
              
             </li>
-            <li className="treeview" >
-            <Link to="/admin/classsubject">
-                <i className="fa fa-dashboard" /> <span>Quản lý lớp học</span>
-                <span className="pull-right-container">
-                  <i className="fa fa-angle-left pull-right" />
-                </span>
-                </Link>
-             
-            </li>
+          
             
            
             <li className="treeview">

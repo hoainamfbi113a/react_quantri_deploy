@@ -18,6 +18,8 @@ import AdminContentResult from '../content/adminContent/AdminContentResult'
 
 import AdminAddItemLession from '../content/adminAddItem/AdminAddLession'
 import AdminContentLession from '../content/adminContent/AdminContentLession'
+import AdminEditItemlession from '../content/adminEdit_Item/AdminEditItemLession'
+
 
 import AdminAddItemNews from '../content/adminAddItem/AdminAddItemNews';
 //import AdminEditItemNews from '../content/adminEdit_Item/AdminEditItemNews';
@@ -53,6 +55,7 @@ export default class RouterURL extends Component {
              <Route exact path="/admin/news/edit/:id" component = {AdminEditItemNews}></Route>
              <Route exact path="/admin/lession" component = {AdminContentLession}></Route>
              <Route exact path="/admin/lession/add" component = {AdminAddItemLession}></Route>
+             <Route exact path="/admin/lession/edit/:id" component = {AdminEditItemlession}></Route>
              <Route exact path="/admin/videoLearning" component = {AdminContentvideoLearning}></Route>
              <Route exact path="/admin/videoLearning/add" component = {AdminAddItemvideoLearning}></Route>
              <Route exact path="/admin/videoLearning/edit/:id" component = {AdminEditItemvideoLearning}></Route>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios';
+import { toastSuccess } from '../../../../helpers/toastHelper';
 export default class AdminEditItem extends Component {
   constructor(props) {
     super(props);
@@ -12,9 +13,10 @@ export default class AdminEditItem extends Component {
       memberPass:'',
       memberName : '',
       memberDate : '',
-      memberSex : '',
+      memberSex : 'NAM',
       memberAddress : '',
       memberClassId : '',
+      
     }
 }
     componentDidMount() {
@@ -58,7 +60,8 @@ export default class AdminEditItem extends Component {
         formData.append('memberAddress', memberAddress);
         axios.post('http://localhost:5000/admin/member', formData)
         .then(res => console.log(res.data));
-      this.props.history.push('/admin/member');
+        toastSuccess('Cập nhật học sinh thành công');
+        this.props.history.push('/admin/member');
   }
     render() {
         return (
@@ -78,12 +81,12 @@ export default class AdminEditItem extends Component {
                 <input type="text" className="form-control"  placeholder="Tên đăng nhập" onChange={this.onChange} name="memberLogin" value={this.state.memberLogin}/>
               </div>
             </div>
-            <div className="form-group">
+            {/* <div className="form-group">
               <label style={{textAlign: 'left'}} htmlFor="inputPassword3" className="col-sm-2 control-label">Mật khẩu</label>
               <div className="col-sm-10" style={{marginLeft: '-5%'}}>
                 <input readOnly type="text" className="form-control" id="inputPassword3" placeholder="Mật khẩu"onChange={this.onChange} name="memberPass" value={this.state.memberPass}/>
               </div>
-            </div>
+            </div> */}
             <div className="form-group">
               <label style={{textAlign: 'left'}} htmlFor="inputEmail3" className="col-sm-2 control-label">Họ và tên</label>
               <div className="col-sm-10" style={{marginLeft: '-5%'}}>
@@ -102,7 +105,7 @@ export default class AdminEditItem extends Component {
               <div className="col-sm-10" style={{marginLeft: '-5%'}}>
               <select className="form-control"  onChange={this.onChange} name="memberSex" value={this.state.memberSex}>
                   <option value="NAM">NAM</option>
-                  <option value="Nữ">NỮ</option>
+                  <option value="NỮ">NỮ</option>
               </select>
                 {/* <input type="text" className="form-control"  placeholder="Giới tính" onChange={this.onChange} name="memberSex" value={this.state.memberSex}/> */}
               </div>

@@ -59,7 +59,7 @@ export default function* classSubjectSaga() {
     console.log("add class2")
     console.log(data);
     const { dataresp , status} = resp;
-    if(status === 201) {
+    if(status === 200) {
       yield put(addclassSubjectSuccess(data));
     } else {
       yield put(addclassSubjectFailed(data));

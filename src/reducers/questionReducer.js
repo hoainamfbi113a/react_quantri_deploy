@@ -36,7 +36,7 @@ const questionReducer = (state = initialState, action) => {
     }
     case questionConstants.ADD_QUESTION_SUCCESS:{
       const {data} = action.payload;
-      toastSuccess('Thêm mới tin tức thành công');
+      toastSuccess('Thêm mới câu hỏi thành công');
       setTimeout(()=>{
 
       },100)
@@ -58,7 +58,7 @@ const questionReducer = (state = initialState, action) => {
     }
     case questionConstants.DELETE_QUESTION_SUCCESS: {
       const { data: id } = action.payload; // task id
-      toastSuccess('Xóa tin tuc thành công');
+      toastSuccess('Xóa câu hỏi thành công');
       console.log(state.listquestion.filter(item => item._id !== id))
       return {
         ...state,
@@ -98,7 +98,7 @@ const questionReducer = (state = initialState, action) => {
           data,
           ...listquestion.slice(index + 1),
         ];
-        toastSuccess('Cập nhật công việc thành công');
+        toastSuccess('Cập nhật câu hỏi thành công');
         return {
           ...state,
           listquestion: newList,

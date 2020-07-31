@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-
+import { toastError, toastSuccess } from '../../../../helpers/toastHelper';
 import * as videoLearningAction  from "../../../../actions/videoLearningAction";
 class AdminAddItemvideoLearning extends Component {
   constructor(prop) {
@@ -13,11 +13,12 @@ class AdminAddItemvideoLearning extends Component {
       videoContentVideo: '',
       videoContentDetail: '',
       selectedFile: '',
-      error: {}
+      error: {},
+      classObject: [],
     }
-    this.onChange = this.onChange.bind(this)
-    this.onChangeImg = this.onChange.bind(this)
-    this.onSubmit = this.onSubmit.bind(this)
+    this.onChange = this.onChange.bind(this);
+    this.onChangeImg = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
   onChange(e) {
     switch (e.target.name) {
@@ -44,9 +45,32 @@ class AdminAddItemvideoLearning extends Component {
     const {videoLearningActionsCreators} = this.props;
     const { addvideoLearning } = videoLearningActionsCreators;
     addvideoLearning(formData);
+    toastSuccess('Thêm video bài học thành công');
     setTimeout(()=>{
       r.props.history.push('/admin/videolearning');
     },100)
+  }
+  componentDidMount() {
+      axios.get('http://localhost:5000/admin/classsubject/list/')
+      .then(response => {
+      this.setState({classObject:response.data})
+        })
+      .catch(function (error){
+      console.log(error +"loi ne");
+      })
+  }
+  renderClass = () =>{
+    let{classObject}=this.state;
+    console.log(classObject);
+    return ( <select className="form-control"  onChange={this.onChange}  name="videoContentSubjects" >
+              { classObject.map((item,index)=>{
+                return (
+                  <option value={item.classSubjectName}>{item.classSubjectName}</option>
+                )
+                  })
+                }
+      </select>
+    )
   }
   render() {
     return (
@@ -61,7 +85,8 @@ class AdminAddItemvideoLearning extends Component {
                 <div className="form-group">
                     <label style={{textAlign: 'left'}} htmlFor="inputPassword3" className="col-sm-2 control-label">Video của lớp </label>
                     <div className="col-sm-10" style={{marginLeft: '-5%'}}>
-                      <input type="text" className="form-control" id="inputPassword3" placeholder="Video của lớp"onChange={this.onChange} name="videoContentSubjects" value={this.state.videoContentSubjects}/>
+                    {this.renderClass()}
+                      {/* <input type="text" className="form-control" id="inputPassword3" placeholder="Video của lớp"onChange={this.onChange} name="videoContentSubjects" value={this.state.videoContentSubjects}/> */}
                     </div>
                 </div>
                 <div className="form-group">

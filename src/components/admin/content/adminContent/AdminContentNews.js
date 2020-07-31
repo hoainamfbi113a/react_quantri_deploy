@@ -88,7 +88,7 @@ class AdminContentNews extends Component {
     let { news } = this.props;
     let filterList = this.state.filterlist;
     news = news.filter(function(item) {
-        return item.title.toLowerCase().search(filterList.toLowerCase()) !== -1;
+        return item.title && item.title.toLowerCase().search(filterList.toLowerCase()) !== -1;
       });
 
     

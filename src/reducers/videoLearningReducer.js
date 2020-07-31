@@ -36,7 +36,7 @@ const videoLearningReducer = (state = initialState, action) => {
     }
     case videoLearningConstants.ADD_VIDEO_LEARNING_SUCCESS:{
       const {data} = action.payload;
-      toastSuccess('Thêm mới tin tức thành công');
+      toastSuccess('Thêm mới video bài học thành công');
       setTimeout(()=>{
 
       },100)
@@ -58,7 +58,7 @@ const videoLearningReducer = (state = initialState, action) => {
     }
     case videoLearningConstants.DELETE_VIDEO_LEARNING_SUCCESS: {
       const { data: id } = action.payload; // task id
-      toastSuccess('Xóa tin tuc thành công');
+      toastSuccess('Xóa bài học thành công');
       console.log(state.listvideoLearning.filter(item => item._id !== id))
       return {
         ...state,
@@ -98,7 +98,7 @@ const videoLearningReducer = (state = initialState, action) => {
           data,
           ...listvideoLearning.slice(index + 1),
         ];
-        toastSuccess('Cập nhật công việc thành công');
+        toastSuccess('Cập nhật video bài học thành công');
         return {
           ...state,
           listvideoLearning: newList,

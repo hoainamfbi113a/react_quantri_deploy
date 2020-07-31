@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 import { Editor } from '@tinymce/tinymce-react';
-// import QuillEditor from '../../QuillEditor';
-// import CKEditor from '@ckeditor/ckeditor5-react';
-// import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-
-export default class AdminAddItemMember extends Component {
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as lessionActions from '../../../../actions/lessionAction';
+import { toastError, toastSuccess } from '../../../../helpers/toastHelper';
+class AdminAddItemlession extends Component {
     constructor(props) {//khởi tạo giá trị
         super(props)
         this.state = {
@@ -15,7 +15,8 @@ export default class AdminAddItemMember extends Component {
           lessionContentImg:"",
           lessionContentDetail:"",
           files:[],
-          errors: {}
+          errors: {},
+          classObject: [],
         }
         this.onChange = this.onChange.bind(this)//để nó hiểu this ở đây là Resgister
         this.onSubmit = this.onSubmit.bind(this)
@@ -33,10 +34,32 @@ export default class AdminAddItemMember extends Component {
         }
       }
       handleEditorChange = (content, editor) => {
-        console.log('Content was updated:', content);
+        // console.log('Content was updated:', content);
         this.setState({
           lessionContentDetail:content
         })
+      }
+      componentDidMount() {
+          axios.get('http://localhost:5000/admin/classsubject/list/')
+          .then(response => {
+          this.setState({classObject:response.data})
+          })
+          .catch(function (error){
+          console.log(error +"loi ne");
+          })
+      }
+      renderClass = () =>{
+        let{classObject}=this.state;
+        // console.log(classObject);
+        return ( <select className="form-control"  onChange={this.onChange}  name="questionCategoryId" >
+                  { classObject.map((item,index)=>{
+                    return (
+                      <option value={item.classSubjectName}>{item.classSubjectName}</option>
+                    )
+                      })
+                    }
+          </select>
+        )
       }
       onSubmit(e) {
         var r = this;
@@ -47,22 +70,12 @@ export default class AdminAddItemMember extends Component {
         formData.append('lessionContentSubjects', lessionContentSubjects);
         formData.append('lessionContentTitle', lessionContentTitle);
         formData.append('lessionContentDetail', lessionContentDetail);
-        axios.post('http://localhost:5000/admin/lession', formData
-          )
-          .then(function (response) {
-            if(response.data ==='User already exists')
-              alert('User already exists');
-            else{
-            r.props.history.push('/admin/lession')
-            }
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-          setTimeout(()=>{
-            r.props.history.push('/admin/lession')
-          },400)
-       
+        const {lessionActionsCreators} = this.props;
+        const { addlession } = lessionActionsCreators;
+        addlession(formData);
+        toastSuccess('Thêm nội dung bài học thành công');
+        // r.props.history.push('/admin/news');
+        r.props.history.push('/admin/lession')
       }
     render() {
         return (
@@ -78,18 +91,7 @@ export default class AdminAddItemMember extends Component {
               <label style={{textAlign: 'left'}} htmlFor="inputEmail3" className="col-sm-2 control-label">Môn học</label>
               <div className="col-sm-10" style={{marginLeft: '-5%'}} >
                 <input type="hidden" className="form-control"  placeholder="text" onChange={this.onChange} name="_id" value={this.state._id}/>
-                <select className="form-control"  onChange={this.onChange}  name="lessionContentSubjects" >
-                  <option value="Anh văn 1">Anh văn lớp 1</option>
-                  <option value="Anh văn 2">Anh văn lớp 2</option>
-                  <option value="Anh văn 3">Anh văn lớp 3</option>
-                  <option value="Anh văn 4">Anh văn lớp 4</option>
-                  <option value="Anh văn 5">Anh văn lớp 5</option>
-                  <option value="Toán lớp 1">Toán lớp 1</option>
-                  <option value="Toán lớp 2">Toán lớp 2</option>
-                  <option value="Toán lớp 3">Toán lớp 3</option>
-                  <option value="Toán lớp 4">Toán lớp 4</option>
-                  <option value="Toán lớp 5">Toán lớp 5</option>
-               </select>
+                {this.renderClass()}
                </div>
             </div>
             <div className="form-group">
@@ -146,3 +148,12 @@ export default class AdminAddItemMember extends Component {
         )
     }
 }
+const mapStateToProps = state =>{
+
+}
+const mapDispatchToProps = dispatch =>{
+  return {
+    lessionActionsCreators:bindActionCreators(lessionActions, dispatch)
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(AdminAddItemlession)

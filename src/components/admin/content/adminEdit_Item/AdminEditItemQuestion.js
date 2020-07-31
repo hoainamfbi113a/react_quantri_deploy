@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+// import { toastSuccess } from '../../../../helpers/toastHelper';
 import * as questionAction  from "../../../../actions/questionAction";
 class AdminEditItemQuestion extends Component {
   constructor(props) {
@@ -18,6 +19,7 @@ class AdminEditItemQuestion extends Component {
           questionResultC : '',
           questionResultD : '',
           questionResultRight : '',
+          classObject: [],
     }
 }
     componentDidMount() {
@@ -35,6 +37,26 @@ class AdminEditItemQuestion extends Component {
                   questionResultD : this.props.questionUpdate.questionResultD,
                   questionResultRight : this.props.questionUpdate.questionResultRight,
               })
+              axios.get('http://localhost:5000/admin/classsubject/list/')
+              .then(response => {
+                this.setState({classObject:response.data})
+              })
+              .catch(function (error){
+                console.log(error +"loi ne");
+              })
+    }
+    renderClass = () =>{
+      let{classObject}=this.state;
+      console.log(classObject);
+      return ( <select className="form-control"  onChange={this.onChange}  name="questionCategoryId" value={this.state.questionCategoryId} >
+                { classObject.map((item,index)=>{
+                  return (
+                    <option value={item.classSubjectName}>{item.classSubjectName}</option>
+                  )
+                    })
+                  }
+        </select>
+      )
     }
     onChange(e) {
       this.setState({ [e.target.name]: e.target.value })//cập nhật giá trị input
@@ -84,19 +106,7 @@ class AdminEditItemQuestion extends Component {
                             onChange={this.onChangeName} /> */}
 
                 <input type="hidden" className="form-control"  placeholder="text" name="_id" value={this.state._id}/>
-                <select className="form-control"  onChange={this.onChange}  name="questionCategoryId" value={this.state.questionCategoryId} >
-                <option value="Anh văn 1">Anh văn 1</option>
-                  <option value="Anh văn 2">Anh văn 2</option>
-                  <option value="Anh văn 3">Anh văn 3</option>
-                  <option value="Anh văn 4">Anh văn 4</option>
-                  <option value="Anh văn 5">Anh văn 5</option>
-                  <option value="Toán lớp 1">Toán lớp 1</option>
-                  <option value="Toán lớp 2">Toán lớp 2</option>
-                  <option value="Toán lớp 3">Toán lớp 3</option>
-                  <option value="Toán lớp 4">Toán lớp 4</option>
-                  <option value="Toán lớp 5">Toán lớp 5</option>
-                 
-              </select>
+                {this.renderClass()}
                 {/* <input type="text" className="form-control"  placeholder="Loại câu hỏi" onChange={this.onChange} name="questionCategoryId" value={this.state.questionCategoryId}/> */}
               </div>
             </div>

@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
 import {Link}  from 'react-router-dom'
 import Swal from 'sweetalert-react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import 'sweetalert/dist/sweetalert.css';
 import axios from 'axios';
 import Item from '../Items/ItemLession';
-import { withRouter  } from 'react-router'
+// import { withRouter  } from 'react-router'
+import * as lessionActions from '../../../../actions/lessionAction';
 // import Items 
 class AdminContentLession extends Component {
     constructor(props){
@@ -25,33 +28,28 @@ class AdminContentLession extends Component {
       })
     }
     handleDeleteItem = () => {
-      let {idAlert, persons} = this.state;
-      axios.get('http://localhost:5000/admin/question/delete/'+idAlert)
-      .then(()=>{
-        axios.get('http://localhost:5000/admin/question/list')
-        .then(response => {
-            // console.log(response.data);
-            this.setState({persons: response.data});
-        })
-        .catch(function (error) {
-            // console.log(error);
-        })
-      }
-      )
-      .catch(err => console.log(err))
+      let { idAlert, news } = this.state;
+      const { lessionActionCreators } = this.props;
+      const { deletelession } = lessionActionCreators;
+      deletelession(idAlert);
       this.setState({
-          showAlert: false
+        showAlert:false
       });
   }
  
   async componentDidMount(){
-        console.log("xin chao lession")
-     await axios.get('http://localhost:5000/admin/lession/list')
-            .then(response => {
-                this.setState({persons: response.data});
-            })
-            .catch(function (error) {
-            })
+    //     console.log("xin chao lession")
+    //  await axios.get('http://localhost:5000/admin/lession/list')
+    //         .then(response => {
+    //             this.setState({persons: response.data});
+    //         })
+    //         .catch(function (error) {
+    //         })
+      this.timeout = setTimeout(() => {
+      const { lessionActionCreators } = this.props;
+      const { fetchListlession } = lessionActionCreators;
+      fetchListlession();
+      }, 200);
     }
     chosePage = (event) => {
       this.setState({
@@ -69,21 +67,21 @@ class AdminContentLession extends Component {
       })
     }
     render() {
-      let { persons } = this.state;
+      let { lession } = this.props;
       let filterList = this.state.filterlist;
-      persons = persons.filter(function(item) {
-          return item.lessionContentTitle.toLowerCase().search(filterList.toLowerCase()) !== -1;
+      lession = lession.filter(function(item) {
+          return item.lessionContentTitle && item.lessionContentTitle.toLowerCase().search(filterList.toLowerCase()) !== -1;
         });
       const currentPage = this.state.currentPage;
       const newsPerPage = this.state.newsPerPage;
       const indexOfLastNews = currentPage * newsPerPage;
       const indexOfFirstNews = indexOfLastNews - newsPerPage;
-      const currentTodos = persons.slice(indexOfFirstNews, indexOfLastNews);
+      const currentTodos = lession.slice(indexOfFirstNews, indexOfLastNews);
       const renderTodos = currentTodos.map((todo, index) => {
         return <Item stt={index + 1 + (currentPage - 1)*newsPerPage} key={index} item={todo} handleShowAlert={this.handleShowAlert} />;
       });
       const pageNumbers = [];
-      for (let i = 1; i <= Math.ceil(persons.length / newsPerPage); i++) {
+      for (let i = 1; i <= Math.ceil(lession.length / newsPerPage); i++) {
         pageNumbers.push(i);
       }
         return (     
@@ -124,7 +122,9 @@ class AdminContentLession extends Component {
                       <tr>
                         <th>Môn học</th>
                         <th>Tiêu đề</th>
-                        <th>Ảnh</th> 
+                        <th>Ảnh</th>
+                        <th>Sửa bài học</th>
+                        <th>Xóa bài học</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -135,6 +135,8 @@ class AdminContentLession extends Component {
                       <th>Môn học</th>
                       <th>Tiêu đề</th>
                       <th>Ảnh</th>
+                      <th>Sửa bài học</th>
+                      <th>Xóa bài học</th>
                       </tr>
                     </tfoot>
                   </table>
@@ -182,4 +184,16 @@ class AdminContentLession extends Component {
         )
     }
 }
-export default withRouter(AdminContentLession)
+const mapStateToProps = state => {
+  return {
+    lession: state.lessionReducer.listlession,
+  };
+};
+const mapDispatchToProps = dispatch => {
+  return {
+    lessionActionCreators: bindActionCreators(lessionActions, dispatch),
+    // modalActionCreators: bindActionCreators( dispatch),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AdminContentLession);

@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as memberAction  from "../../../../actions/memberAction";
 import './style.css'
+import { toastError, toastSuccess } from '../../../../helpers/toastHelper';
 class AdminAddItemMember extends Component {
     constructor(props) {//khởi tạo giá trị
         super(props)
@@ -13,7 +14,7 @@ class AdminAddItemMember extends Component {
           memberPass:'',
           memberName : '',
           memberDate : '',
-          memberSex : '',
+          memberSex : 'NAM',
           memberAddress : '',
           // memberClassId : 'Toán lớp 1',
           errors: {}
@@ -48,21 +49,22 @@ class AdminAddItemMember extends Component {
         formData.append('memberAddress', memberAddress);
         const {memberActionsCreators} = this.props;
         const { addMember } = memberActionsCreators;
-        addMember(formData);
-        // axios.post('http://localhost:5000/admin/member', formData)
-        //   .then(function (response) {
-        //     alert(response.data+"aaaa")
-        //     if(response.data === 'User already exists')
-        //       alert(response.data);
-        //     else{
-        //     alert("vao anh");
-        //     r.props.history.push('/admin/member')
-        //     }
-        //   })
-        //   .catch(function (error) {
-        //     console.log(error);
-        //   });
+        this.timeout = setTimeout(() => {
+          const { fetchListMember } = memberActionsCreators;
+          fetchListMember();
+         }, 500);
+        let { member } = this.props;
+        let obj = member.find(o => o.memberLogin === memberLogin);
+        if(!obj){
+        // member.memberLogin.index
+          setTimeout(()=>{
+            addMember(formData);
           r.props.history.push('/admin/member');
+          },400)
+        }
+        else{
+          alert("Ten dang nhap da duoc su dung");
+        }
       }
     render() {
         return (
@@ -110,7 +112,7 @@ class AdminAddItemMember extends Component {
               <div className="col-sm-10" style={{marginLeft: '-5%'}}>
               <select className="form-control"  onChange={this.onChange} name="memberSex">
                   <option value="NAM">NAM</option>
-                  <option value="Nữ">NỮ</option>
+                  <option value="NỮ">NỮ</option>
               </select>
                 </div>
             </div>
@@ -148,7 +150,9 @@ class AdminAddItemMember extends Component {
 }
 
 const mapStateToProps = state =>{
-
+  return {
+    member: state.memberReducer.listmember,
+  };
 }
 const mapDispatchToProps = dispatch =>{
   return {

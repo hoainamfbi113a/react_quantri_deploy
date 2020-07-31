@@ -61,7 +61,7 @@ export default function* questionSaga() {
     console.log("add class2")
     console.log(data);
     const { dataresp , status} = resp;
-    if(status === 201) {
+    if(status === 200) {
       yield put(addquestionSuccess(data));
     } else {
       yield put(addquestionFailed(data));

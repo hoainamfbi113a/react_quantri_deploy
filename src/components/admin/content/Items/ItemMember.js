@@ -6,9 +6,9 @@ export default class ItemMember extends Component {
         return (
                 <tr>
                         <td>{item.memberLogin}</td>
-                        <td>{item.memberPass}</td>
                         <td>{item.memberName}</td>
                         <td>{item.memberSex}</td>
+                        <td>{item.memberDate}</td>
                         <td><img width="50px" src={`http://localhost:5000/${item.avatarContentImg}`} alt="not display"></img></td>
                         <td>
                         <Link to={"/admin/member/edit/"+this.props.item._id}>

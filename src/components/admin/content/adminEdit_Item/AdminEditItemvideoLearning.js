@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-
+import axios from 'axios';
 import * as videoLearningAction  from "../../../../actions/videoLearningAction";
+import { toastSuccess } from '../../../../helpers/toastHelper';
 class AdminAddItemvideoLearning extends Component {
   constructor(prop) {
     super(prop)
@@ -13,7 +14,8 @@ class AdminAddItemvideoLearning extends Component {
       videoContentVideo: '',
       videoContentDetail: '',
       selectedFile: '',
-      error: {}
+      error: {},
+      classObject: [],
     }
     this.onChange = this.onChange.bind(this)
     this.onChangeImg = this.onChange.bind(this)
@@ -31,10 +33,27 @@ class AdminAddItemvideoLearning extends Component {
       videoContentTitle: this.props.videoLearningUpdate.videoContentTitle,
       videoContentVideo: this.props.videoLearningUpdate.videoContentVideo,
       videoContentDetail: this.props.videoLearningUpdate.videoContentDetail,
-
-      // contents: this.props.videoLearningUpdate.contents,
-      // timeUpdate: this.props.videoLearningUpdate.timeUpdate,
-  })
+    })
+    axios.get('http://localhost:5000/admin/classsubject/list/')
+      .then(response => {
+      this.setState({classObject:response.data})
+        })
+      .catch(function (error){
+      console.log(error +"loi ne");
+      })
+  }
+  renderClass = () =>{
+    let{classObject}=this.state;
+    console.log(classObject);
+    return ( <select className="form-control"  onChange={this.onChange}  name="videoContentSubjects" value={this.state.videoContentSubjects} >
+              { classObject.map((item,index)=>{
+                return (
+                  <option value={item.classSubjectName}>{item.classSubjectName}</option>
+                )
+                  })
+                }
+      </select>
+    )
   }
   onChange(e) {
     switch (e.target.name) {
@@ -49,14 +68,6 @@ class AdminAddItemvideoLearning extends Component {
     var r = this;
     e.preventDefault();
     const {  videoContentVideo, videoContentTitle,videoContentSubjects,videoContentDetail } = this.state;
-    // const formData = new FormData()
-    // formData.append('_id', this.props.match.params.id);
-    // formData.append('selectedFile', selectedFile);
-    // formData.append('videoContentSubjects', videoContentSubjects);
-    // formData.append('videoContentTitle', videoContentTitle);
-    // formData.append('videoContentVideo', videoContentVideo);
-    // formData.append('videoContentDetail', videoContentDetail);
-    // formData.append('timeUpdate', timeUpdate);
     let formData={
       
     } ;
@@ -71,6 +82,7 @@ class AdminAddItemvideoLearning extends Component {
     const {videoLearningActionsCreators} = this.props;
     const { updatevideoLearning } = videoLearningActionsCreators;
     updatevideoLearning(formData);
+    toastSuccess('Cập nhật video bài học thành công');
     setTimeout(()=>{
       r.props.history.push('/admin/videolearning');
     },100)
@@ -89,7 +101,8 @@ class AdminAddItemvideoLearning extends Component {
               <div className="form-group">
                   <label style={{textAlign: 'left'}} htmlFor="inputPassword3" className="col-sm-2 control-label">Video của lớp </label>
                   <div className="col-sm-10" style={{marginLeft: '-5%'}}>
-                    <input type="text" className="form-control" id="inputPassword3" placeholder="Video của lớp"onChange={this.onChange} name="videoContentSubjects" value={this.state.videoContentSubjects}/>
+                  {this.renderClass()}
+                    {/* <input type="text" className="form-control" id="inputPassword3" placeholder="Video của lớp"onChange={this.onChange} name="videoContentSubjects" value={this.state.videoContentSubjects}/> */}
                   </div>
               </div>
               <div className="form-group">

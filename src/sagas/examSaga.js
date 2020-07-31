@@ -61,7 +61,7 @@ export default function* examSaga() {
     console.log("add class2")
     console.log(data);
     const { dataresp , status} = resp;
-    if(status === 201) {
+    if(status === 200) {
       yield put(addexamSuccess(data));
     } else {
       yield put(addexamFailed(data));

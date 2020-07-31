@@ -45,10 +45,11 @@
   }
   .box-header{
     display: flex;
-    /* justify-content: space-between; */ 
+    justify-content: stretch;
+    display: flex;
+    position: relative;
   }
-  .box-header *{
-    /* padding-right: 100px; */
-    margin-right: 10px;
-    /* justify-content:space-between; */
+  .box-header input{
+    position: absolute;
+    right:10px;
   }

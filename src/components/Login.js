@@ -28,8 +28,6 @@ class Login extends Component {
           this.props.history.push('/admin')
         }
       })
-    //   this.props.history.push('/admin')
-   
   }
   render() {
     return (

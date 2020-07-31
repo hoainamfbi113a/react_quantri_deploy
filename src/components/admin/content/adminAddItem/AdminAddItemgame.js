@@ -3,6 +3,7 @@ import axios from 'axios';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as gameAction  from "../../../../actions/gameAction";
+import { toastError, toastSuccess } from '../../../../helpers/toastHelper';
 class AdminAddItemgame extends Component {
     constructor(props) {//khởi tạo giá trị
         super(props)
@@ -52,6 +53,7 @@ class AdminAddItemgame extends Component {
         const { gameActionsCreators } = this.props;
         const { addgame } = gameActionsCreators;
         addgame(formData);
+        toastSuccess('Thêm item game thành công');
         r.props.history.push('/admin/game');
       }
     render() {
@@ -60,7 +62,7 @@ class AdminAddItemgame extends Component {
              <section className="content">
                  <div className="box box-info">
         <div className="box-header with-border">
-          <h3 className="box-title">Thêm học sinh</h3>
+          <h3 className="box-title">Thêm item game</h3>
         </div>
         {/* /.box-header */}
         {/* form start */}

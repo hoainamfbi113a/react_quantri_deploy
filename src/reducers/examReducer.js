@@ -36,7 +36,7 @@ const examReducer = (state = initialState, action) => {
     }
     case examConstants.ADD_EXAM_SUCCESS:{
       const {data} = action.payload;
-      toastSuccess('Thêm mới tin tức thành công');
+      toastSuccess('Thêm mới bài kiểm thành công');
       setTimeout(()=>{
 
       },100)
@@ -58,7 +58,7 @@ const examReducer = (state = initialState, action) => {
     }
     case examConstants.DELETE_EXAM_SUCCESS: {
       const { data: id } = action.payload; // task id
-      toastSuccess('Xóa tin tuc thành công');
+      toastSuccess('Xóa bài kiểm tra thành công');
       console.log(state.listexam.filter(item => item._id !== id))
       return {
         ...state,
@@ -98,7 +98,7 @@ const examReducer = (state = initialState, action) => {
           data,
           ...listexam.slice(index + 1),
         ];
-        toastSuccess('Cập nhật công việc thành công');
+        toastSuccess('Cập nhật bài kiểm tra thành công');
         return {
           ...state,
           listexam: newList,

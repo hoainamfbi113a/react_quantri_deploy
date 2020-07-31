@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Editor } from '@tinymce/tinymce-react';
 import * as newsAction  from "../../../../actions/newsAction";
+import { toastError, toastSuccess } from '../../../../helpers/toastHelper';
 class AdminAddItemNews extends Component {
   constructor(prop) {
     super(prop)
@@ -48,6 +49,7 @@ class AdminAddItemNews extends Component {
     const {newsActionsCreators} = this.props;
     const { addNew } = newsActionsCreators;
     addNew(formData);
+    toastSuccess('Thêm tin tức thành công');
     r.props.history.push('/admin/news');
   }
   render() {

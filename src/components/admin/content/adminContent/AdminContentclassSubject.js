@@ -7,6 +7,7 @@ import 'sweetalert/dist/sweetalert.css';
 import axios from 'axios';
 import * as classSubjectActions from '../../../../actions/classSubjectAction';
 import ItemclassSubject from '../Items/ItemclassSubject';
+import { toastError, toastSuccess } from '../../../../helpers/toastHelper';
 
 class AdminContentclassSubject extends Component {
   constructor(props) {
@@ -45,16 +46,6 @@ class AdminContentclassSubject extends Component {
     const { fetchListclassSubject } = classSubjectActionCreators;
     fetchListclassSubject();
   }
-  // renderItem = () => {
-  //   let { classSubject } = this.props;
-  //   return (
-  //     classSubject.map((item, index) => {
-  //       return (
-  //         <ItemclassSubject key={item._id} item={item} index={index} handleShowAlert={this.handleShowAlert}></ItemclassSubject>
-  //       )
-  //     })
-  //   )
-  // }
   chosePage = (event) => {
     this.setState({
       currentPage: Number(event.target.id)
