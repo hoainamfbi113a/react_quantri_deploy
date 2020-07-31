@@ -13,7 +13,7 @@ class AdminAddItemExam extends Component {
           // examEasyNumber:'',
           // examMediumNumber : '',
           // examDifficultNumber : '',
-          examTimeMake : '',
+          examTimeMake : '05 phút',
           classId : 'Toán lớp 1',
           examCategoryNumber : 'Toán lớp 1',
           errors: {},
@@ -65,7 +65,6 @@ class AdminAddItemExam extends Component {
         e.preventDefault();
         const { examName, examEasyNumber, examMediumNumber,examDifficultNumber,examCategoryNumber,examTimeMake,classId } = this.state;
         let formData={
-          
         } ;
         formData.examDifficultNumber=examDifficultNumber;
         formData.examMediumNumber= examMediumNumber;
@@ -77,7 +76,7 @@ class AdminAddItemExam extends Component {
         const {examActionsCreators} = this.props;
         const { addexam } = examActionsCreators;
         addexam(formData);
-        // toastSuccess('Thêm bài kiểm tra thành công');
+        toastSuccess('Thêm bài kiểm tra thành công');
         setTimeout(()=>{
           r.props.history.push('/admin/exam');
         },500)
@@ -113,7 +112,7 @@ class AdminAddItemExam extends Component {
               <label style={{textAlign: 'left'}} htmlFor="inputEmail3" className="col-sm-2 control-label">Thời gian làm bài</label>
               <div className="col-sm-10" style={{marginLeft: '-5%'}}>
               <select className="form-control"  onChange={this.onChange}  name="examTimeMake" >
-                  <option value="5 phút">05 phút</option>
+                  <option value="05 phút">05 phút</option>
                   <option value="10 phút">10 phút</option>
                   <option value="15 phút">20 phút</option>
               </select>
