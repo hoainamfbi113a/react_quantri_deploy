@@ -86,9 +86,9 @@ class AdminContentgame extends Component {
                 <div className="box-header">
                   <Link to="game/add"><button type="submit" className="btn btn-primary"><i className="fa fa-fw fa-home" />Thêm cau hoi tro choi</button></Link>
                   {/* <Link to="game/generate"> */}
-                    <button onClick={()=>{
+                    {/* <button onClick={()=>{
                       this.handleGenerate()
-                    }} className="btn btn-primary"><i className="fa fa-fw fa-home" />Generate câu hỏi trò chơi</button>
+                    }} className="btn btn-primary"><i className="fa fa-fw fa-home" />Generate câu hỏi trò chơi</button> */}
                     {/* </Link> */}
                     <div className="news-per-page" style={{marginTop: '10px'}}>
                     <select defaultValue="0" onChange={this.select} >

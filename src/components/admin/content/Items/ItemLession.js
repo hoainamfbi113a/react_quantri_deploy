@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {Link}  from 'react-router-dom'
+import parse from 'html-react-parser';
 export default class ItemLession extends Component {
     render() {
         let {item,index} = this.props;
@@ -8,6 +9,8 @@ export default class ItemLession extends Component {
                         <td>{item.lessionContentSubjects}</td>
                         <td>{item.lessionContentTitle}</td>
                         <td><img width="50px" src={`http://localhost:5000/${item.lessionContentImg}`} alt="not display"></img></td>
+                        {/* <i>{parse(`${item.lessionContentDetail}`)}</i> */}
+                        {/* <i>{parse(`${item.lessionContentDetail}`) && item.lessionContentDetail }</i> */}
                         <td>
                         {/* <Link to={"/admin/news/edit/"+this.props.item._id}> */}
                         <Link to={`/admin/lession/edit/${item._id}`}>

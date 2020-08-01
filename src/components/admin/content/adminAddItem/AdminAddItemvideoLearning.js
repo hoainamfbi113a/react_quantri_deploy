@@ -123,7 +123,7 @@ class AdminAddItemvideoLearning extends Component {
   }
 }
 const mapStateToProps = state =>{
-
+  return {}
 }
 const mapDispatchToProps = dispatch =>{
   return {

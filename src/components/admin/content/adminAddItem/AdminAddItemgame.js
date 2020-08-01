@@ -69,32 +69,32 @@ class AdminAddItemgame extends Component {
         <form className="form-horizontal" noValidate onSubmit={this.onSubmit}>
           <div className="box-body">
           <div className="form-group">
-              <label style={{textAlign: 'left'}} htmlFor="inputEmail3" className="col-sm-2 control-label">Loại câu hỏi cua game</label>
+              <label style={{textAlign: 'left'}} htmlFor="inputEmail3" className="col-sm-2 control-label">Loại câu hỏi </label>
               <div className="col-sm-10" style={{marginLeft: '-5%'}}>
               <select className="form-control"  onChange={this.onChange}  name="categoryvocabulary">
-                  <option value="con người">con người</option>
-                  <option value="thiên nhiên">thiên nhiên</option>
-                  <option value="hoa quả">hoa quả</option>
+                  <option value="con người">Con người</option>
+                  <option value="thiên nhiên">Thiên nhiên</option>
+                  <option value="hoa quả">Hoa quả</option>
               </select>
                 {/* <input type="text" className="form-control"  placeholder="Số câu trung bình" onChange={this.onChange} name="examMediumNumber" value={this.state.examMediumNumber}/> */}
               </div>
             </div>
             <div className="form-group">
-              <label style={{textAlign: 'left'}} htmlFor="inputEmail3" className="col-sm-2 control-label">vocabularygame</label>
+              <label style={{textAlign: 'left'}} htmlFor="inputEmail3" className="col-sm-2 control-label">Từ vựng</label>
               <div className="col-sm-10" style={{marginLeft: '-5%'}} >
                 <input type="hidden" className="form-control"  placeholder="text" onChange={this.onChange} name="_id" value={this.state._id}/>
                 <input type="email" className="form-control"  placeholder="vocabularygame" onChange={this.onChange} name="vocabularygame" value={this.state.vocabularygame}/>
               </div>
             </div>
             <div className="form-group">
-              <label style={{textAlign: 'left'}} htmlFor="inputEmail3" className="col-sm-2 control-label">spellingvocabulary</label>
+              <label style={{textAlign: 'left'}} htmlFor="inputEmail3" className="col-sm-2 control-label">Phiên âm</label>
               <div className="col-sm-10" style={{marginLeft: '-5%'}}>
            
                 <input type="text" className="form-control"  placeholder="spellingvocabulary" onChange={this.onChange} name="spellingvocabulary" value={this.state.spellingvocabulary}/>
               </div>
             </div>
             <div className="form-group">
-              <label style={{textAlign: 'left'}} htmlFor="inputEmail3" className="col-sm-2 control-label">Img1</label>
+              <label style={{textAlign: 'left'}} htmlFor="inputEmail3" className="col-sm-2 control-label">Ảnh 1</label>
               <div className="col-sm-10" style={{marginLeft: '-5%'}}>
               <input
                   type="file"
@@ -104,14 +104,14 @@ class AdminAddItemgame extends Component {
                </div>
             </div>
             <div className="form-group">
-              <label style={{textAlign: 'left'}} htmlFor="inputEmail3" className="col-sm-2 control-label">meaningA</label>
+              <label style={{textAlign: 'left'}} htmlFor="inputEmail3" className="col-sm-2 control-label">Nghĩa từ ảnh 1</label>
               <div className="col-sm-10" style={{marginLeft: '-5%'}}>
            
                 <input type="text" className="form-control"  placeholder="meaningA" onChange={this.onChange} name="meaningA" value={this.state.meaningA}/>
               </div>
             </div>
             <div className="form-group">
-              <label style={{textAlign: 'left'}} htmlFor="inputEmail3" className="col-sm-2 control-label">Img2</label>
+              <label style={{textAlign: 'left'}} htmlFor="inputEmail3" className="col-sm-2 control-label">Ảnh 2</label>
               <div className="col-sm-10" style={{marginLeft: '-5%'}}>
               <input
                   type="file"
@@ -121,14 +121,14 @@ class AdminAddItemgame extends Component {
                </div>
             </div>
             <div className="form-group">
-              <label style={{textAlign: 'left'}} htmlFor="inputEmail3" className="col-sm-2 control-label">meaningB</label>
+              <label style={{textAlign: 'left'}} htmlFor="inputEmail3" className="col-sm-2 control-label">Nghĩa từ ảnh 2</label>
               <div className="col-sm-10" style={{marginLeft: '-5%'}}>
            
                 <input type="text" className="form-control"  placeholder="meaningB" onChange={this.onChange} name="meaningB" value={this.state.meaningB}/>
               </div>
             </div>
             <div className="form-group">
-              <label style={{textAlign: 'left'}} htmlFor="inputEmail3" className="col-sm-2 control-label">Img3</label>
+              <label style={{textAlign: 'left'}} htmlFor="inputEmail3" className="col-sm-2 control-label">Ảnh 3</label>
               <div className="col-sm-10" style={{marginLeft: '-5%'}}>
               <input
                   type="file"
@@ -138,7 +138,7 @@ class AdminAddItemgame extends Component {
                </div>
             </div>
             <div className="form-group">
-              <label style={{textAlign: 'left'}} htmlFor="inputEmail3" className="col-sm-2 control-label">meaningC</label>
+              <label style={{textAlign: 'left'}} htmlFor="inputEmail3" className="col-sm-2 control-label">Nghĩa từ ảnh 3</label>
               <div className="col-sm-10" style={{marginLeft: '-5%'}}>
            
                 <input type="text" className="form-control"  placeholder="meaningC" onChange={this.onChange} name="meaningC" value={this.state.meaningC}/>
@@ -157,10 +157,10 @@ class AdminAddItemgame extends Component {
         )
     }
 }
-
 const mapStateToProps = state =>{
-
+  return {}
 }
+
 const mapDispatchToProps = dispatch =>{
   return {
     gameActionsCreators:bindActionCreators(gameAction, dispatch)

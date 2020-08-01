@@ -14,7 +14,7 @@ export default class ItemNews extends Component {
                         <td>{parse(`${item.contents}`)}</td>
                         {/* <td>{item.timeUpdate}</td> */}
                         <td>
-                        {/* <Link to={"/admin/news/edit/"+this.props.item._id}> */}
+                        
                         <Link to={`/admin/news/edit/${item._id}`}>
                         <button type="button" className="btn btn-social-icon btn-bitbucket" >
                         <i className="fa fa-edit" />

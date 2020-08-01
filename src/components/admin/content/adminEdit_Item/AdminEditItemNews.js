@@ -63,7 +63,7 @@ class AdminAddItemNews extends Component {
     const {newsActionsCreators} = this.props;
     const { updateNew } = newsActionsCreators;
     updateNew(formData);
-    toastSuccess('Cập nhật tin tức thành công');
+    // toastSuccess('Cập nhật tin tức thành công');
     r.props.history.push('/admin/news');
   }
   render() {
@@ -116,7 +116,7 @@ class AdminAddItemNews extends Component {
                       height: 500,
                         menubar: false,
                         plugins: [
-                        'advlist autolink lists link image charmap print preview anchor',
+                        // 'advlist autolink lists link image charmap print preview anchor',
                         'searchreplace visualblocks code fullscreen',
                         'insertdatetime media table paste code help wordcount'
                           ],
@@ -137,7 +137,7 @@ class AdminAddItemNews extends Component {
                 </div> */}
               </div>
               <div className="box-footer" style={{ paddingRight: '69px' }}>
-                <button type="submit" className="btn btn-info pull-right">Sua</button>
+                <button type="submit" className="btn btn-info pull-right">Sửa</button>
               </div>
             </form>
           </div>

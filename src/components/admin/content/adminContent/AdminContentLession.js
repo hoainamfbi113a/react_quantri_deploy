@@ -6,9 +6,7 @@ import { bindActionCreators } from 'redux';
 import 'sweetalert/dist/sweetalert.css';
 import axios from 'axios';
 import Item from '../Items/ItemLession';
-// import { withRouter  } from 'react-router'
 import * as lessionActions from '../../../../actions/lessionAction';
-// import Items 
 class AdminContentLession extends Component {
     constructor(props){
       super(props)
@@ -17,7 +15,8 @@ class AdminContentLession extends Component {
         idAlert:"",
         persons:[],
         currentPage: 1,
-        newsPerPage: 7,filterlist:"",
+        newsPerPage: 7,
+        filterlist:"",
       }
     }
     handleShowAlert = (item) =>{
@@ -38,13 +37,6 @@ class AdminContentLession extends Component {
   }
  
   async componentDidMount(){
-    //     console.log("xin chao lession")
-    //  await axios.get('http://localhost:5000/admin/lession/list')
-    //         .then(response => {
-    //             this.setState({persons: response.data});
-    //         })
-    //         .catch(function (error) {
-    //         })
       this.timeout = setTimeout(() => {
       const { lessionActionCreators } = this.props;
       const { fetchListlession } = lessionActionCreators;
@@ -90,17 +82,7 @@ class AdminContentLession extends Component {
           <div className="row">
             <div className="col-xs-12">
               <div className="box">
-                {/* <div className="box-header">
-                <Link to="lession/add"><button type="submit" className="btn btn-primary"><i className="fa fa-fw fa-home" />Thêm bài học</button></Link>
-                <div className="news-per-page" style={{marginTop: '10px'}}>
-                    <select defaultValue="0" onChange={this.select} >
-                      <option value="0" disabled>Get by</option>
-                      <option value="5">5</option>
-                      <option value="10">10</option>
-                      <option value="20">20</option>
-                    </select>
-                  </div>
-               </div> */}
+    
                 <div className="box-header">
                   <div >
                   <Link to="lession/add"><button type="submit" className="btn btn-primary"><i className="fa fa-fw fa-home" />Thêm bài học</button></Link>
@@ -109,7 +91,7 @@ class AdminContentLession extends Component {
                             <option value="0" disabled>Get by</option>
                             <option value="5">5</option>
                             <option value="10">10</option>
-                            <option value="202">20</option>
+                            <option value="20">20</option>
                           </select>
                         </div>
                       </div>
@@ -123,6 +105,7 @@ class AdminContentLession extends Component {
                         <th>Môn học</th>
                         <th>Tiêu đề</th>
                         <th>Ảnh</th>
+                        {/* <th>Nội dung bài học</th> */}
                         <th>Sửa bài học</th>
                         <th>Xóa bài học</th>
                       </tr>
@@ -135,6 +118,7 @@ class AdminContentLession extends Component {
                       <th>Môn học</th>
                       <th>Tiêu đề</th>
                       <th>Ảnh</th>
+                      {/* <th>Nội dung bài học</th> */}
                       <th>Sửa bài học</th>
                       <th>Xóa bài học</th>
                       </tr>

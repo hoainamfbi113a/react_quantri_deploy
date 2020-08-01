@@ -113,23 +113,22 @@ class AdminAddItemlession extends Component {
             <div className="form-group">
               <label style={{textAlign: 'left'}} htmlFor="inputPassword3" className="col-sm-2 control-label">Noi dung bai hoc</label>
               <div className="col-sm-10" style={{marginLeft: '-5%'}}>
-            
               <Editor
-              name="lessionContentDetail"
-                init={{
-                 height: 500,
-                  menubar: false,
-                   plugins: [
-                   'advlist autolink lists link image charmap print preview anchor',
-                   'searchreplace visualblocks code fullscreen',
-                   'insertdatetime media table paste code help wordcount'
-                     ],
-                   toolbar:
-                   'undo redo | formatselect | bold italic backcolor | \
-                    alignleft aligncenter alignright alignjustify | \
-                      bullist numlist outdent indent | removeformat | help'
-         }}
-                      onEditorChange={this.handleEditorChange}
+                    name="lessionContentDetail"
+                      init={{
+                      height: 500,
+                        menubar: false,
+                        plugins: [
+                        // 'advlist autolink lists link image charmap print preview anchor',
+                        'searchreplace visualblocks code fullscreen',
+                        'insertdatetime media table paste code help wordcount'
+                          ],
+                        toolbar:
+                        'undo redo | formatselect | bold italic backcolor | \
+                          alignleft aligncenter alignright alignjustify | \
+                            bullist numlist outdent indent | removeformat | help'
+              }}
+                            onEditorChange={this.handleEditorChange}
              />
                 </div>
             </div>
@@ -149,7 +148,7 @@ class AdminAddItemlession extends Component {
     }
 }
 const mapStateToProps = state =>{
-
+  return {}
 }
 const mapDispatchToProps = dispatch =>{
   return {

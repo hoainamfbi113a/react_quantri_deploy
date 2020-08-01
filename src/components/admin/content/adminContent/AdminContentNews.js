@@ -110,17 +110,6 @@ class AdminContentNews extends Component {
           <div className="row">
             <div className="col-xs-12">
               <div className="box">
-                {/* <div className="box-header">
-                  <Link to="news/add"><button type="submit" className="btn btn-primary"><i className="fa fa-fw fa-home" />Thêm tin tức</button></Link>
-                  <div className="news-per-page" style={{marginTop: '10px'}}>
-                    <select defaultValue="0" onChange={this.select} >
-                      <option value="0" disabled>Get by</option>
-                      <option value="5">5</option>
-                      <option value="10">10</option>
-                      <option value="20">20</option>
-                    </select>
-                  </div>
-                </div> */}
                  <div className="box-header">
                   <div >
                   <Link to="news/add"><button type="submit" className="btn btn-primary"><i className="fa fa-fw fa-home" />Thêm tin tức</button></Link>
@@ -129,7 +118,7 @@ class AdminContentNews extends Component {
                             <option value="0" disabled>Get by</option>
                             <option value="5">5</option>
                             <option value="10">10</option>
-                            <option value="202">20</option>
+                            <option value="20">20</option>
                           </select>
                         </div>
                       </div>
