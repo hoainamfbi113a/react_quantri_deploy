@@ -43,7 +43,6 @@ class AdminAddItemlession extends Component {
     const {lessionActionsCreators} = this.props;
     const { setlessionEditing } = lessionActionsCreators;
     setlessionEditing(this.props.match.params.id);
-    // console.log(this.props.lessionUpdate.lessionContentTitle);
     this.setState({
       _id: this.props.lessionUpdate._id,
       lessionContentSubjects: this.props.lessionUpdate.lessionContentSubjects,
@@ -85,8 +84,10 @@ renderClass = () =>{
     const {lessionActionsCreators} = this.props;
     const { updatelession } = lessionActionsCreators;
     updatelession(formData);
-    // toastSuccess('Cập nhật tin tức thành công');
-    r.props.history.push('/admin/lession');
+    setTimeout(()=>{
+      r.props.history.push('/admin/lession');
+    },200)
+    
   }
   render() {
     return (
@@ -122,7 +123,7 @@ renderClass = () =>{
               </div>
             </div>
             <div className="form-group">
-              <label style={{textAlign: 'left'}} htmlFor="inputPassword3" className="col-sm-2 control-label">Noi dung bai hoc</label>
+              <label style={{textAlign: 'left'}} htmlFor="inputPassword3" className="col-sm-2 control-label">Nội dung bài học</label>
               <div className="col-sm-10" style={{marginLeft: '-5%'}}>
             
               <Editor
@@ -150,7 +151,7 @@ renderClass = () =>{
           </div>
           <div className="box-footer" style={{paddingRight: '69px'}}>
             
-            <button type="submit" className="btn btn-info pull-right">Thêm</button>
+            <button type="submit" className="btn btn-info pull-right">Sữa nội dung bài học</button>
           </div>
         </form>
           </div>

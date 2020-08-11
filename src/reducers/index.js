@@ -8,6 +8,7 @@ import questionReducer from "./questionReducer";
 import examReducer from "./examReducer";
 import gameReducer from "./gameReducer";
 import lessionReducer from "./lessionReducer";
+import forumReducer from "./forumReducer";
 const rootReducer = combineReducers({
     ui:uiReducer,
     newReducer:newReducer,
@@ -18,5 +19,6 @@ const rootReducer = combineReducers({
     examReducer:examReducer,
     gameReducer:gameReducer,
     lessionReducer:lessionReducer,
+    forumReducer:forumReducer,
 })
 export default rootReducer;

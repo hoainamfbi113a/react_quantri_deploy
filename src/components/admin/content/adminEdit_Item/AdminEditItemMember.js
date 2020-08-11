@@ -18,7 +18,7 @@ export default class AdminEditItem extends Component {
       memberClassId : '',
       
     }
-}
+  }
     componentDidMount() {
       axios.get('http://localhost:5000/admin/member/'+this.props.match.params.id)
           .then(response => {
@@ -81,12 +81,6 @@ export default class AdminEditItem extends Component {
                 <input type="text" className="form-control"  placeholder="Tên đăng nhập" onChange={this.onChange} name="memberLogin" value={this.state.memberLogin}/>
               </div>
             </div>
-            {/* <div className="form-group">
-              <label style={{textAlign: 'left'}} htmlFor="inputPassword3" className="col-sm-2 control-label">Mật khẩu</label>
-              <div className="col-sm-10" style={{marginLeft: '-5%'}}>
-                <input readOnly type="text" className="form-control" id="inputPassword3" placeholder="Mật khẩu"onChange={this.onChange} name="memberPass" value={this.state.memberPass}/>
-              </div>
-            </div> */}
             <div className="form-group">
               <label style={{textAlign: 'left'}} htmlFor="inputEmail3" className="col-sm-2 control-label">Họ và tên</label>
               <div className="col-sm-10" style={{marginLeft: '-5%'}}>
@@ -107,7 +101,6 @@ export default class AdminEditItem extends Component {
                   <option value="NAM">NAM</option>
                   <option value="NỮ">NỮ</option>
               </select>
-                {/* <input type="text" className="form-control"  placeholder="Giới tính" onChange={this.onChange} name="memberSex" value={this.state.memberSex}/> */}
               </div>
             </div>
             <div className="form-group">
@@ -136,12 +129,11 @@ export default class AdminEditItem extends Component {
                   <option value="Toán lớp 3">Toán lớp 3</option>
                   <option value="Toán lớp 4">Toán lớp 4</option>
                   <option value="Toán lớp 5">Toán lớp 5</option>
-                  
               </select> */}
                </div>
             </div>
           </div>
-          {/* /.box-body */}
+          
           <div className="box-footer" style={{paddingRight: '69px'}}>
             
             <button type="submit" className="btn btn-info pull-right">Sửa</button>

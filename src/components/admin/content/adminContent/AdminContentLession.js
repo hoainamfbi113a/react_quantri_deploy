@@ -27,7 +27,7 @@ class AdminContentLession extends Component {
       })
     }
     handleDeleteItem = () => {
-      let { idAlert, news } = this.state;
+      let { idAlert } = this.state;
       const { lessionActionCreators } = this.props;
       const { deletelession } = lessionActionCreators;
       deletelession(idAlert);
@@ -97,7 +97,7 @@ class AdminContentLession extends Component {
                       </div>
                   <input style={{height: '36px'}} type="text" placeholder="Search" onChange={this.filterList}/>
                 </div>
-                {/* /.box-header */}
+               
                 <div className="box-body">
                   <table id="example2" className="table table-bordered table-hover">
                     <thead>
@@ -105,7 +105,7 @@ class AdminContentLession extends Component {
                         <th>Môn học</th>
                         <th>Tiêu đề</th>
                         <th>Ảnh</th>
-                        {/* <th>Nội dung bài học</th> */}
+                       
                         <th>Sửa bài học</th>
                         <th>Xóa bài học</th>
                       </tr>
@@ -118,7 +118,7 @@ class AdminContentLession extends Component {
                       <th>Môn học</th>
                       <th>Tiêu đề</th>
                       <th>Ảnh</th>
-                      {/* <th>Nội dung bài học</th> */}
+                    
                       <th>Sửa bài học</th>
                       <th>Xóa bài học</th>
                       </tr>
@@ -176,7 +176,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     lessionActionCreators: bindActionCreators(lessionActions, dispatch),
-    // modalActionCreators: bindActionCreators( dispatch),
   };
 };
 

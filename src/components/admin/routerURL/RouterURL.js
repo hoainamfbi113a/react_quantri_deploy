@@ -11,6 +11,7 @@ import AdminEditItemQuestion from '../content/adminEdit_Item/AdminEditItemQuesti
 
 import AdminContentExam from '../content/adminContent/AdminContentExam'
 import AdminAddItemExam from '../content/adminAddItem/AdminAddItemExam'
+import AdminAddItemExamExcel from '../content/adminAddItem/AdminAddItemExamExcel'
 import AdminEditItemExam from '../content/adminEdit_Item/AdminEditItemExam'
 import AdminEditItemNews from '../content/adminEdit_Item/AdminEditItemNews'
 
@@ -34,6 +35,7 @@ import AdminContentclassSubject from '../content/adminContent/AdminContentclassS
 import AdminContentgame from '../content/adminContent/AdminContentgame'
 import AdminAddItemgame from '../content/adminAddItem/AdminAddItemgame'
 
+import AdminContentforum from '../content/adminContent/AdminContentforum'
 export default class RouterURL extends Component {
     
     render() {
@@ -48,6 +50,7 @@ export default class RouterURL extends Component {
              <Route exact path="/admin/question/edit/:id" component = {AdminEditItemQuestion}></Route>
              <Route exact path="/admin/exam" component = {AdminContentExam}></Route>
              <Route exact path="/admin/exam/add" component = {AdminAddItemExam}></Route>
+             <Route exact path="/admin/exam/addexcel" component = {AdminAddItemExamExcel}></Route>
              <Route exact path="/admin/exam/edit/:id" component = {AdminEditItemExam}></Route>
              <Route exact path="/admin/result" component = {AdminContentResult}></Route>
              <Route exact path="/admin/news" component = {AdminContentNews}></Route>
@@ -64,6 +67,7 @@ export default class RouterURL extends Component {
              <Route exact path="/admin/classSubject/edit/:id" component = {AdminEditItemclassSubject}></Route>
              <Route exact path="/admin/game" component = {AdminContentgame}></Route>
              <Route exact path="/admin/game/add" component = {AdminAddItemgame}></Route>
+             <Route exact path="/admin/forum" component = {AdminContentforum}></Route>
             </div>
         )
     }

@@ -43,17 +43,6 @@ class AdminContentExam extends Component {
       const { fetchListexam } = examActionCreators;
       fetchListexam();
     }
-    // renderItem = () =>{
-      
-    //   let { exam } = this.props;
-    // return (
-    //   exam.map((item, index) => {
-    //     return (
-    //       <Item key={item._id} item={item} index={index} handleShowAlert={this.handleShowAlert}></Item>
-    //     )
-    //   })
-    // )
-    // }
     chosePage = (event) => {
       this.setState({
         currentPage: Number(event.target.id)
@@ -69,6 +58,26 @@ class AdminContentExam extends Component {
         filterlist: event.target.value
       })
     }
+    onChangefile = (e) =>{
+      // alert("change file")
+      switch (e.target.name) {
+        case 'file':
+          this.setState({ file: e.target.files[0] });
+          break;
+        default:
+          this.setState({ [e.target.name]: e.target.value });
+      }
+    }
+    onSubmit =(e) => {
+      e.preventDefault();
+      const {file } = this.state;
+        const formData = new FormData()
+        formData.append('file', file);
+        axios.post('http://localhost:5000/admin/exam/excel', formData)
+        .then(res => console.log(res.data));
+        alert("Cập nhật thành công")
+        // this.props.history.push('/');
+  }
     render() {
       let { exam } = this.props;
       let filterList = this.state.filterlist;
@@ -93,20 +102,10 @@ class AdminContentExam extends Component {
           <div className="row">
             <div className="col-xs-12">
               <div className="box">
-                {/* <div className="box-header">
-                <Link to="exam/add"><button type="submit" className="btn btn-primary"><i className="fa fa-fw fa-home" />Thêm đề thi</button></Link>
-                <div className="news-per-page" style={{marginTop: '10px'}}>
-                    <select defaultValue="0" onChange={this.select} >
-                      <option value="0" disabled>Get by</option>
-                      <option value="5">5</option>
-                      <option value="10">10</option>
-                      <option value="20">20</option>
-                    </select>
-                  </div>
-                </div> */}
                   <div className="box-header">
                   <div >
-                  <Link to="exam/add"><button type="submit" className="btn btn-primary"><i className="fa fa-fw fa-home" />Thêm đề thi</button></Link>
+                  <Link to="exam/add"><button  type="submit" className="btn btn-primary"><i className="fa fa-fw fa-home" />Thêm đề thi</button></Link>
+                  <Link to="exam/addexcel"><button style={{marginLeft: '15px'}} type="submit" className="btn btn-primary"><i className="fa fa-fw fa-home" />Thêm đề thi(Excel)</button></Link>
                       <div className="news-per-page" style={{marginTop: '10px'}}>
                           <select defaultValue="0" onChange={this.select} >
                             <option value="0" disabled>Get by</option>
@@ -118,6 +117,7 @@ class AdminContentExam extends Component {
                       </div>
                   <input style={{height: '36px'}} type="text" placeholder="Search" onChange={this.filterList}/>
                 </div>
+                
                 {/* /.box-header */}
                 <div className="box-body">
                   <table id="example2" className="table table-bordered table-hover">

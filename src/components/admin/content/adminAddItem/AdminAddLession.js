@@ -10,7 +10,7 @@ class AdminAddItemlession extends Component {
         super(props)
         this.state = {
           _id:'',
-          lessionContentSubjects:"Anh văn 1",
+          lessionContentSubjects:"Toán lớp 1",
           lessionContentTitle:"",
           lessionContentImg:"",
           lessionContentDetail:"",
@@ -51,7 +51,7 @@ class AdminAddItemlession extends Component {
       renderClass = () =>{
         let{classObject}=this.state;
         // console.log(classObject);
-        return ( <select className="form-control"  onChange={this.onChange}  name="questionCategoryId" >
+        return ( <select className="form-control"  onChange={this.onChange}  name="lessionContentSubjects" >
                   { classObject.map((item,index)=>{
                     return (
                       <option value={item.classSubjectName}>{item.classSubjectName}</option>
@@ -75,7 +75,9 @@ class AdminAddItemlession extends Component {
         addlession(formData);
         toastSuccess('Thêm nội dung bài học thành công');
         // r.props.history.push('/admin/news');
-        r.props.history.push('/admin/lession')
+        setTimeout (()=>{
+          r.props.history.push('/admin/lession')
+        },220)
       }
     render() {
         return (
@@ -97,7 +99,7 @@ class AdminAddItemlession extends Component {
             <div className="form-group">
               <label style={{textAlign: 'left'}} htmlFor="inputEmail3" className="col-sm-2 control-label">Tiêu đề</label>
               <div className="col-sm-10" style={{marginLeft: '-5%'}}>
-                <input type="text" className="form-control"  placeholder="Tieu de" onChange={this.onChange} name="lessionContentTitle" value={this.state.lessionContentTitle}/>
+                <input type="text" className="form-control"  placeholder="Tiêu đề" onChange={this.onChange} name="lessionContentTitle" value={this.state.lessionContentTitle}/>
               </div>
             </div>
             <div className="form-group">
@@ -111,7 +113,7 @@ class AdminAddItemlession extends Component {
               </div>
             </div>
             <div className="form-group">
-              <label style={{textAlign: 'left'}} htmlFor="inputPassword3" className="col-sm-2 control-label">Noi dung bai hoc</label>
+              <label style={{textAlign: 'left'}} htmlFor="inputPassword3" className="col-sm-2 control-label">Nội dung bài học</label>
               <div className="col-sm-10" style={{marginLeft: '-5%'}}>
               <Editor
                     name="lessionContentDetail"
@@ -136,7 +138,7 @@ class AdminAddItemlession extends Component {
           </div>
           <div className="box-footer" style={{paddingRight: '69px'}}>
             
-            <button type="submit" className="btn btn-info pull-right">Thêm</button>
+            <button type="submit" className="btn btn-info pull-right">Thêm bài học</button>
           </div>
         </form>
       </div>

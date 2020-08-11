@@ -6,16 +6,20 @@ const url = 'admin/exam/list';
 
 export const getList = (params = {}) => {
   let queryParams = '';
-  //   if (Object.keys(params).length > 0) {
-  //     queryParams = `?${qs.stringify(params)}`;
-  //   }
+  // alert("service");
   return axiosService.get(`${API_ENDPOINT}/${url}${queryParams}`);
 };
 export const deleteexam = (examID) => {
   return axiosService.get(`${API_ENDPOINT}/admin/exam/delete/${examID}`)
 }
 export const addexam = (data) => {
-  return axiosService.post(`${API_ENDPOINT}/admin/exam`, data)
+  if(data.examCategoryNumber){
+    alert("xin chao");
+    return axiosService.post(`${API_ENDPOINT}/admin/exam`, data)
+  } else{
+    return axiosService.post(`${API_ENDPOINT}/admin/exam/excel`, data)
+  }
+    
 }
 export const setexam = (data) => {
   return axiosService.get(`${API_ENDPOINT}/admin/exam/${data}`);

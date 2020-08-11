@@ -5,22 +5,19 @@ import { Link } from 'react-router-dom'
 import Swal from 'sweetalert-react';
 import 'sweetalert/dist/sweetalert.css';
 import axios from 'axios';
-import * as classSubjectActions from '../../../../actions/classSubjectAction';
-import ItemclassSubject from '../Items/ItemclassSubject';
-import { toastError, toastSuccess } from '../../../../helpers/toastHelper';
+import * as forumActions from '../../../../actions/forumAction';
+import Itemforum from '../Items/Itemforum';
 
-class AdminContentclassSubject extends Component {
+class AdminContentforum extends Component {
   constructor(props) {
     super(props)
     this.state = {
       showAlert: false,
-      classSubject: [],
+      forum: [],
       deleteItem: "",
       idAlert:"",
       currentPage: 1,
-      newsPerPage: 7,
-      filterlist:"",
-      
+      newsPerPage: 7
     }
   }
   handleShowAlert = (item) => {
@@ -29,50 +26,48 @@ class AdminContentclassSubject extends Component {
       titleAlert: item.name,
       idAlert: item._id,
       deleteItem: item.title
-
     })
   }
   handleDeleteItem = async() => {
-    let { idAlert, classSubject } = this.state;
-    const { classSubjectActionCreators } = this.props;
-    const { deleteclassSubject } = classSubjectActionCreators;
-    deleteclassSubject(idAlert);
+    let { idAlert, forum } = this.state;
+    const { forumActionCreators } = this.props;
+    const { deleteforum } = forumActionCreators;
+    deleteforum(idAlert);
     this.setState({
       showAlert:false
     });
   }
   componentDidMount = () => {
-    const { classSubjectActionCreators } = this.props;
-    const { fetchListclassSubject } = classSubjectActionCreators;
-    fetchListclassSubject();
+    
+    setTimeout(()=>{
+      const { forumActionCreators } = this.props;
+      const { fetchListforum } = forumActionCreators;
+      fetchListforum();
+    },150)
+    
   }
   chosePage = (event) => {
     this.setState({
       currentPage: Number(event.target.id)
     });
   }
-  filterList = (event) => {
+  select = (event) => {
     this.setState({
-      filterlist: event.target.value
+      newsPerPage: event.target.value
     })
   }
   render() {
-    let { classSubject } = this.props;
-    let filterList = this.state.filterlist;
-    classSubject = classSubject.filter(function(item) {
-        return item.classSubjectName && item.classSubjectName.toLowerCase().search(filterList.toLowerCase()) !== -1;
-      });
-    
+    let { forum } = this.props;
     const currentPage = this.state.currentPage;
     const newsPerPage = this.state.newsPerPage;
     const indexOfLastNews = currentPage * newsPerPage;
     const indexOfFirstNews = indexOfLastNews - newsPerPage;
-    const currentTodos = classSubject.slice(indexOfFirstNews, indexOfLastNews);
+    const currentTodos = forum.slice(indexOfFirstNews, indexOfLastNews);
     const renderTodos = currentTodos.map((todo, index) => {
-      return <ItemclassSubject stt={index + 1 + (currentPage - 1)*newsPerPage} key={index} item={todo} handleShowAlert={this.handleShowAlert} />;
+      return <Itemforum stt={index + 1 + (currentPage - 1)*newsPerPage} key={index} item={todo} handleShowAlert={this.handleShowAlert} />;
     });
     const pageNumbers = [];
-    for (let i = 1; i <= Math.ceil(classSubject.length / newsPerPage); i++) {
+    for (let i = 1; i <= Math.ceil(forum.length / newsPerPage); i++) {
       pageNumbers.push(i);
     }
     return (
@@ -81,43 +76,39 @@ class AdminContentclassSubject extends Component {
           <div className="row">
             <div className="col-xs-12">
               <div className="box">
-              <div className="box-header">
-                  <div >
-                  <Link to="classSubject/add"><button type="submit" className="btn btn-primary"><i className="fa fa-fw fa-home" />Thêm lớp môn học</button></Link>
-                      <div className="news-per-page" style={{marginTop: '10px'}}>
-                          <select defaultValue="0" onChange={this.select} >
-                            <option value="0" disabled>Get by</option>
-                            <option value="5">5</option>
-                            <option value="10">10</option>
-                            <option value="202">20</option>
-                          </select>
-                        </div>
-                      </div>
-                  <input style={{height: '36px'}} type="text" placeholder="Search" onChange={this.filterList}/>
+                <div className="box-header">
+                 
+                    <div className="news-per-page" style={{marginTop: '10px'}}>
+                    <select defaultValue="0" onChange={this.select} >
+                      <option value="0" disabled>Get by</option>
+                      <option value="5">5</option>
+                      <option value="10">10</option>
+                      <option value="20">20</option>
+                    </select>
+                  </div>
                 </div>
-             
-                {/* /.box-header */}
                 <div className="box-body">
                   <table id="example2" className="table table-bordered table-hover">
                     <thead>
                       <tr>
-
-                        <th>Tên lớp học </th>
-                        
-                        <th>Sửa lớp</th>
-                        <th>Xóa lớp</th>
-
+                        <th>member </th>
+                        <th>classForumQuestion </th>
+                        <th>question form</th>
+                     
+                        <th>Xoá</th>
                       </tr>
                     </thead>
                     <tbody>
-                    {renderTodos}
+                      {renderTodos}
                     </tbody>
                     <tfoot>
-                      <tr>
-                        <th>Tên lớp học </th>
-                        <th>Sửa lớp</th>
-                        <th>Xóa lớp</th>
-                      </tr>
+                    <tr>
+                      <th>member </th>
+                      <th>classForumQuestion </th>
+                      <th>question form</th>
+                   
+                      <th>Xoá</th>
+                    </tr>
                     </tfoot>
                   </table>
                 </div>
@@ -168,14 +159,13 @@ class AdminContentclassSubject extends Component {
 }
 const mapStateToProps = state => {
   return {
-    classSubject: state.classSubjectReducer.listclassSubject,
+    forum: state.forumReducer.listforum,
   };
 };
 const mapDispatchToProps = dispatch => {
   return {
-    classSubjectActionCreators: bindActionCreators(classSubjectActions, dispatch),
-    // modalActionCreators: bindActionCreators( dispatch),
+    forumActionCreators: bindActionCreators(forumActions, dispatch),
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AdminContentclassSubject);
+export default connect(mapStateToProps, mapDispatchToProps)(AdminContentforum);

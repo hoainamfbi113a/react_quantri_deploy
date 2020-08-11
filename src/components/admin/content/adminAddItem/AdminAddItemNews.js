@@ -3,6 +3,7 @@ import axios from 'axios';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Editor } from '@tinymce/tinymce-react';
+import  { Redirect } from 'react-router-dom'
 import * as newsAction  from "../../../../actions/newsAction";
 import { toastError, toastSuccess } from '../../../../helpers/toastHelper';
 class AdminAddItemNews extends Component {

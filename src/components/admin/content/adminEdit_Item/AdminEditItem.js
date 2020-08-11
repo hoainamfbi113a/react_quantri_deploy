@@ -12,7 +12,7 @@ export default class AdminEditItem extends Component {
         fullname: '',
         email: ''
     }
-}
+    }
     componentDidMount() {
     //  axios.get('http://localhost:4000/persons/edit/'+this.props.match.params.id)
       //alert(this.props.match.params.id)

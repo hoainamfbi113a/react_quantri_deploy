@@ -76,57 +76,27 @@ export default class AdminMenu extends Component {
                   <i className="fa fa-angle-left pull-right" />
                 </span>
              </Link>
-             
               </li>
              <li>
-             <Link to="/admin/game">
-                <i className="fa fa-edit" /> <span>Quản lý câu hỏi trò chơi</span>
+             <Link to="/admin/forum">
+                <i className="fa fa-edit" /> <span>Quản lý câu hỏi forum</span>
                 <span className="pull-right-container">
                   <i className="fa fa-angle-left pull-right" />
                 </span>
               </Link>
-              </li>
-    
-            
-            
-            {/* <li className="treeview">
-              <a href="fake_url">
-                <i className="fa fa-share" /> <span>Multilevel</span>
-                <span className="pull-right-container">
-                  <i className="fa fa-angle-left pull-right" />
-                </span>
-              </a>
-              <ul className="treeview-menu">
-                <li><a href="fake_url"><i className="fa fa-circle-o" /> Level One</a></li>
-                <li>
-                  <a href="fake_url"><i className="fa fa-circle-o" /> Level One
-                    <span className="pull-right-container">
-                      <i className="fa fa-angle-left pull-right" />
-                    </span>
-                  </a>
-                  <ul className="treeview-menu">
-                    <li><a href="fake_url"><i className="fa fa-circle-o" /> Level Two</a></li>
-                    <li>
-                      <a href="fake_url"><i className="fa fa-circle-o" /> Level Two
-                        <span className="pull-right-container">
-                          <i className="fa fa-angle-left pull-right" />
-                        </span>
-                      </a>
-                      <ul className="treeview-menu">
-                        <li><a href="fake_url"><i className="fa fa-circle-o" /> Level Three</a></li>
-                        <li><a href="fake_url"><i className="fa fa-circle-o" /> Level Three</a></li>
-                      </ul>
-                    </li>
-                  </ul>
-                </li>
-                <li><a href="fake_url"><i className="fa fa-circle-o" /> Level One</a></li>
-              </ul>
-            </li> */}
-            <li> <Link to="/admin/result"><i className="fa fa-book" /> <span>Kết quả thi</span></Link></li>
            
+              </li>
+              <li>
+                <Link to="/admin/game">
+                  <i className="fa fa-edit" /> <span>Quản lý câu hỏi trò chơi</span>
+                  <span className="pull-right-container">
+                    <i className="fa fa-angle-left pull-right" />
+                  </span>
+                </Link>
+              </li>
+            <li> <Link to="/admin/result"><i className="fa fa-book" /> <span>Kết quả thi</span></Link></li>
           </ul>
         </section>
-        {/* /.sidebar */}
       </aside>
 
         )

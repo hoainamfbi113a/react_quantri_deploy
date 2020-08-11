@@ -53,8 +53,11 @@ class AdminAddItemgame extends Component {
         const { gameActionsCreators } = this.props;
         const { addgame } = gameActionsCreators;
         addgame(formData);
-        toastSuccess('Thêm item game thành công');
-        r.props.history.push('/admin/game');
+        // toastSuccess('Thêm item game thành công');
+        setTimeout(()=>{
+          r.props.history.push('/admin/game');
+        },300)
+        
       }
     render() {
         return (

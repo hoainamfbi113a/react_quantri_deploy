@@ -64,7 +64,10 @@ class AdminAddItemNews extends Component {
     const { updateNew } = newsActionsCreators;
     updateNew(formData);
     // toastSuccess('Cập nhật tin tức thành công');
-    r.props.history.push('/admin/news');
+    setTimeout(()=>{
+      r.props.history.push('/admin/news');
+    },200)
+    
   }
   render() {
     return (
