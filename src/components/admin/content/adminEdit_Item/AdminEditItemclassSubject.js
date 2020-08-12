@@ -53,10 +53,10 @@ class AdminAddItemclassSubject extends Component {
     const {classSubjectActionsCreators} = this.props;
     const { updateclassSubject } = classSubjectActionsCreators;
     updateclassSubject(formData);
-    toastSuccess('Cập nhật lớp học thành công');
+    // toastSuccess('Cập nhật lớp học thành công');
     setTimeout(()=>{
       r.props.history.push('/admin/classsubject');
-    },100)
+    },700)
     
   }
   render() {

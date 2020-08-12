@@ -38,7 +38,7 @@ class AdminAddItemclassSubject extends Component {
     toastSuccess('Thêm mới lớp học thành công');
     setTimeout(()=>{
       r.props.history.push('/admin/classsubject');
-    },100)
+    },600)
   }
   render() {
     return (

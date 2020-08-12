@@ -82,7 +82,7 @@ class AdminEditItemQuestion extends Component {
       updatequestion(formData);
       setTimeout(()=>{
         r.props.history.push('/admin/question');
-      },100)
+      },600)
   }
     render() {
       

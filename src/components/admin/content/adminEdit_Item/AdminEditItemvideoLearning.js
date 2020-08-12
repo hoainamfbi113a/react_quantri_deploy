@@ -85,7 +85,7 @@ class AdminAddItemvideoLearning extends Component {
     toastSuccess('Cập nhật video bài học thành công');
     setTimeout(()=>{
       r.props.history.push('/admin/videolearning');
-    },100)
+    },600)
     
   }
   render() {

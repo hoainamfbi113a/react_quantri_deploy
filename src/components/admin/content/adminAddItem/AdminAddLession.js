@@ -77,7 +77,7 @@ class AdminAddItemlession extends Component {
         // r.props.history.push('/admin/news');
         setTimeout (()=>{
           r.props.history.push('/admin/lession')
-        },220)
+        },60)
       }
     render() {
         return (

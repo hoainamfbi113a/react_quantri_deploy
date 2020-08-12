@@ -52,7 +52,7 @@ class AdminAddItemMember extends Component {
         this.timeout = setTimeout(() => {
           const { fetchListMember } = memberActionsCreators;
           fetchListMember();
-         }, 200);
+         }, 600);
         let { member } = this.props;
         let obj = member.find(o => o.memberLogin === memberLogin);
         if(!obj){

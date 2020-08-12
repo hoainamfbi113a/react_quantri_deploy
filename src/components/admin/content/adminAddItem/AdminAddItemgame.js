@@ -56,7 +56,7 @@ class AdminAddItemgame extends Component {
         // toastSuccess('Thêm item game thành công');
         setTimeout(()=>{
           r.props.history.push('/admin/game');
-        },300)
+        },600)
         
       }
     render() {

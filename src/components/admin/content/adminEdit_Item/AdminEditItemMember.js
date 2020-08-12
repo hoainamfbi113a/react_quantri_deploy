@@ -61,7 +61,10 @@ export default class AdminEditItem extends Component {
         axios.post('https://cititechnodejs.herokuapp.com/admin/member', formData)
         .then(res => console.log(res.data));
         toastSuccess('Cập nhật học sinh thành công');
-        this.props.history.push('/admin/member');
+        
+        setTimeout(()=>{
+          this.props.history.push('/admin/member');
+        },600)
   }
     render() {
         return (

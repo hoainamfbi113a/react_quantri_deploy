@@ -48,7 +48,7 @@ class AdminAddItemvideoLearning extends Component {
     toastSuccess('Thêm video bài học thành công');
     setTimeout(()=>{
       r.props.history.push('/admin/videolearning');
-    },100)
+    },500)
   }
   componentDidMount() {
       axios.get('https://cititechnodejs.herokuapp.com/admin/classsubject/list/')

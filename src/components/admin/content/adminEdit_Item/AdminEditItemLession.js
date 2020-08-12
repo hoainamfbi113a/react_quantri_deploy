@@ -86,7 +86,7 @@ renderClass = () =>{
     updatelession(formData);
     setTimeout(()=>{
       r.props.history.push('/admin/lession');
-    },200)
+    },600)
     
   }
   render() {

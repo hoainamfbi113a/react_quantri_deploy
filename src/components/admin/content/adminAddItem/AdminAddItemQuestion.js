@@ -70,7 +70,7 @@ class AdminAddItemQuestion extends Component {
         toastSuccess('Thêm câu hỏi thành công');
         setTimeout(()=>{
           r.props.history.push('/admin/question');
-    },100)
+    },600)
       }
     render() {
         return (

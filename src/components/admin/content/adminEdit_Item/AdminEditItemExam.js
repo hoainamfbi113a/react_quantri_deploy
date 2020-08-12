@@ -78,7 +78,7 @@ class AdminEditItemExam extends Component {
       toastSuccess('Cập nhật bài kiểm tra thành công');
       setTimeout(()=>{
         r.props.history.push('/admin/exam');
-      },100)
+      },600)
     }
     render() {
         return (
