@@ -37,7 +37,7 @@ class AdminEditItemQuestion extends Component {
                   questionResultD : this.props.questionUpdate.questionResultD,
                   questionResultRight : this.props.questionUpdate.questionResultRight,
               })
-              axios.get('http://localhost:5000/admin/classsubject/list/')
+              axios.get('https://cititechnodejs.herokuapp.com/admin/classsubject/list/')
               .then(response => {
                 this.setState({classObject:response.data})
               })

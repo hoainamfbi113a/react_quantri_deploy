@@ -73,7 +73,7 @@ class AdminContentExam extends Component {
       const {file } = this.state;
         const formData = new FormData()
         formData.append('file', file);
-        axios.post('http://localhost:5000/admin/exam/excel', formData)
+        axios.post('https://cititechnodejs.herokuapp.com/admin/exam/excel', formData)
         .then(res => console.log(res.data));
         alert("Cập nhật thành công")
         // this.props.history.push('/');

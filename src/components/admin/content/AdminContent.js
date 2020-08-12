@@ -24,9 +24,9 @@ export default class AdminContent extends Component {
     }
     handleDeleteItem = () => {
       let {idAlert, persons} = this.state;
-      axios.get('http://localhost:5000/employee/delete/'+idAlert)
+      axios.get('https://cititechnodejs.herokuapp.com/employee/delete/'+idAlert)
       .then(()=>{
-        axios.get('http://localhost:5000/employee/list')
+        axios.get('https://cititechnodejs.herokuapp.com/employee/list')
         .then(response => {
             // console.log(response.data);
             this.setState({persons: response.data});
@@ -51,7 +51,7 @@ export default class AdminContent extends Component {
     });
 }
     componentDidMount(){ 
-        axios.get('http://localhost:5000/employee/list')
+        axios.get('https://cititechnodejs.herokuapp.com/employee/list')
             .then(response => {
                 // console.log(response.data);
                 this.setState({persons: response.data});

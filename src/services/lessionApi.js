@@ -1,6 +1,6 @@
 // import qs from 'query-string';
 import axiosService from '../commons/axiosService';
-const API_ENDPOINT = 'http://localhost:5000';
+const API_ENDPOINT = 'https://cititechnodejs.herokuapp.com';
 
 const url = 'admin/lession/list';
 

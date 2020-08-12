@@ -44,7 +44,7 @@ class AdminContentgame extends Component {
     fetchListgame();
   }
   handleGenerate = ()=>{
-    axios.get('http://localhost:5000/admin/game/generate/')
+    axios.get('https://cititechnodejs.herokuapp.com/admin/game/generate/')
     .then(response => {
         // this.setState({listquestionGame: response.data});
         console.log(response.data);

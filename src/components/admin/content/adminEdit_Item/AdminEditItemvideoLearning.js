@@ -34,7 +34,7 @@ class AdminAddItemvideoLearning extends Component {
       videoContentVideo: this.props.videoLearningUpdate.videoContentVideo,
       videoContentDetail: this.props.videoLearningUpdate.videoContentDetail,
     })
-    axios.get('http://localhost:5000/admin/classsubject/list/')
+    axios.get('https://cititechnodejs.herokuapp.com/admin/classsubject/list/')
       .then(response => {
       this.setState({classObject:response.data})
         })

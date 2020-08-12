@@ -16,7 +16,7 @@ export default class AdminEditItem extends Component {
     componentDidMount() {
     //  axios.get('http://localhost:4000/persons/edit/'+this.props.match.params.id)
       //alert(this.props.match.params.id)
-      axios.get('http://localhost:5000/employee/'+this.props.match.params.id)
+      axios.get('https://cititechnodejs.herokuapp.com/'+this.props.match.params.id)
           .then(response => {
               this.setState({
                   _id:this.props.match.params.id,
@@ -45,7 +45,7 @@ export default class AdminEditItem extends Component {
           fullname: this.state.fullname,
           email: this.state.email
       };
-      axios.post('http://localhost:5000/employee', obj)
+      axios.post('https://cititechnodejs.herokuapp.com/employee', obj)
           .then(res => console.log(res.data));
 
       this.props.history.push('/index');

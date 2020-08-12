@@ -1,7 +1,7 @@
 // import qs from 'query-string';
 import axiosService from '../commons/axiosService';
 import { data } from 'jquery';
-const API_ENDPOINT = 'http://localhost:5000';
+const API_ENDPOINT = 'https://cititechnodejs.herokuapp.com';
 
 const url = 'admin/news/list';
 

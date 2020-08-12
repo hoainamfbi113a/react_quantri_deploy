@@ -26,9 +26,9 @@ export default class AdminContentQuestion extends Component {
     }
     handleDeleteItem = () => {
       let {idAlert, persons} = this.state;
-      axios.get('http://localhost:5000/admin/question/delete/'+idAlert)
+      axios.get('https://cititechnodejs.herokuapp.com/admin/question/delete/'+idAlert)
       .then(()=>{
-        axios.get('http://localhost:5000/admin/question/list')
+        axios.get('https://cititechnodejs.herokuapp.com/admin/question/list')
         .then(response => {
             // console.log(response.data);
             this.setState({persons: response.data});
@@ -45,7 +45,7 @@ export default class AdminContentQuestion extends Component {
   }
  
     componentDidMount(){ 
-        axios.get('http://localhost:5000/admin/result/list')
+        axios.get('https://cititechnodejs.herokuapp.com/admin/result/list')
             .then(response => {
                 // console.log(response.data);
                 this.setState({persons: response.data});

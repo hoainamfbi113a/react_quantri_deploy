@@ -8,7 +8,7 @@ export default class ItemLession extends Component {
                 <tr>
                         <td>{item.lessionContentSubjects}</td>
                         <td>{item.lessionContentTitle}</td>
-                        <td><img width="50px" src={`http://localhost:5000/${item.lessionContentImg}`} alt="not display"></img></td>
+                        <td><img width="50px" src={`https://cititechnodejs.herokuapp.com/${item.lessionContentImg}`} alt="not display"></img></td>
                         {/* <i>{parse(`${item.lessionContentDetail}`)}</i> */}
                         {/* <i>{parse(`${item.lessionContentDetail}`) && item.lessionContentDetail }</i> */}
                         <td>

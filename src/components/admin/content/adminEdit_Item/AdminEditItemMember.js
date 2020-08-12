@@ -20,7 +20,7 @@ export default class AdminEditItem extends Component {
     }
   }
     componentDidMount() {
-      axios.get('http://localhost:5000/admin/member/'+this.props.match.params.id)
+      axios.get('https://cititechnodejs.herokuapp.com/admin/member/'+this.props.match.params.id)
           .then(response => {
               this.setState({
                   _id:this.props.match.params.id,
@@ -58,7 +58,7 @@ export default class AdminEditItem extends Component {
         formData.append('memberDate', memberDate);
         formData.append('memberSex', memberSex);
         formData.append('memberAddress', memberAddress);
-        axios.post('http://localhost:5000/admin/member', formData)
+        axios.post('https://cititechnodejs.herokuapp.com/admin/member', formData)
         .then(res => console.log(res.data));
         toastSuccess('Cập nhật học sinh thành công');
         this.props.history.push('/admin/member');

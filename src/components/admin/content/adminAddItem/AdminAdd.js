@@ -44,7 +44,7 @@ export default class AdminAddItemMember extends Component {
         formData.append('title', title);
         formData.append('images', images);
         // formData.append('lessionContentDetail', lessionContentDetail);
-        axios.post('http://localhost:5000/admin/goodstudent', formData
+        axios.post('https://cititechnodejs.herokuapp.com/admin/goodstudent', formData
           )
           .then(function (response) {
             if(response.data ==='User already exists')

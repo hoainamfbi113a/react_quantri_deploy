@@ -15,7 +15,7 @@ import axios from 'axios'
 export const login = user => {////var login = function(user){    }// nguyn
 //alert(user.memberLogin);
 return axios
-    .post('http://localhost:5000/users/loginadmin', {
+    .post('https://cititechnodejs.herokuapp.com/users/loginadmin', {
       memberLogin: user.memberLogin,
       memberPass: user.memberPass,
       memberCategory: user.memberCategory

@@ -9,7 +9,7 @@ export default class ItemNews extends Component {
                         <td>{item.categoryNews==="newcategory1"? "Tin tức giáo dục": "Tin tức học sinh tiêu biểu"}</td>
                         <td>{item.title}</td>
                         {/* <td>{item.images}</td> */}
-                        <td><img width="50px" src={`http://localhost:5000/${item.images}`} alt="not display"></img></td>
+                        <td><img width="50px" src={`https://cititechnodejs.herokuapp.com/${item.images}`} alt="not display"></img></td>
                         {/* <td>{item.contents}</td> */}
                         <td>{parse(`${item.contents}`)}</td>
                         {/* <td>{item.timeUpdate}</td> */}

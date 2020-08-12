@@ -9,7 +9,7 @@ export default class ItemMember extends Component {
                         <td>{item.memberName}</td>
                         <td>{item.memberSex}</td>
                         <td>{item.memberDate}</td>
-                        <td><img width="50px" src={`http://localhost:5000/${item.avatarContentImg}`} alt="not display"></img></td>
+                        <td><img width="50px" src={`https://cititechnodejs.herokuapp.com/${item.avatarContentImg}`} alt="not display"></img></td>
                         <td>
                         <Link to={"/admin/member/edit/"+this.props.item._id}>
                         <button type="button" className="btn btn-social-icon btn-bitbucket" >

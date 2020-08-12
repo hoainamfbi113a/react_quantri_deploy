@@ -20,7 +20,7 @@ class AdminAddItemExam extends Component {
         this.onSubmit = this.onSubmit.bind(this)
       }
       componentDidMount() {
-        axios.get('http://localhost:5000/admin/classsubject/list/')
+        axios.get('https://cititechnodejs.herokuapp.com/admin/classsubject/list/')
         .then(response => {
          this.setState({classObject:response.data})
           })
