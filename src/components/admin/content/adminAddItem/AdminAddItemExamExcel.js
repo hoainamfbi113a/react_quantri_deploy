@@ -85,7 +85,7 @@ class AdminAddItemExam extends Component {
         // toastSuccess('Thêm bài kiểm tra thành công');
         setTimeout(()=>{
           r.props.history.push('/admin/exam');
-        },600)
+        },900)
       }
     render() {
         return (

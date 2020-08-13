@@ -68,7 +68,6 @@ class AdminEditItemQuestion extends Component {
       let formData={
       
       } ;
-      // formData.append('selectedFile', selectedFile);
       formData._id=this.props.match.params.id;
       formData.questionCategoryId=questionCategoryId;
       formData.questionName= questionName;
@@ -82,7 +81,7 @@ class AdminEditItemQuestion extends Component {
       updatequestion(formData);
       setTimeout(()=>{
         r.props.history.push('/admin/question');
-      },600)
+      },1000)
   }
     render() {
       
